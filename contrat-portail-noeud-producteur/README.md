@@ -205,7 +205,7 @@ Cet objet représente l&#39;ensemble des métadonnées d&#39;un jeu de données 
 
 ##### {
 
-##### &quot;total&quot;: \&lt;int64\&gt;,
+##### &quot;total&quot;: &lt;int64&gt;,
 
 ##### &quot;items&quot;: [
 
@@ -222,18 +222,18 @@ Cet objet représente l&#39;ensemble des métadonnées d&#39;un jeu de données 
 
 ## **3.3. URL d&#39;accès et gestion du versionnement**
 
-Les différentes API sont exposées avec une URL de la forme : \&lt;host\&gt;/\&lt;prefixe\&gt;
+Les différentes API sont exposées avec une URL de la forme : &lt;host&gt;/&lt;prefixe&gt;
 
-- \&lt;prefixe\&gt; prendra la forme api par défaut mais peut prendre d&#39;autres formes si plusieurs typologie d&#39;API sont exposées.
-  - Exemple \&lt;host\&gt;/api
+- &lt;prefixe&gt; prendra la forme api par défaut mais peut prendre d&#39;autres formes si plusieurs typologie d&#39;API sont exposées.
+  - Exemple &lt;host&gt;/api
 
-L&#39;API dans sa version la plus récente sera exposée en \&lt;host\&gt;/\&lt;prefixe\&gt;/\*
+L&#39;API dans sa version la plus récente sera exposée en &lt;host&gt;/&lt;prefixe&gt;/*
 
 Cela signifie que la version la plus récente de l&#39;API est accessible directement sans changement de code des appelants.
 
 Les API dans les versions plus anciennes seront exposées en
 
-##### \&lt;host\&gt;/\&lt;prefixe\&gt;/\&lt;version\&gt;/\*
+##### &lt;host&gt;/&lt;prefixe&gt;/&lt;version&gt;/*
 
 - \&lt;version\&gt; prendra la forme v\&lt;Majeur\&gt; ou v\&lt;Majeur\&gt;.\&lt;Mineur\&gt;
   - Exemple : \&lt;host\&gt;/api/v1 ou \&lt;host\&gt;/api/v1.1
@@ -250,7 +250,7 @@ Dans la mesure du possible, seul le niveau \&lt;Majeur\&gt; sera utilisé.
 
 Les différents services décrits ci-après seront accessibles avec le préfixe « api ».
 
-- Exemple \&lt;host\&gt;/api/\*
+- Exemple &lt;host&gt;/api/*
 
 ##
 
@@ -260,7 +260,7 @@ Les différents services décrits ci-après seront accessibles avec le préfixe 
 
 Soumission d&#39;une demande de création d&#39;un jeu de données par ses métadonnées
 
-**POST \&lt;\&gt;/resources**
+**POST &lt;&gt;/resources**
 
 **Body** :
 
@@ -293,7 +293,7 @@ Soumission d&#39;une demande de création d&#39;un jeu de données par ses méta
 
 Soumission d&#39;une demande de modification d&#39;un jeu de données par ses métadonnées
 
-**PUT \&lt;\&gt;/resources**
+**PUT &lt;&gt;/resources**
 
 **Body** :
 
@@ -328,7 +328,7 @@ Soumission d&#39;une demande de modification d&#39;un jeu de données par ses m�
 
 Soumission d&#39;une demande de suppression d&#39;un jeu de données
 
-**DELETE \&lt;\&gt;/resources/{global\_id}**
+**DELETE &lt;&gt;/resources/{global\_id}**
 
 **Code retour :**
 
@@ -361,7 +361,7 @@ Demande de génération d&#39;un identifiant RUDI.
 
 Le DOI RUDI généré tiendra compte des informations contenues dans le token JWT d&#39;authentification pour déduire le producteur.
 
-**GET \&lt;\&gt;/resources/id\_generation**
+**GET &lt;&gt;/resources/id\_generation**
 
 **Code retour :**
 
@@ -392,7 +392,7 @@ Le DOI RUDI généré tiendra compte des informations contenues dans le token JW
 
 Les différents services décrits ci-après seront accessibles avec le préfixe « api ».
 
-- Exemple \&lt;host\&gt;/api/\*
+- Exemple &lt;host&gt;/api/*
 
 #### **3.4.2.2. Recherche des jeux de données**
 
@@ -400,7 +400,7 @@ Les différents services décrits ci-après seront accessibles avec le préfixe 
 
 Recherche des jeux de données
 
-**GET \&lt;\&gt;/resources**
+**GET &lt;&gt;/resources**
 
 **Query :**
 
@@ -445,7 +445,7 @@ Recherche des jeux de données
 
 Obtention des métadonnées d&#39;un jeux de données
 
-**GET \&lt;\&gt;/resources/{global\_id}**
+**GET &lt;&gt;/resources/{global\_id}**
 
 **Code retour :**
 
@@ -480,7 +480,7 @@ Obtention des métadonnées d&#39;un jeux de données
 
 Réception de l&#39;intégration d&#39;une demande réalisée par les services [3.4.1.2](#_fy6l6rbd94q2), [3.4.1.3](#_gj0yzmmqjzoi), [3.4.1.4.](#_gd2wuvaz8kv1).
 
-**PUT \&lt;\&gt;/resources/{global\_id}/report**
+**PUT &lt;&gt;/resources/{global\_id}/report**
 
 **Body :** #/components/schemas/Report
 
