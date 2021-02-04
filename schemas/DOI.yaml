@@ -1,0 +1,10 @@
+description:
+	Digital object identifier (modern Crossref DOIs version)
+type: string
+pattern: '^10.\d{4,9}/[-.;()/:\w]+$'
+# \d : digit character == [0-9]
+# \w : word character == [0-9a-zA-Z_]
+# /i (at the end) : expression is case insensitive
+#source: https://www.crossref.org/blog/dois-and-matching-regular-expressions/
+#alternative: https://github.com/regexhq/doi-regex/blob/master/index.js
+

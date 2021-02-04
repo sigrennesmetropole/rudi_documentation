@@ -1,0 +1,8 @@
+type: object
+  properties:
+    'status_code':
+      type: integer
+      enum: [500]
+    'message': 
+      type: string
+      enum: ['An unexpected error occured.']
