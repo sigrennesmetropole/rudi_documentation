@@ -21,7 +21,7 @@ Le module fonctionne selon 2 modes :
 
 En mode « **notification** », le diagramme de séquence d&#39;appel est le suivant :
 
-![](RackMultipart20210204-4-1jo8lld_html_f2b5faa114d6dab0.png)
+[diagramme de séquence des notifications](metacatalogue-push.png)]
 
 Figure 4 - Diagramme de séquence &quot;notification&quot;
 
@@ -41,9 +41,9 @@ A l&#39;issue du traitement, le module de collecte envoie au nœud producteur un
 
 En mode « **moissonnage** », le diagramme de séquence d&#39;appel est le suivant :
 
-![](RackMultipart20210204-4-1jo8lld_html_980f707e42cf6f43.png)
+[diagramme de séquence de moissonnage](metacatalogue-pull.png)]
 
-Figure 3 - Diagramme de séquence &quot;pull&quot;
+Figure 3 - Diagramme de séquence &quot;moisonnage&quot;
 
 Comme l&#39;indique le schéma ci-dessus, le module de collecte des données du portail RUDI commence par appeler le nœud producteur afin de collecter par leur identifiant unique tous les jeux de données dont les métadonnées ont été modifiées depuis la dernière date de collecte réussie.
 
