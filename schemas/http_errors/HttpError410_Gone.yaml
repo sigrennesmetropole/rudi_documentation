@@ -1,8 +1,0 @@
-type: object
-  properties:
-    'status_code':
-      type: integer
-      enum: [410]
-    'message': 
-      type: string
-      enum: ['The requested resource is no longer available and will not be available again. The resource should be purged from the client system.']

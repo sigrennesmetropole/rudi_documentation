@@ -1,8 +1,0 @@
-type: object
-  properties:
-    'status_code':
-      type: integer
-      enum: [408]
-    'message': 
-      type: string
-      enum: ['The client did not produce a request within the time that the server was prepared to wait. The client may repeat the request without modifications at any later time.']

@@ -1,8 +1,0 @@
-type: object
-  properties:
-    'status_code':
-      type: integer
-      enum: [423]
-    'message': 
-      type: string
-      enum: ['The resource that is being accessed is locked.']
