@@ -1,0 +1,8 @@
+type: object
+  properties:
+    'status_code':
+      type: integer
+      enum: [429]
+    'message': 
+      type: string
+      enum: ['The user has sent too many requests in a short period.']
