@@ -1,0 +1,8 @@
+type: object
+  properties:
+    'status_code':
+      type: integer
+      enum: [403]
+    'message': 
+      type: string
+      enum: ['The access is not allowed.']

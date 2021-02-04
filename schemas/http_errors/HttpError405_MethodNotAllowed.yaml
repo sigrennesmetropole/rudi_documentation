@@ -1,0 +1,8 @@
+type: object
+  properties:
+    'status_code':
+      type: integer
+      enum: [405]
+    'message': 
+      type: string
+      enum: ['Request method is not supported for the requested resource.']
