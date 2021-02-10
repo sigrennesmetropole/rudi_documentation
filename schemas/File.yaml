@@ -1,0 +1,69 @@
+description: 
+  Description of the container of data as a file
+type: object
+required:
+- media_type
+- file_id
+- connector
+properties: 
+  #——————————————————————————
+  'media_type':
+    type: string
+    enum: ['file']
+  #——————————————————————————
+  'file_id':
+    description: 
+      Unique identifier of the file in Rudi system
+      (determined automatically)
+    $ref: 'https://raw.githubusercontent.com/sigrennesmetropole/rudi_documentation/main/schemas/UUIDv4.yaml'
+
+  #——————————————————————————
+  'file_structure':
+    description: >
+      Link towards the resource that describes the structure of the data
+      (language, norm, data structure, JSON schema, OpenAPI, etc.)
+    type: string
+    format: URI
+    #'URI definition - https://tools.ietf.org/html/rfc2396'
+
+  #——————————————————————————
+  'connector':
+    $ref: 'https://raw.githubusercontent.com/sigrennesmetropole/rudi_documentation/main/schemas/Connector.yaml'
+
+  #——————————————————————————
+  'file_size':
+    description: 
+      Size of the file, in bytes 
+      (determined automatically)
+    type: integer
+
+  #——————————————————————————
+  'file_extension':
+    # Media type (determined automatically)
+    $ref: 'https://raw.githubusercontent.com/sigrennesmetropole/rudi_documentation/main/schemas/FileExtension.yaml'
+    #TODO: extension ≠ media type?
+
+  #——————————————————————————
+  'file_encoding':
+    description: 
+      Source encoding of the data 
+      (determined automatically)
+    type: string
+    #format:
+    #ISO/CEI 10646'
+    #TODO: thesaurus for encoding
+
+  #——————————————————————————
+  'checksum':
+    description: 
+      Hash that makes it possible to check the a file intergrity
+      (determined automatically)
+    type: object
+    required:
+    - algo
+    - hash
+    properties:
+      'algo':
+        $ref: '#/components/schemas/HashAlgorithm'
+      'hash':
+        type: string
