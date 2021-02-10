@@ -1,4 +1,0 @@
-# Very early definition for testing purpose, to be defined more deeply later
-description: Source format of the data
-type: string
-enum: [json, xml, csv, xlsx, txt, pdf, jpg, png]
