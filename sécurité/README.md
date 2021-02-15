@@ -16,7 +16,9 @@ Le document définit également la notion de qualité de service et comment elle
 ### **2.1.1. Entités**
 Une Entité est une organization dans RUDI, qui peut être soit un nœud Producteur de données, soit nœud Consommateur.
 Exemple de nœud Consommateur: une organisation "Porteuse de projet" qui souhaite collecter des données de façon récurrent pour proposer un service par le biais d'une application)
+
 [TODO: à valider — les utilisateurs lambdas peuvent-ils demander un droit d'accès ou une QoS particuliers ?] 
+
 Les utilisateurs qui dans RUDI sont référencés mais n'appartiennent pas à une organisation particulière sont considérés comme appartenant à l'Entité "Default Entity"
 
 ### **2.1.2. Groupes**
