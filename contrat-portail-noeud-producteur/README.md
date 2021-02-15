@@ -41,7 +41,7 @@ A l&#39;issue du traitement, le module de collecte envoie au nœud producteur un
 
 En mode « **moissonnage** », le diagramme de séquence d&#39;appel est le suivant :
 
-[![diagramme de séquence de moissonnage](metacatalogue-pull.png)]
+![diagramme de séquence de moissonnage](metacatalogue-pull.png)
 
 Figure 3 - Diagramme de séquence &quot;moisonnage&quot;
 
