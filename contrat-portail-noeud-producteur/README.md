@@ -137,14 +137,14 @@ Le tableau ci-dessous présente les données présentes dans le rapport d&#39;in
 | --- | --- | --- | --- | --- | --- |
 | report\_id | Identifiant du rapport d&#39;intégration | 1 | Oui | UUID v4 | |
 | submission\_date | Date de soumission de la demande d&#39;intégration | 1 | Oui | Timestamp | |
-| treatment\_date | Date de traitement de l&#39;intégration du jeu de donnée dans Rudi | 2 | Oui | Timestamp | |
+| treatment\_date | Date de traitement de l&#39;intégration du jeu de donnéesdans Rudi | 2 | Oui | Timestamp | |
 | version | Numéro de la version de l&#39;API utilisée par le nœud producteur pour communiquer avec le portail RUDI | 1 | Oui | Numérique | 2 |
 | method | Méthode de soumission utilisée | 1 | Oui | Enuméré | 6 |
-| global\_id | Identifiant du jeu de donnée dans le système Rudi | 2 | Oui | UUID v4 | |
+| resource\_id | Identifiant du jeu de donnéesdans le système Rudi | 2 | Oui | UUID v4 | |
 | title | Nom du jeu de données | 2 | Non | Texte | Identique à lAPI |
-| Integration\_status | État de l&#39;intégration du jeu de donnée dans Rudi. 2 valeurs possibles :·OK : l&#39;intégration du jeu de données s&#39;est bien déroulée·KO : l&#39;intégration du jeu de données est en erreur | 2 | Oui | Enuméré | 2 |
-| comment | Commentaire sur l&#39;état de l&#39;intégration. Formaté.·Si etat\_integration = OK, commentaire = l&#39;intégration du jeu de donnée &quot;_nom\_jeu\_de\_donnee_&quot; s&#39;est bien déroulée le &quot;_date\_traitement\_jdd\_Rudi_&quot;.·Si etat\_integration = KO, commentaire = l&#39;intégration du jeu de donnée &quot;_nom\_jeu\_de\_donnee_&quot; ne s&#39;est pas déroulée correctement, le &quot;_date\_traitement\_jdd\_Rudi. Veuillez consulter les erreurs ci-dessous et après correction des erreurs, renvoyer votre jeu de données. Pour plus d&#39;information, vous pouvez contacter votre administrateur Rudi._&quot;. | 2 | Oui | Texte | 255 |
-| errors | Liste des erreurs rencontrées lors de l&#39;intégration du jeu de données. L&#39;objectif est de lister l&#39;ensemble des erreurs rencontrées sur le jeu de données afin d&#39;éviter de multiple envoi pour un même jeu de donnée (à chaque envoi, une nouvelle erreur est rencontrée). | 2 | Fonction de « status » :·Non si etat\_integration = 1·Oui si etat\_integration = 0 | Liste dobjets | Infini |
+| Integration\_status | État de l&#39;intégration du jeu de donnéesdans Rudi. 2 valeurs possibles :·OK : l&#39;intégration du jeu de données s&#39;est bien déroulée·KO : l&#39;intégration du jeu de données est en erreur | 2 | Oui | Enuméré | 2 |
+| comment | Commentaire sur l&#39;état de l&#39;intégration. Formaté.·Si etat\_integration = OK, commentaire = l&#39;intégration du jeu de données&quot;_nom\_jeu\_de\_donnee_&quot; s&#39;est bien déroulée le &quot;_date\_traitement\_jdd\_Rudi_&quot;.·Si etat\_integration = KO, commentaire = l&#39;intégration du jeu de données&quot;_nom\_jeu\_de\_donnee_&quot; ne s&#39;est pas déroulée correctement, le &quot;_date\_traitement\_jdd\_Rudi. Veuillez consulter les erreurs ci-dessous et après correction des erreurs, renvoyer votre jeu de données. Pour plus d&#39;information, vous pouvez contacter votre administrateur Rudi._&quot;. | 2 | Oui | Texte | 255 |
+| errors | Liste des erreurs rencontrées lors de l&#39;intégration du jeu de données. L&#39;objectif est de lister l&#39;ensemble des erreurs rencontrées sur le jeu de données afin d&#39;éviter de multiple envoi pour un même jeu de données(à chaque envoi, une nouvelle erreur est rencontrée). | 2 | Fonction de « status » :·Non si etat\_integration = 1·Oui si etat\_integration = 0 | Liste dobjets | Infini |
 | error\_code | Code technique de l&#39;erreur(Cf. [3.2.2.3](#_89z81nu8ziwl)) | 3 | Oui | Texte | 7 |
 | field\_name | Nom du champ concerné par l&#39;erreur (le cas échéant) | 3 | Non | Texte | 30 |
 | error\_message | Descriptif de l&#39;erreur(Cf [3.2.2.3](#_89z81nu8ziwl)) | 3 | Oui | Texte | 255 |
@@ -287,7 +287,7 @@ Soumission d&#39;une demande de modification d&#39;un jeu de données par ses m�
   - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
   - $ref: &quot;#/components/responses/Error403Forbidden&quot;
-- 404 : le global\_id contenu dans le ResourceInfo est inconnu
+- 404 : le global\_id contenu dans la métadonnée est inconnu
   - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
   - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
@@ -318,7 +318,7 @@ Soumission d&#39;une demande de suppression d&#39;un jeu de données
   - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
   - $ref: &quot;#/components/responses/Error403Forbidden&quot;
-- 404 : le global\_id contenu dans le ResourceInfo est inconnu
+- 404 : le global\_id contenu dans la métadonnée est inconnu
   - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
   - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
@@ -351,7 +351,7 @@ Le DOI RUDI généré tiendra compte des informations contenues dans le token JW
   - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
   - $ref: &quot;#/components/responses/Error403Forbidden&quot;
-- 404 : le global\_id contenu dans le ResourceInfo est inconnu
+- 404 : le global\_id contenu dans la métadonnée est inconnu
   - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
   - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
@@ -471,7 +471,7 @@ Réception de l&#39;intégration d&#39;une demande réalisée par les services [
   - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
   - $ref: &quot;#/components/responses/Error403Forbidden&quot;
-- 404 : le global\_id contenu dans le ResourceInfo est inconnu
+- 404 : le global\_id contenu dans la métadonnée est inconnu
   - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
   - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
@@ -537,4 +537,4 @@ Version de l&#39;API au moment de l&#39;écriture de ce document:
 
 Dernière version de l&#39;API:
 
-[https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER](https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER/1.0.3)
+[https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER](https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER/)
