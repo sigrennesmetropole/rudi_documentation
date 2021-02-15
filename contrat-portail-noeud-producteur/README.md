@@ -111,20 +111,20 @@ Les dates sont au format **ISO-8601** et prennent la forme :
 Le rapport d&#39;intégration est de la forme suivante :
 
     {
-      &quot;report\_id&quot;: &quot;&quot;,
-      &quot;submission\_date&quot;: &quot;&quot;,
-      &quot;treatment\_date&quot;: &quot;&quot;,
-      &quot;method&quot; : (&quot;POST&quot;|&quot;PUT&quot;|&quot;DELETE&quot;)
-      &quot;version&quot;:&quot;&quot;,
-      &quot;global\_id&quot;: &quot;&quot;,
-      &quot;resource\_title&quot;: &quot;&quot;,
-      &quot;integration\_status&quot;: (&quot;OK&quot;|&quot;KO&quot;),
-      &quot;comment&quot;: &quot;&quot;,
-      &quot;errors&quot;: [
+      'report\_id': '',
+      'submission\_date': '',
+      'treatment\_date': '',
+      'method' : ('POST'|'PUT'|'DELETE')
+      'version':'',
+      'global\_id': '',
+      'resource\_title': '',
+      'integration\_status': ('OK'|'KO'),
+      'comment': '',
+      'errors': [
         {
-          &quot;error\_code&quot;: &quot;&quot;,
-          &quot;error\_message&quot;: &quot;&quot;
-          &quot;field\_name&quot;: &quot;&quot;,
+          'error\_code': '',
+          'error\_message': ''
+          'field\_name': '',
         }
       ]
     }
@@ -174,7 +174,7 @@ Le tableau ci-dessous liste les différents cas d&#39;erreur possibles.
 
 L&#39;identifiant d&#39;un jeu de données RUDI est une chaîne de caractères composée comme suit :
 
-    &lt;UUID v4&gt;
+    <UUID v4>
 
 L&#39;expression régulière permettant de définir un tel champ est la suivante :
 
@@ -186,12 +186,12 @@ Cet objet représente l&#39;ensemble des métadonnées d&#39;un jeu de données 
 
 ### **3.2.5. Liste de métadonnées – #/component/schemas/MetadataList**
 
-		{
-			&quot;total&quot;: &lt;int64&gt;,
-			&quot;items&quot;: [
-				#/components/schemas/Metadata
-			]
-		}
+    {
+      'total': <int64>,
+      'items': [
+        #/components/schemas/Metadata
+      ]
+    }
 
 | **Nom balise** | **Description** | **Niveau** | **Obligatoire** | **Type** | **Taille** |
 | --- | --- | --- | --- | --- | --- |
@@ -211,7 +211,7 @@ Cela signifie que la version la plus récente de l&#39;API est accessible direct
 
 Les API dans les versions plus anciennes seront exposées en
 
-    &lt;host&gt;&lt;prefixe&gt;&lt;version&gt;/*
+    <host><prefixe><version>/*
 
 - &lt;version&gt; prendra la forme v&lt;Majeur&gt; ou v&lt;Majeur&gt;.&lt;Mineur&gt;
   - Exemple : &lt;host&gt;/api/v1 ou &lt;host&gt;/api/v1.1
