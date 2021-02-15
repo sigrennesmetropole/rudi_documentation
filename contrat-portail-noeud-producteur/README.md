@@ -21,7 +21,7 @@ Le module fonctionne selon 2 modes :
 
 En mode « **notification** », le diagramme de séquence d&#39;appel est le suivant :
 
-[![diagramme de séquence des notifications](metacatalogue-push.png)]
+![diagramme de séquence des notifications](metacatalogue-push.png)
 
 Figure 4 - Diagramme de séquence &quot;notification&quot;
 
