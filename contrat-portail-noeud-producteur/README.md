@@ -23,7 +23,7 @@ En mode « **notification** », le diagramme de séquence d&#39;appel est le sui
 
 ![diagramme de séquence des notifications](metacatalogue-push.png)
 
-Figure 4 - Diagramme de séquence &quot;notification&quot;
+*Figure 1 - Diagramme de séquence &quot;notification&quot;*
 
 Comme l&#39;indique le schéma ci-dessus, le nœud producteur peut appeler le module de collecte (µKollect) du portail RUDI afin de déposer une demande de collecte. Cette demande comporte :
 
@@ -43,7 +43,7 @@ En mode « **moissonnage** », le diagramme de séquence d&#39;appel est le suiv
 
 ![diagramme de séquence de moissonnage](metacatalogue-pull.png)
 
-Figure 3 - Diagramme de séquence &quot;moisonnage&quot;
+*Figure 2 - Diagramme de séquence &quot;moisonnage&quot;*
 
 Comme l&#39;indique le schéma ci-dessus, le module de collecte des données du portail RUDI commence par appeler le nœud producteur afin de collecter par leur identifiant unique tous les jeux de données dont les métadonnées ont été modifiées depuis la dernière date de collecte réussie.
 
@@ -101,7 +101,7 @@ Les dates sont au format **ISO-8601** et prennent la forme :
 - YYYY-MM-DDTH24:MI:SS.nano pour les « date+heure » - ce format est nommé « Timestamp » dans le reste du document.
   - Exemple : 2020-12-14T09:56:34.592384024
 
-- YYYY-MM-DDTH24:MI:SS.nano\&lt;+ou - timezone offset ou Z pour UTC\&gt; pour les « date+heure avec time-zone » - ce format est nommé « Timestamp avec time-zone » dans le reste du document.
+- YYYY-MM-DDTH24:MI:SS.nano&lt;+/- timezone offset ou Z pour UTC&gt; pour les « date+heure avec time-zone » - ce format est nommé « Timestamp avec time-zone » dans le reste du document.
   - Exemple : 2020-12-14T09:56:34.592384024+0100
 
 ### **3.2.2. Rapport d&#39;intégration – #/components/schemas/Report**
@@ -110,41 +110,24 @@ Les dates sont au format **ISO-8601** et prennent la forme :
 
 Le rapport d&#39;intégration est de la forme suivante :
 
-##### {
-
-##### &quot;report\_id&quot;: &quot;&quot;,
-
-##### &quot;submission\_date&quot;: &quot;&quot;,
-
-##### &quot;treatment\_date&quot;: &quot;&quot;,
-
-##### &quot;method&quot; : (&quot;POST&quot;|&quot;PUT&quot;|&quot;DELETE&quot;)
-
-##### &quot;version&quot;:&quot;&quot;,
-
-##### &quot;global\_id&quot;: &quot;&quot;,
-
-##### &quot;resource\_title&quot;: &quot;&quot;,
-
-##### &quot;integration\_status&quot;: (&quot;OK&quot;|&quot;KO&quot;),
-
-##### &quot;comment&quot;: &quot;&quot;,
-
-##### &quot;errors&quot;: [
-
-##### {
-
-##### &quot;error\_code&quot;: &quot;&quot;,
-
-##### &quot;error\_message&quot;: &quot;&quot;
-
-##### &quot;field\_name&quot;: &quot;&quot;,
-
-##### }
-
-##### ]
-
-##### }
+    {
+      &quot;report\_id&quot;: &quot;&quot;,
+      &quot;submission\_date&quot;: &quot;&quot;,
+      &quot;treatment\_date&quot;: &quot;&quot;,
+      &quot;method&quot; : (&quot;POST&quot;|&quot;PUT&quot;|&quot;DELETE&quot;)
+      &quot;version&quot;:&quot;&quot;,
+      &quot;global\_id&quot;: &quot;&quot;,
+      &quot;resource\_title&quot;: &quot;&quot;,
+      &quot;integration\_status&quot;: (&quot;OK&quot;|&quot;KO&quot;),
+      &quot;comment&quot;: &quot;&quot;,
+      &quot;errors&quot;: [
+        {
+          &quot;error\_code&quot;: &quot;&quot;,
+          &quot;error\_message&quot;: &quot;&quot;
+          &quot;field\_name&quot;: &quot;&quot;,
+        }
+      ]
+    }
 
 #### **3.2.2.2 Détail des données**
 
@@ -191,11 +174,11 @@ Le tableau ci-dessous liste les différents cas d&#39;erreur possibles.
 
 L&#39;identifiant d&#39;un jeu de données RUDI est une chaîne de caractères composée comme suit :
 
-##### \&lt;UUID v4\&gt;
+    &lt;UUID v4&gt;
 
 L&#39;expression régulière permettant de définir un tel champ est la suivante :
 
-##### /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 ### **3.2.4**** Métadonnées d&#39;un jeu de données – Rudi #/components/schemas/Metadata**
 
@@ -203,17 +186,12 @@ Cet objet représente l&#39;ensemble des métadonnées d&#39;un jeu de données 
 
 ### **3.2.5. Liste de métadonnées – #/component/schemas/MetadataList**
 
-##### {
-
-##### &quot;total&quot;: &lt;int64&gt;,
-
-##### &quot;items&quot;: [
-
-##### #/components/schemas/Metadata
-
-##### ]
-
-##### }
+		{
+			&quot;total&quot;: &lt;int64&gt;,
+			&quot;items&quot;: [
+				#/components/schemas/Metadata
+			]
+		}
 
 | **Nom balise** | **Description** | **Niveau** | **Obligatoire** | **Type** | **Taille** |
 | --- | --- | --- | --- | --- | --- |
@@ -233,14 +211,14 @@ Cela signifie que la version la plus récente de l&#39;API est accessible direct
 
 Les API dans les versions plus anciennes seront exposées en
 
-##### &lt;host&gt;/&lt;prefixe&gt;/&lt;version&gt;/*
+    &lt;host&gt;&lt;prefixe&gt;&lt;version&gt;/*
 
-- \&lt;version\&gt; prendra la forme v\&lt;Majeur\&gt; ou v\&lt;Majeur\&gt;.\&lt;Mineur\&gt;
-  - Exemple : \&lt;host\&gt;/api/v1 ou \&lt;host\&gt;/api/v1.1
+- &lt;version&gt; prendra la forme v&lt;Majeur&gt; ou v&lt;Majeur&gt;.&lt;Mineur&gt;
+  - Exemple : &lt;host&gt;/api/v1 ou &lt;host&gt;/api/v1.1
 
 Cela signifie que les modifications de niveau « Révision » n&#39;ont pas d&#39;impact sur la version de l&#39;API.
 
-Dans la mesure du possible, seul le niveau \&lt;Majeur\&gt; sera utilisé.
+Dans la mesure du possible, seul le niveau &lt;Majeur&gt; sera utilisé.
 
 ## **3.4. Contrat d&#39;interface Jeu de données &amp; Métadonnées**
 
@@ -408,7 +386,7 @@ Recherche des jeux de données
 - ffset : int32
 - update\_date\_min : timestamp
 - update\_date\_max : timestamp
-- \&lt;à compléter\&gt;
+- &lt;à compléter&gt;
 
 **Code retour :**
 
@@ -437,7 +415,7 @@ Recherche des jeux de données
 - 503 :
   - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
-\&lt;à compléter\&gt;
+&lt;à compléter&gt;
 
 #### **3.4.2.3. Obtention d&#39;un jeu de données**
 
@@ -523,11 +501,11 @@ Le mécanisme de notification prend place lorsqu&#39;un nœud producteur souhait
 Par exemple, lors de la création d&#39;un nouveau jeu de données par le producteur, le séquencement des appels entre portail et nœud producteur est le suivant :
 
 - Obtention par le nœud d&#39;un token JWT. Ce Point sera détaillé par ailleurs
-- Si le producteur le souhaite, il peut demander un identifiant unique auprès du portail (GET \&lt;\&gt;/resources/generation\_id). Cet identifiant unique est appelé « global\_id ».
+- Si le producteur le souhaite, il peut demander un identifiant unique auprès du portail (GET &lt;&gt;/resources/generation\_id). Cet identifiant unique est appelé « global\_id ».
 - Attribution par le nœud producteur de l&#39;identifiant au nouveau jeu de données
-- Soumission par le nœud d&#39;une demande de création (POST \&lt;\&gt;/resources) avec la structure de métadonnées attendue
+- Soumission par le nœud d&#39;une demande de création (POST &lt;&gt;/resources) avec la structure de métadonnées attendue
   - Réponse du portail par un code 200 avec un identifiant unique correspondant à la demande. Cet identifiant est appelé « report\_id ».
-- Le portail traite la demande de manière asynchrone (mais dans l&#39;ordre des demandes) et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT \&lt;\&gt;/resources/report/{global\_id}
+- Le portail traite la demande de manière asynchrone (mais dans l&#39;ordre des demandes) et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT &lt;&gt;/resources/report/{global\_id}
   - Réponse du portail par un code 200
   - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
 
@@ -538,13 +516,13 @@ Le mécanisme de moissonnage intervient lorsqu&#39;un nœud producteur ne met pa
 Le séquencement des appels entre Portail et nœud producteur est le suivant :
 
 - Obtention par le portail d&#39;un token JWT
-- Demande auprès du nœud par le portail des différents jeux de données modifiés depuis une date connue du portail (GET \&lt;\&gt;/resources avec des paramètres et de la pagination)
+- Demande auprès du nœud par le portail des différents jeux de données modifiés depuis une date connue du portail (GET &lt;&gt;/resources avec des paramètres et de la pagination)
   - Réponse du nœud par un code 200 avec une liste d&#39;éléments
 - Pour chaque élément reçu grâce à l&#39;appel précédent, contrôle de la date de dernière modification par rapport à la date connue du portail pour ce jeu de données
-- Si le jeu de données doit être mis à jour, récupération des métadonnées du jeu (GET \&lt;\&gt;/resources/{global\_id})
+- Si le jeu de données doit être mis à jour, récupération des métadonnées du jeu (GET &lt;&gt;/resources/{global\_id})
   - Réponse du nœud par un code 200 avec les métadonnées du jeu de données
 - Enregistrement dans la file d&#39;attente d&#39;une activité de mise à jour (création/modification/suppression)
-- Le portail traite la demande et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT \&lt;\&gt;/resources/report/{global\_id}
+- Le portail traite la demande et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT &lt;&gt;/resources/report/{global\_id}
   - Réponse du portail par un code 200 ou
   - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
 
