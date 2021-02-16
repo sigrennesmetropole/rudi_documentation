@@ -7,7 +7,7 @@ Le document définit également la notion de qualité de service et comment elle
 
 # **Concepts préalables**
 
-[TODO: peut-être mettre ça dans un autre document et y faire référence ?]
+> [TODO: peut-être mettre ça dans un autre document et y faire référence ?]
 
 **Producteur** (Producer) : organisation identifiée dans le système RUDI qui produit des données.
 **Fournisseur** (Publisher) : organisation identifiée dans le système RUDI qui produit des métadonnées et publie des données. Il s'agit généralement, mais pas nécessairement, du Producteur lui-même.
@@ -30,21 +30,21 @@ Pour une Entité Consommatrice qui souhaite accéder aux données d'une Entité 
 
 ### **Configuration par défaut**
 
-[TODO: à valider — les utilisateurs lambdas peuvent-ils demander un droit d'accès ou une QoS particuliers ?] 
-
-[TODO: à valider] Les utilisateurs qui dans RUDI sont référencés mais n'appartiennent pas à une organisation particulière sont considérés comme appartenant à l'Entité "Default Entity". Chaque Producteur définit une configuration de sécurité par défaut pour de tels accès "ouverts".
+> [TODO: à valider — les utilisateurs lambdas peuvent-ils demander un droit d'accès ou une QoS particuliers ?] 
+ 
+> [TODO: à valider] Les utilisateurs qui dans RUDI sont référencés mais n'appartiennent pas à une organisation particulière sont considérés comme appartenant à l'Entité "Default Entity". Chaque Producteur définit une configuration de sécurité par défaut pour de tels accès "ouverts".
 
 ### **Workflow: création d'une Entité**
 
 Une Entité est créée au niveau du Portail RUDI, pour chaque nouveau nœud Producteur et tout nouveau Porteur de Projet.
 
-[TODO: qui crée ? API sur le Portail ? Procédure de vérification ?]
+> [TODO: qui crée ? API sur le Portail ? Procédure de vérification ?]
 
 Une Entité ne peut être supprimée mais peut être désactivée 
 
-[TODO: par qui? Protail et/ou admin de l'Entité? Critères? conséquences pour les données/métadonnées?]
+> [TODO: par qui? Protail et/ou admin de l'Entité? Critères? conséquences pour les données/métadonnées?]
 
-[TODO: modification d'une Entité]
+> [TODO: modification d'une Entité]
 
 ## **Concept “Groupe”**
 
@@ -58,7 +58,7 @@ Ex :
 - groupe "Aministrateurs Consommateurs" 
 - groupe "Backoffice Consommateur"
 
-[TODO: à valider] Les utilisateurs qui dans RUDI sont référencés mais n'appartiennent pas à une organisation particulière sont considérés comme appartenant au groupe "Default Group". Une configuration de sécurité est définie par le Producteur pour de tels accès "ouverts".
+> [TODO: à valider] Les utilisateurs qui dans RUDI sont référencés mais n'appartiennent pas à une organisation particulière sont considérés comme appartenant au groupe "Default Group". Une configuration de sécurité est définie par le Producteur pour de tels accès "ouverts".
 
 ## **Concept “Utilisateur”**
 Un compte utilisateur est associé soit à une personne physique, soit un robot (ex: agent de requête)
