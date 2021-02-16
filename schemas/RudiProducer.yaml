@@ -1,10 +1,16 @@
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+#
+# This document is a mirror of 
+# https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER
+#
+#•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+#
 # [- LIST OF CHANGES -]
-
+#
 # [1.1.0]
 #   - Heavy restructuration that keeps only the required properties for Metadata
 #   - 'RudiID' scheme deleted and replaced by 'UUIDv4'
-
+#
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 openapi: 3.0.0
 info:
@@ -282,7 +288,7 @@ paths:
   #=============================================================================
   # ORGANIZATION
   #=============================================================================
-  '/organization/{id}':
+  '/organizations/{id}':
     summary: Access the metadata for an identified organization
     parameters:
     - name: 'id'
@@ -309,7 +315,7 @@ paths:
                   $ref: '#/components/schemas/Organization'
 
   #=============================================================================
-  #'/organization/{id}':
+  #'/organizations/{id}':
     'delete':
       tags:
       - Organization
@@ -328,7 +334,7 @@ paths:
                 $ref: '#/components/schemas/Organization'
 
   #=============================================================================
-  '/organization':
+  '/organizations':
     'get':
       tags:
       - Organization
@@ -373,7 +379,7 @@ paths:
                   $ref: '#/components/schemas/Organization'
         
   #=============================================================================
-  # '/organization':
+  # '/organizations':
     'post':
       tags:
       - Organization
@@ -392,7 +398,7 @@ paths:
           description: The creation of the organization has been initiated
 
   #=============================================================================
-  # '/organization':
+  # '/organizations':
     'put':
       tags:
       - Organization
@@ -403,7 +409,7 @@ paths:
       - authRudi: [backoffice]
         # NOTES:
         # - the request implies organization ID is present in the body, so
-        #   '/organization/{id}' is redundant
+        #   '/organizations/{id}' is redundant
         # - the organization ID should exist already, or the upload will fail
       requestBody:
         content:
@@ -416,7 +422,7 @@ paths:
           description: The update of the organization has been initiated
 
   #=============================================================================
-  '/organization/deletion':
+  '/organizations/deletion':
     'post':
       tags:
       - Organization
@@ -440,7 +446,7 @@ paths:
   #=============================================================================
   # CONTACT
   #=============================================================================
-  '/contact/{id}':
+  '/contacts/{id}':
     summary: Access the metadata an identified contacts
     parameters:
     - name: 'id'
@@ -467,7 +473,7 @@ paths:
                   $ref: '#/components/schemas/Contact'
 
   #=============================================================================
-  #'/contact/{id}':
+  #'/contacts/{id}':
     'delete':
       tags:
       - Contact
@@ -486,7 +492,7 @@ paths:
                 $ref: '#/components/schemas/Contact'
 
   #=============================================================================
-  '/contact':
+  '/contacts':
     'get':
       tags:
       - Contact
@@ -531,7 +537,7 @@ paths:
                   $ref: '#/components/schemas/Contact'
         
   #=============================================================================
-  # '/contact':
+  # '/contacts':
     'post':
       tags:
       - Contact
@@ -550,7 +556,7 @@ paths:
           description: The creation of the contact has been initiated
 
   #=============================================================================
-  # '/contact':
+  # '/contacts':
     'put':
       tags:
       - Contact
@@ -561,7 +567,7 @@ paths:
       - authRudi: [backoffice]
         # NOTES:
         # - the request implies contact_id is present in the body, so
-        #   '/contact/{id}' is redundant
+        #   '/contacts/{id}' is redundant
         # - the contact_id should exist already, or the upload will fail
       requestBody:
         content:
@@ -574,7 +580,7 @@ paths:
           description: The update of the contact has been initiated
 
   #=============================================================================
-  '/contact/deletion':
+  '/contacts/deletion':
     'post':
       tags:
       - Contact
@@ -648,7 +654,7 @@ paths:
           description: The report has been received.
 
   #=============================================================================
-  '/organization/{id}/report':
+  '/organizations/{id}/report':
     parameters:
     - name: 'id'
       description: Unique id of the resource
@@ -719,8 +725,8 @@ components:
       
       - available_formats
       
-      - temporal_spread
-      - geography
+      #- temporal_spread
+      #- geography
       - dataset_dates
       - storage_status
       
@@ -828,8 +834,15 @@ components:
 
         #——————————————————————————
         'temporal_spread':
-          description: Period of time described by the data
+          description: >
+            Period of time described by the data.
+            If the end date is not known (because the resource is still valid in
+            the present for instance, the end_date field will be left blank)
+            For a one-time measurement, one can fill both start and end date 
+            with the same value.
           type: object
+          required: 
+          - start_date
           properties:
             #......................
             'start_date': 
@@ -847,9 +860,27 @@ components:
           properties: 
             #......................
             'bounding_box':
-              description: Geographic distribution of the data as a rectangle
+              description: >
+                Geographic distribution of the data as a rectangle.
+                The 4 parameters are given as decimal as described in the
+                norm ISO 6709
               type: object
+              required:
+              - west_longitude
+              - east_longitude
+              - north_latitude
+              - south_latitude
               properties:
+                'west_longitude':
+                  description: Westernmost latitude (decimal number, norm ISO 6709)
+                  type: number
+                  minimum: -180
+                  maximum: 180
+                'east_longitude':
+                  description: Easternmost latitude (decimal number, norm ISO 6709)
+                  type: number
+                  minimum: -180
+                  maximum: 180
                 'north_latitude': 
                   description: 
                     Northernmost latitude given as a decimal number (norm ISO 6709)
@@ -861,28 +892,17 @@ components:
                   type: number
                   minimum: -90
                   maximum: 90
-                'west_longitude':
-                  description: Westernmost latitude (decimal number, norm ISO 6709)
-                  type: number
-                  minimum: -180
-                  maximum: 180
-                'east_longitude':
-                  description: Easternmost latitude (decimal number, norm ISO 6709)
-                  type: number
-                  minimum: -180
-                  maximum: 180
             #......................
             'geographic_distribution':
-              allOf:
-              - description: Precise geographic distribution of the data 
-                type: object  
-              - $ref: 'https://app.swaggerhub.com/apis/OlivierMartineau/GeoJSON/#/schemas/GeoJsonObject'
+              description: Precise geographic distribution of the data 
+              #  type: object  
+              $ref: 'https://app.swaggerhub.com/apis/OlivierMartineau/GeoJSON/#/schemas/GeoJsonObject'
             #......................
             'projection':
               description: Cartographic projection used to describe the data
               type: string
-              example:
-                'RGF93/Lambert-93 (EPSG:2154)'
+              example: 'WGS 84 (EPSG:4326)'
+                # 'RGF93/Lambert-93 (EPSG:2154)'
                 # 'RGF93/CC48 (EPSG:3948)'
               #TODO: 'Projection' thesaurus
 
@@ -923,6 +943,7 @@ components:
         # METADATA INFO
         #——————————————————————————
         'metadata_info':
+          description: Metadata on the metadata
           type: object
           required: 
           - api_version
@@ -931,7 +952,7 @@ components:
             #......................
             'api_version':
               type: string
-              pattern: '([0-9]{1,2}\.){2}[0-9]{1,2}}'
+              pattern: '([0-9]{1,2}\.){2}[0-9]{1,2}[a-z]*'
             #......................
             'metadata_dates':
               $ref: '#/components/schemas/ReferenceDates'
@@ -1045,6 +1066,10 @@ components:
       - $ref: '#/components/schemas/Media'
       - description: Description of the container of data as a file
         type: object
+        required:
+        - file_size
+        - file_type
+        - checksum
         properties:
           #——————————————————————————
           'file_structure':
@@ -1178,7 +1203,7 @@ components:
     'IntegrationReport':
       required:
       - report_id
-      - global_id
+      - resource_id
       properties:
         #——————————————————————————
         'report_id':
@@ -1186,7 +1211,7 @@ components:
           type: string
           format: uuid
         #——————————————————————————
-        'global_id':
+        'resource_id':
           type: string
           format: uuid
         #——————————————————————————
@@ -1271,11 +1296,11 @@ components:
       enum: 
       - 'application/x-executable'
       - 'application/graphql'
-      - 'application/javascript'
-      - 'application/json'
+      - 'application/javascript' # (.js)
+      - 'application/json' # (.json)
       - 'application/ld+json'
       - 'application/msword' # (.doc)
-      - 'application/pdf'
+      - 'application/pdf' # (.pdf)
       - 'application/sql'
       - 'application/vnd.api+json'
       - 'application/vnd.ms-excel' # (.xls)
@@ -1286,24 +1311,24 @@ components:
       - 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' # (.docx)'
       - 'application/x-www-form-urlencoded'
       - 'application/xml'
-      - 'application/zip'
+      - 'application/zip' # (.zip)
       - 'application/zstd' # (.zst)
-      - 'audio/mpeg'
-      - 'audio/ogg'
-      - 'image/gif'
+      - 'audio/mpeg' # (.mpeg | .mpg)
+      - 'audio/ogg' # (.ogg)
+      - 'image/gif' # (.gif)
       - 'image/apng'
       - 'image/flif'
       - 'image/webp'
       - 'image/x-mng'
-      - 'image/jpeg'
-      - 'image/png'
+      - 'image/jpeg' # (.jpeg)
+      - 'image/png' # (.png)
       - 'multipart/form-data'
-      - 'text/css'
-      - 'text/csv'
-      - 'text/html'
-      - 'text/php'
-      - 'text/plain'
-      - 'text/xml'
+      - 'text/css' # (.css)
+      - 'text/csv' # (.csv)
+      - 'text/html' # (.html | .htm)
+      - 'text/php' # (.php)
+      - 'text/plain' # (.txt)
+      - 'text/xml' # (.xml)
 
     #---------------------------------------------------------------------------
     'FileExtension':
