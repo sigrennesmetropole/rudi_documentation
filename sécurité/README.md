@@ -1,4 +1,4 @@
-# *Contrôle d'accès dans RUDI*
+## *Contrôle d'accès dans RUDI*
 
 L'objet du présent document est de définir les différents concepts du modèle de contrôle d'accès défini pour RUDI, et d'illustrer comment il s'articulent avec des exemples concrets.
 Le document définit également la notion de qualité de service et comment elle est amenée à être configurée dans RUDI.
