@@ -52,10 +52,10 @@ Une Entité ne peut être supprimée mais peut être désactivée
 Un Groupe rassemble les Utilisateurs d'une Entité Consommatrice qui ont les mêmes droits d'accès et la même qualité de service pour un Producteur donné.
 En d'autres termes, une Entité Consommatrice qui souhaite bénéficier d'un ou plusieurs accès particuliers auprès d'une Entité Productrice de données va définir chez celui-ci autant de Groupes. 
 
-Ex : 
-- groupe "Webservices"
-- groupe "Administrateurs Consommateurs" 
-- groupe "Backoffice Consommateur"
+> Exemples : 
+> - groupe "Webservices"
+> - groupe "Administrateurs Consommateurs" 
+> - groupe "Backoffice Consommateur"
 
 ### **Workflow: création d'un Groupe**
 
