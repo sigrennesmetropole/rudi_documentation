@@ -29,7 +29,8 @@ Le document définit également la notion de qualité de service et comment elle
 
 Une Entité est une organisation dans RUDI, qui peut être soit un nœud Producteur de données, soit nœud Consommateur.
 
-> *Exemple de nœud Consommateur: une organisation "Porteuse de projet" qui souhaite collecter les données d'un nœud Producteur de façon récurrente pour proposer un service par le biais d'une application) [TODO: exemple plus concret avec des noms d'entreprise]*
+> *Exemple de nœud Consommateur: une organisation "Porteuse de projet" qui souhaite collecter les données d'un nœud Producteur de façon récurrente pour proposer un service par le biais d'une application)*
+> [TODO: exemple plus concret avec des noms d'entreprise fictifs]
 
 Pour une Entité Consommatrice qui souhaite accéder aux données d'une Entité Productrice avec des droits d'accès et/ou une qualité de service spécifique, va être définie une configuration d'accès particulière. Dans RUDI, la notion d'Entité sert donc à modéliser les deux acteurs (l'un Consommateur, l'autre Producteur) qui vont négocier un tel Contrat d'accès.
 
