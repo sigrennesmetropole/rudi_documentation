@@ -1,4 +1,4 @@
-## *Contrôle d'accès dans RUDI*
+### *Contrôle d'accès dans RUDI*
 
 L'objet du présent document est de définir les différents concepts du modèle de contrôle d'accès défini pour RUDI, et d'illustrer comment il s'articulent avec des exemples concrets.
 Le document définit également la notion de qualité de service et comment elle est amenée à être configurée dans RUDI.
@@ -7,7 +7,14 @@ Le document définit également la notion de qualité de service et comment elle
 
 # **Concepts préalables**
 
-**Nœud Producteur**: organisation identifiée dans l'architecture RUDI comme un 
+[TODO: peut-être mettre ça dans un autre document et y faire référence ?]
+
+**Producteur** (Producer) : organisation identifiée dans le système RUDI qui produit des données.
+**Fournisseur** (Publisher) : organisation identifiée dans le système RUDI qui produit des métadonnées et publie des données. Il s'agit généralement, mais pas nécessairement, du Producteur lui-même.
+**Hébergeur** (Host) : organisation identifiée dans le système RUDI qui gère l'hébergement des données.
+**Noeud Producteur** : du point de vue du système RUDI, on appèlera "Nœud Producteur" l'ensemble Producteur + Fournisseur + Hébergeur. Concrètement, le Fournisseur aura la charge de publier les données, mais aussi de gérer le contrôle d'accès aux données.
+**Consommateur** : le consommateur de données est l'utilisateur des données mises en partage dans RUDI, qui va les exploiter soit pour son propre usage, soit pour offrir des services à des tiers.
+**Porteur de projet** : dans RUDI, un Porteur de projet est une organisation qui exploite les données pour offrir un service à des tiers, en général sous forme d'application.
 
 # **Modélisation du contrôle d'accès dans RUDI**
 
