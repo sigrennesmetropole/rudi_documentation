@@ -17,3 +17,19 @@ curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_ty
 
 
 </pre>
+
+
+# Contrôle de l'authentification appel du Portail RUDI vers un fournisseur de données
+
+Lorsque le portail vient moissonner des données d'un fournisseur de données ou lorsque le portail vient soumettre un rapport d'intégration, l'appel comporte une entête d'authorization de type "Bearer".
+
+Exemple :
+<pre>
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
+</pre>
+
+Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
+
+<pre>
+curl -v --request GET http://&lt;server>:&lt;port>/oauth/_chek_token?token=<valeur du token>
+<pre>
