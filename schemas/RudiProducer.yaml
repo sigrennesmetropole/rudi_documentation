@@ -10,12 +10,16 @@
 # [1.1.0]
 #   - Heavy restructuration that keeps only the required properties for Metadata
 #   - 'RudiID' scheme deleted and replaced by 'UUIDv4'
+#   - 'File' renamed in 'MediaFile'
+#   - 'Series' renamed in 'MediaSeries'
+#   - 'lang' parameter removed from 'resources' routes
+#   - 'abstract' renamed in 'synopsis'
 #
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 openapi: 3.0.0
 info:
   version: 1.1.0
-  title: rudy-catalog-api
+  title: rudi-catalog-api
   description: "API pour l'accès aux données au niveau du nœud producteur RUDI"
   termsOfService: "no"
   contact:
@@ -53,15 +57,9 @@ paths:
   #=============================================================================
   # METADATA
   #=============================================================================
-  '/{lang}/resources/{id}':
+  '/resources/{id}':
     summary: Access the metadata for one identified resource
     parameters:
-    - name: 'lang'
-      description: Language chosen by the user for the interface
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Language'
     - name: 'id'
       description: Unique id of the resource
       in: path
@@ -111,7 +109,7 @@ paths:
           $ref: "#/components/responses/Error503ServiceUnavailable"
 
   #=============================================================================
-  # '/{lang}/resources/{id}':
+  # '/resources/{id}':
     'delete':
       tags:
       - Metadata
@@ -131,15 +129,8 @@ paths:
                 $ref: '#/components/schemas/Metadata'
                 
   #=============================================================================
-  '/{lang}/resources':
+  '/resources':
     summary: Access the metadata for a set of resources
-    parameters:
-    - name: 'lang'
-      description: Language chosen by the user for the interface
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Language'
     'get':
       summary: Access the metadata for every resource
       description: Returns an array of the metadata of every resource
@@ -171,17 +162,6 @@ paths:
           format: int32
           minimum: 0
           example: 1
-      - name: 'partial'
-        description: >
-          MAkes it possible to access only a 
-          0 global
-        in: query
-        schema:
-          type: integer
-          format: int32
-          minimum: 0
-          example: 1
-
       responses:
         '200':
           description: Metadata for every resource
@@ -201,7 +181,7 @@ paths:
                   $ref: '#/components/schemas/Metadata'
         
   #=============================================================================
-  #'/{lang}/resources':
+  #'/resources':
     'post':
       tags:
       - Metadata
@@ -230,7 +210,7 @@ paths:
           description: The creation of the resource has been initiated.
         
   #=============================================================================
-  #'/{lang}/resources':
+  #'/resources':
     'put':
       tags:
       - Metadata
@@ -257,14 +237,27 @@ paths:
           description: The update of the resource has been initiated
 
   #=============================================================================
-  '/{lang}/resources/deletion':
-    parameters:
-    - name: 'lang'
-      description: Language chosen by the user for the interface
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Language'
+  #'/resources':
+    'delete':
+      tags:
+      - Metadata
+      description:
+        Delete every metadata on the Proxi/organization node 
+      operationId: deleteEveryResource
+      security:
+      - authRudi: [backadmin]
+        # NOTES:
+        # - the request implies global_id is present in the body, so
+        #   '/resources/{id}' is redundant
+        # - the resource global_id should exist already, or the upload will fail
+        # - data is located on the proxi/organization node, metadata both on 
+        #   producer node and on RUDI catalog node
+      responses:
+        '202':
+          description: The deletion of the resource has been initiated
+
+  #=============================================================================
+  '/resources/deletion':
     'post':
       tags:
       - Metadata
@@ -604,14 +597,8 @@ paths:
   #=============================================================================
   # REPORT
   #=============================================================================
-  '/{lang}/resources/{id}/report':
+  '/resources/{id}/report':
     parameters:
-    - name: 'lang'
-      description: Language chosen by the user for the interface
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/Language'
     - name: 'id'
       description: Unique id of the resource
       in: path
@@ -657,7 +644,7 @@ paths:
   '/organizations/{id}/report':
     parameters:
     - name: 'id'
-      description: Unique id of the resource
+      description: Unique id of the organization
       in: path
       required: true
       schema:
@@ -696,6 +683,49 @@ paths:
       responses:
         '202':
           description: The report has been received.
+  #=============================================================================
+  '/contacts/{id}/report':
+    parameters:
+    - name: 'id'
+      description: Unique id of the resource
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/UUIDv4'
+    'post':
+      tags:
+      - Report
+      description: >
+        Action called when receiving an ackowledgement for an integration
+        operation from the Portal
+      operationId: addContactIntegrationReport
+      security:
+      - authRudi: [node]
+      #TODO maybe such operation should stay private
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IntegrationReport"
+      responses:
+        '202':
+          description: A new report was created.
+    'put':
+      tags:
+      - Report
+      description:
+        Report from the Portal on the result of a previous operation request
+      operationId: updateContactReport
+      security:
+      - authRudi: [portal]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IntegrationReport"
+      responses:
+        '202':
+          description: The report has been received.
 
 
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
@@ -714,7 +744,7 @@ components:
       - global_id
       
       - resource_title
-      - abstract
+      - synopsis
       - summary
       
       - theme
@@ -766,7 +796,7 @@ components:
         # !DICO!
 
         #——————————————————————————
-        'abstract':
+        'synopsis':
           description: Short description for the whole dataset
           type: array
           items:
@@ -871,16 +901,6 @@ components:
               - north_latitude
               - south_latitude
               properties:
-                'west_longitude':
-                  description: Westernmost latitude (decimal number, norm ISO 6709)
-                  type: number
-                  minimum: -180
-                  maximum: 180
-                'east_longitude':
-                  description: Easternmost latitude (decimal number, norm ISO 6709)
-                  type: number
-                  minimum: -180
-                  maximum: 180
                 'north_latitude': 
                   description: 
                     Northernmost latitude given as a decimal number (norm ISO 6709)
@@ -892,6 +912,16 @@ components:
                   type: number
                   minimum: -90
                   maximum: 90
+                'west_longitude':
+                  description: Westernmost latitude (decimal number, norm ISO 6709)
+                  type: number
+                  minimum: -180
+                  maximum: 180
+                'east_longitude':
+                  description: Easternmost latitude (decimal number, norm ISO 6709)
+                  type: number
+                  minimum: -180
+                  maximum: 180
             #......................
             'geographic_distribution':
               description: Precise geographic distribution of the data 
@@ -947,7 +977,7 @@ components:
           type: object
           required: 
           - api_version
-          - reference_dates
+          - metadata_dates
           properties:
             #......................
             'api_version':
@@ -964,7 +994,7 @@ components:
                 type: object
               - $ref: '#/components/schemas/Organization'
             #......................
-            'metadata_contact':
+            'metadata_contacts':
               description: 
                 Addresses to get further information on the metadata
               type: array
@@ -1057,35 +1087,20 @@ components:
       discriminator:  
         propertyName: media_type
         mapping:
-          'FILE': '#/components/schemas/File'
-          'SERIES': '#/components/schemas/Series'
+          'FILE': '#/components/schemas/MediaFile'
+          'SERIES': '#/components/schemas/MediaSeries'
       
     #---------------------------------------------------------------------------
-    'File':
+    'MediaFile':
       allOf:
       - $ref: '#/components/schemas/Media'
       - description: Description of the container of data as a file
         type: object
         required:
-        - file_size
         - file_type
+        - file_size
         - checksum
         properties:
-          #——————————————————————————
-          'file_structure':
-            description: >
-              Link towards the resource that describes the structure of the data
-              (language, norm, data structure, JSON schema, OpenAPI, etc.)
-            type: string
-            format: URI
-            #'URI definition - https://tools.ietf.org/html/rfc2396'
-  
-          #——————————————————————————
-          'file_size':
-            description: >
-              Size of the file, in bytes 
-              (determined automatically)
-            type: integer
   
           #——————————————————————————
           'file_type':
@@ -1093,14 +1108,11 @@ components:
             $ref: '#/components/schemas/MediaType'
   
           #——————————————————————————
-          'file_encoding':
-            description: 
-              Source encoding of the data 
+          'file_size':
+            description: >
+              Size of the file, in bytes 
               (determined automatically)
-            type: string
-            #format:
-            #ISO/CEI 10646'
-            #TODO: thesaurus for encoding
+            type: integer
   
           #——————————————————————————
           'checksum':
@@ -1116,9 +1128,29 @@ components:
                 $ref: '#/components/schemas/HashAlgorithm'
               'hash':
                 type: string
+                
+          #——————————————————————————
+          'file_structure':
+            description: >
+              Link towards the resource that describes the structure of the data
+              (language, norm, data structure, JSON schema, OpenAPI, etc.)
+            type: string
+            format: URI
+            #'URI definition - https://tools.ietf.org/html/rfc2396'
+  
+          #——————————————————————————
+          'file_encoding':
+            description: 
+              Source encoding of the data 
+              (determined automatically)
+            type: string
+            #format:
+            #ISO/CEI 10646'
+            #TODO: thesaurus for encoding
+
                   
     #---------------------------------------------------------------------------
-    'Series':
+    'MediaSeries':
       allOf:
       - $ref: '#/components/schemas/Media'
       - description: Description of the container of data as a file
@@ -1128,15 +1160,14 @@ components:
           'latency':
             description: >
               Theorical delay between the production of the record and its availability,
-              in milliseconds. Applies to temporal series of data.
+              in milliseconds.
             type: integer
             minimum: 0
   
           #——————————————————————————
           'period':
-            description: >
+            description:
               Theorical delay between the production of two records, in milliseconds.
-              Applies to temporal series of data.
             type: integer
             minimum: 0
   
@@ -1151,7 +1182,8 @@ components:
             description: 
               Actual size of the data, in bytes (refreshed automatically)
             type: integer
-  
+            minimum: 0
+
           #——————————————————————————
           'total_number_of_records':    
             description: Estimated total number of records
@@ -1163,6 +1195,7 @@ components:
             description: 
               Estimated total size of the data, in bytes 
             type: integer
+            minimum: 0
 
     #---------------------------------------------------------------------------
     'Connector':
@@ -1242,7 +1275,7 @@ components:
         #——————————————————————————
         'version' :
           description:
-            Version number of the integration contract used for the file
+              Version number of the integration contract used for the file
           type: integer
           minimum: 0            
         #——————————————————————————
@@ -1259,9 +1292,9 @@ components:
           type: string
           #TODO: lang?
         #——————————————————————————
-        'errors':
+        'integration_errors':
           description: >
-            List of all the errors that were encounntered during the
+            List of all the errors that were encountered during the
             integration of the resource.
           type: array
           items:
@@ -1384,7 +1417,6 @@ components:
       type: object
       required:
       - created
-      - published
       properties:
         'created':
           $ref: '#/components/schemas/Date'
