@@ -31,5 +31,5 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlc
 Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
 
 <pre>
-curl -v --request GET http://&lt;server>:&lt;port>/oauth/chek_token?token=&ltvaleur du token>
+curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
 <pre>
