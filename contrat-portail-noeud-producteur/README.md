@@ -335,9 +335,9 @@ Soumission d&#39;une demande de suppression d&#39;un jeu de données
 
 **Description :**
 
-Demande de génération d&#39;un identifiant RUDI.
+Demande de génération d&#39;un identifiant RUDI (UUID v4).
 
-Le DOI RUDI généré tiendra compte des informations contenues dans le token JWT d&#39;authentification pour déduire le producteur.
+L'identifiant RUDI généré tiendra compte des informations contenues dans le token JWT d&#39;authentification pour déduire le producteur.
 
 **GET &lt;&gt;/resources/id\_generation**
 
