@@ -160,6 +160,7 @@ Le tableau ci-dessous liste les différents cas d&#39;erreur possibles.
 | ERR-103 | Le paramètre &quot;_nom\_parametre_&quot; est manquant |
 | ERR-104 | Autres erreurs d&#39;intégration |
 | ERR-105 | Erreur inconnue: l&#39;erreur n&#39;a pas été reconnue, veuillez contacter l&#39;administrateur Rudi afin d&#39;analyser l&#39;erreur. |
+| ERR-106 | La version de metadonnées &quot;_api\_version_&quot; n'est pas supportées. La version courante est X.X.X |
 | ERR-1XX | …. Erreurs de base, à définir. |
 | ERR-201 | Le type du champ &quot;_nom\_champ_&quot; n&#39;est pas le bon (format attendu : &quot;_format attendu&quot;_ / format reçu : _&quot;format\_reçu&quot;_ ) |
 | ERR-202 | Le champ &quot;_nom\_champ&quot;_ est manquant alors qu&#39;il est obligatoire. |
