@@ -168,6 +168,8 @@ Le tableau ci-dessous liste les différents cas d&#39;erreur possibles.
 | ERR-2XX | …. Erreurs sur le type du champ, à définir. |
 | ERR-301 | Des caractères ne sont pas acceptés dans le &quot;_nom\_champ_&quot; |
 | ERR-302 | La valeur saisie ne correspond pas au référentiel des valeurs attendues pour le champ &quot;_nom\_champ_&quot; (valeur saisie : &quot;_valeur\_saisie_&quot; / référentiel attendu : &quot;_liste des valeurs attendue séparées par des virgules_&quot; |
+| ERR-303 | La valeur saisie &quot;_valeur\_saisie_&quot; pour le champ &quot;_nom\_champ_&quot; ne correspond pas à un code de concept SKOS connu |
+| ERR-304 | La valeur saisie &quot;_valeur\_saisie_&quot; pour le champ &quot;_nom\_champ_&quot; est déjà utilisée |
 | ERR-3XX | … Erreur en lien avec les valeurs d&#39;un champ, à définir. |
 | ERR-XXX | … Autres types d&#39;erreurs, autres erreurs, à définir. |
 
