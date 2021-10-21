@@ -1,10 +1,5 @@
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 #
-# This document is a mirror of 
-# https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER
-#
-#•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-#
 # [- LIST OF CHANGES -]
 #
 # [1.1.0]
@@ -14,12 +9,34 @@
 #   - 'Series' renamed in 'MediaSeries'
 #   - 'lang' parameter removed from 'resources' routes
 #   - 'abstract' renamed in 'synopsis'
+#   - 'minimum' is incorrect for arrays -> 'minItems'
+#   - IntegrationReport.version is now a string
 #
+# [1.2.0]
+#   - Schemas 'SkosConcept' and 'SkosScheme'
+#   - Added 'access_condition' and especially 'access_condition.licence'
+#   - Licence, LicenceCustom and LicenceStandard schemas
+#   - $ref: 'UUIDv4' replaced by {type: string; format: uuid}. 
+#   - 'UUIDv4' schema deleted
+#
+# [1.2.1]
+#   - 'count_by', 'sort_by', 'group_by', 'group_limit', 'group_offset', 
+#     'fields', 'updated_after' and 'updated_before' added as parameters
+#     of the main GET /resources path.
+#   - 'media_name' property added to 'Media' scheme
+#   - 'scheme_role' and 'scheme_uri' added to 'SkosScheme' scheme
+#
+# [1.2.2]
+#   - Suppression of paths not accessible from the Portal
+#
+# [1.2.3]
+#   - Modification of the access to the list of metadata
+
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 openapi: 3.0.0
 info:
-  version: 1.1.0
-  title: rudi-catalog-api
+  version: 1.2.3
+  title: rudi-proxi-api
   description: "API pour l'accès aux données au niveau du nœud producteur RUDI"
   termsOfService: "no"
   contact:
@@ -30,8 +47,8 @@ info:
     url: 'https://www.gnu.org/licenses/gpl-3.0.html'
 
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-#servers:
-#- url: https://rudi-server/api/v1
+servers:
+- url: https://data-rudi.aqmo.org/api/v1
 
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 # DEFINITIONS
@@ -65,7 +82,8 @@ paths:
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/UUIDv4'
+        type: string   
+        format: uuid
     'get':
       tags:
       - Metadata
@@ -109,26 +127,6 @@ paths:
           $ref: "#/components/responses/Error503ServiceUnavailable"
 
   #=============================================================================
-  # '/resources/{id}':
-    'delete':
-      tags:
-      - Metadata
-      description: Deletes one identified resource
-      # - should we keep the metadata for some time?
-      # - see above: can we access a metadata but not the resource?
-      operationId: deleteResource
-      security:
-      - authRudi: [backadmin]
-      responses:
-        '200':
-          description: Resource successfully deleted.
-          content:
-            application/json:
-              schema:
-                # The deleted resource
-                $ref: '#/components/schemas/Metadata'
-                
-  #=============================================================================
   '/resources':
     summary: Access the metadata for a set of resources
     'get':
@@ -146,454 +144,91 @@ paths:
       - authRudi: [portal, backoffice]
       parameters:
       - name: 'limit'
-        description: Max number of resource to return
+        description: The maximum number of metadata in the result set    
         in: query
         schema:
           type: integer
           format: int32
           minimum: 1
-          maximum: 500 #default MAX to limit the server overload
+          maximum: 100 #default MAX to limit the server overload
         example: 100
       - name: 'offset'
-        description: Index of the first line of resources to display
+        description: The number of metadata to skip before starting to collect the result set    
         in: query
         schema:
           type: integer
           format: int32
           minimum: 0
-          example: 1
+        example: 1
+      - name: 'sort_by'
+        description:
+          Comma-separated properties used to order the metadata in the result set.
+          First property gets the priority over the second one and so on.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: 'fields'
+        description: 
+          Comma-separated properties that are kept for displaying the elements of the result set
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: 'updated_after'
+        description: Shortcut to list the metadata updated after a given ISO date
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'  
+      - name: 'updated_before'
+        description: Shortcut to list the metadata updated before a given ISO date
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'  
       responses:
         '200':
           description: Metadata for every resource
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Metadata'
+                type: object          
+                properties:
+                  'total': 
+                    description: 
+                      the total number of resources that match the filter used  
+                      in the request
+                    type: integer
+                    minimum: 0
+                  'items':
+                    description: 
+                      list of metadata that match the filter, possibly partial
+                      (navigation is offered with limit / offset parameters)
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Metadata'
         '206':
           description: Metadata for a subset of the resources
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Metadata'
-        
-  #=============================================================================
-  #'/resources':
-    'post':
-      tags:
-      - Metadata
-      description:
-        Create one new resource
-      operationId: addResource
-      security:
-      - authRudi: [backoffice]
-        # NOTES:
-        # - the request implies global_id is present in the body, so
-        #   '/resources/{id}' is redundant
-        # - the uploader chooses the global_ids!
-        # - the resource global_id should not exist already, or the upload will
-        #   fail
-        # - data in the proxi/organization node + metadata both on producer node
-        #   AND on RUDI catalog node
-      requestBody:
-        content:
-          application/json:
-            schema:
-              # The added resource
-              $ref: '#/components/schemas/Metadata'
+                type: object          
+                properties:
+                  'total': 
+                    description: 
+                      the total number of resources that match the filter used  
+                      in the request
+                    type: integer
+                    minimum: 0
+                  'items':
+                    description: 
+                      list of metadata that match the filter, possibly partial
+                      (navigƒation is offered with limit / offset parameters)
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Metadata'
 
-      responses:
-        '202':
-          description: The creation of the resource has been initiated.
-        
-  #=============================================================================
-  #'/resources':
-    'put':
-      tags:
-      - Metadata
-      description:
-        Update data and metadata on the Proxi/organization node for one identified
-        resource
-      operationId: updateResource
-      security:
-      - authRudi: [backoffice]
-        # NOTES:
-        # - the request implies global_id is present in the body, so
-        #   '/resources/{id}' is redundant
-        # - the resource global_id should exist already, or the upload will fail
-        # - data is located on the proxi/organization node, metadata both on 
-        #   producer node and on RUDI catalog node
-      requestBody:
-        content:
-          application/json:
-            schema:
-              # The updated resource
-              $ref: '#/components/schemas/Metadata'
-      responses:
-        '202':
-          description: The update of the resource has been initiated
-
-  #=============================================================================
-  #'/resources':
-    'delete':
-      tags:
-      - Metadata
-      description:
-        Delete every metadata on the Proxi/organization node 
-      operationId: deleteEveryResource
-      security:
-      - authRudi: [backadmin]
-        # NOTES:
-        # - the request implies global_id is present in the body, so
-        #   '/resources/{id}' is redundant
-        # - the resource global_id should exist already, or the upload will fail
-        # - data is located on the proxi/organization node, metadata both on 
-        #   producer node and on RUDI catalog node
-      responses:
-        '202':
-          description: The deletion of the resource has been initiated
-
-  #=============================================================================
-  '/resources/deletion':
-    'post':
-      tags:
-      - Metadata
-      description:
-        Delete data on the Proxi/organization node for several identified resources
-        #TODO: and metadata? After e.g. a year?
-      operationId: deleteResources
-      security:
-      - authRudi: [backadmin]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/UUIDv4"
-      responses:
-        '202':
-          description: The deletion of the resources has been initiated.
-
-  #=============================================================================
-  # ORGANIZATION
-  #=============================================================================
-  '/organizations/{id}':
-    summary: Access the metadata for an identified organization
-    parameters:
-    - name: 'id'
-      description: Unique id of the organization
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UUIDv4'    
-    'get':
-      tags:
-      - Organization
-      description: Returns the metadata for the identified organization
-      operationId: getOrganization
-      security:
-      - authRudi: [portal, backoffice]
-      responses:
-        '200':
-          description: All metadata for the identified organization
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization'
-
-  #=============================================================================
-  #'/organizations/{id}':
-    'delete':
-      tags:
-      - Organization
-      description: Deletes one identified organization
-        # - action will fail for a organization that still has resources attached
-      operationId: deleteOrganization
-      security:
-      - authRudi: [backadmin]
-      responses:
-        '200':
-          description: Organization successfully deleted
-          content:
-            application/json:
-              schema:
-                # The deleted resource
-                $ref: '#/components/schemas/Organization'
-
-  #=============================================================================
-  '/organizations':
-    'get':
-      tags:
-      - Organization
-      description: Access the data for a set of organizations
-      operationId: getOrganizationList
-      security:
-      - authRudi: [portal, backoffice]
-      parameters:
-      - name: 'limit'
-        description: Max number of organizations to return
-        in: query
-        schema:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500 #default MAX to limit the server overload
-        example: 100
-      - name: 'offset'
-        description: Index of the first line of organizations to display
-        in: query
-        schema:
-          type: integer
-          format: int32
-          minimum: 0
-          example: 1
-      responses:
-        '200':
-          description: Metadata for every organization
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization'
-        '206':
-          description: Metadata for a subset of the organizations
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organization'
-        
-  #=============================================================================
-  # '/organizations':
-    'post':
-      tags:
-      - Organization
-      description:
-        Create one new organization in RUDI system
-      operationId: addOrganization
-      security:
-      - authRudi: [backoffice]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Organization"
-      responses:
-        '202':
-          description: The creation of the organization has been initiated
-
-  #=============================================================================
-  # '/organizations':
-    'put':
-      tags:
-      - Organization
-      description:
-        Updates one organization in RUDI system
-      operationId: updateOrganization
-      security:
-      - authRudi: [backoffice]
-        # NOTES:
-        # - the request implies organization ID is present in the body, so
-        #   '/organizations/{id}' is redundant
-        # - the organization ID should exist already, or the upload will fail
-      requestBody:
-        content:
-          application/json:
-            schema:
-              # The updated organization
-              $ref: "#/components/schemas/Organization"
-      responses:
-        '202':
-          description: The update of the organization has been initiated
-
-  #=============================================================================
-  '/organizations/deletion':
-    'post':
-      tags:
-      - Organization
-      description:
-        Delete data on the Producer node for several identified organizations
-        # - action will fail for every organization that still has resources attached
-      operationId: deleteOrganizations
-      security:
-      - authRudi: [backadmin]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/UUIDv4"
-      responses:
-        '202':
-          description: The deletion of the organizations has been initiated
-  
-  #=============================================================================
-  # CONTACT
-  #=============================================================================
-  '/contacts/{id}':
-    summary: Access the metadata an identified contacts
-    parameters:
-    - name: 'id'
-      description: Unique id of the contact
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UUIDv4'    
-    'get':
-      tags:
-      - Contact
-      description: Returns the metadata for the identified contact
-      operationId: getContact
-      security:
-      - authRudi: [portal, backoffice]
-      responses:
-        '200':
-          description: All metadata for the identified contact
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Contact'
-
-  #=============================================================================
-  #'/contacts/{id}':
-    'delete':
-      tags:
-      - Contact
-      description: Deletes one identified contact
-        # - action will fail for a contact that still has resources attached
-      operationId: deleteContact
-      security:
-      - authRudi: [backadmin]
-      responses:
-        '200':
-          description: Contact successfully deleted.
-          content:
-            application/json:
-              schema:
-                # The deleted resource
-                $ref: '#/components/schemas/Contact'
-
-  #=============================================================================
-  '/contacts':
-    'get':
-      tags:
-      - Contact
-      description: Access the data for a set of contacts
-      operationId: getContactList
-      security:
-      - authRudi: [portal, backoffice]
-      parameters:
-      - name: 'limit'
-        description: Max number of contacts to return
-        in: query
-        schema:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500 #default MAX to limit the server overload
-        example: 100
-      - name: 'offset'
-        description: Index of the first line of contacts to display
-        in: query
-        schema:
-          type: integer
-          format: int32
-          minimum: 0
-          example: 1
-      responses:
-        '200':
-          description: Metadata for every contact
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Contact'
-        '206':
-          description: Metadata for a subset of the contacts
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Contact'
-        
-  #=============================================================================
-  # '/contacts':
-    'post':
-      tags:
-      - Contact
-      description:
-        Create one new contact in RUDI system
-      operationId: addContact
-      security:
-      - authRudi: [backoffice]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Contact"
-      responses:
-        '202':
-          description: The creation of the contact has been initiated
-
-  #=============================================================================
-  # '/contacts':
-    'put':
-      tags:
-      - Contact
-      description:
-        Updates one contact
-      operationId: updateContact
-      security:
-      - authRudi: [backoffice]
-        # NOTES:
-        # - the request implies contact_id is present in the body, so
-        #   '/contacts/{id}' is redundant
-        # - the contact_id should exist already, or the upload will fail
-      requestBody:
-        content:
-          application/json:
-            schema:
-              # The updated contact
-              $ref: "#/components/schemas/Contact"
-      responses:
-        '202':
-          description: The update of the contact has been initiated
-
-  #=============================================================================
-  '/contacts/deletion':
-    'post':
-      tags:
-      - Contact
-      description:
-        Delete data on the Proxi/organization node for several identified contacts
-        # - action will fail for every contact that still has resources attached
-      operationId: deleteContacts
-      security:
-      - authRudi: [backadmin]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/UUIDv4"
-      responses:
-        '202':
-          description: The deletion of the contacts has been initiated.
-        
   #=============================================================================
   # REPORT
   #=============================================================================
@@ -604,30 +239,14 @@ paths:
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/UUIDv4'
-    'post':
-      tags:
-      - Report
-      description: >
-        Action called when receiving an ackowledgement for an integration
-        operation from the Portal
-      operationId: addIntegrationReport
-      security:
-      - authRudi: [node]
-      #TODO maybe such operation should stay private
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IntegrationReport"
-      responses:
-        '202':
-          description: A new report was created.
+        type: string   
+        format: uuid
     'put':
       tags:
       - Report
       description:
-        Report from the Portal on the result of a previous operation request
+        Create or update a Portal report for a metadata integration operation
+        (create, update or delete)
       operationId: updateIntegrationReport
       security:
       - authRudi: [portal]
@@ -639,94 +258,58 @@ paths:
       responses:
         '202':
           description: The report has been received.
-
   #=============================================================================
-  '/organizations/{id}/report':
-    parameters:
-    - name: 'id'
-      description: Unique id of the organization
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/UUIDv4'
-    'post':
-      tags:
-      - Report
-      description: >
-        Action called when receiving an ackowledgement for an integration
-        operation from the Portal
-      operationId: addOrganizationIntegrationReport
-      security:
-      - authRudi: [node]
-      #TODO maybe such operation should stay private
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IntegrationReport"
-      responses:
-        '202':
-          description: A new report was created.
-    'put':
+  #'/resources/{id}/report':
+    'get':
       tags:
       - Report
       description:
-        Report from the Portal on the result of a previous operation request
-      operationId: updateOrganizationReport
+        List reports all the Portal integration reports for the identified resource
+      operationId: getIntegrationReportListForMetadata
       security:
       - authRudi: [portal]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IntegrationReport"
       responses:
         '202':
-          description: The report has been received.
+          description: List of the integration reports for the resource
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/IntegrationReport"
+
   #=============================================================================
-  '/contacts/{id}/report':
+  '/resources/{id}/report/{irid}':
     parameters:
     - name: 'id'
       description: Unique id of the resource
       in: path
       required: true
       schema:
-        $ref: '#/components/schemas/UUIDv4'
-    'post':
-      tags:
-      - Report
-      description: >
-        Action called when receiving an ackowledgement for an integration
-        operation from the Portal
-      operationId: addContactIntegrationReport
-      security:
-      - authRudi: [node]
-      #TODO maybe such operation should stay private
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IntegrationReport"
-      responses:
-        '202':
-          description: A new report was created.
-    'put':
+        type: string   
+        format: uuid
+    - name: 'irid'
+      description: Unique id of the report
+      in: path
+      required: true
+      schema:
+        type: string   
+        format: uuid
+    'get':
       tags:
       - Report
       description:
-        Report from the Portal on the result of a previous operation request
-      operationId: updateContactReport
+        Access one identified integration for the identified resource
+      operationId: getIntegrationReportForMetadata
       security:
       - authRudi: [portal]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/IntegrationReport"
       responses:
         '202':
-          description: The report has been received.
-
+          description: Identified integration report for the resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntegrationReport"
 
 #•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 components:
@@ -759,6 +342,8 @@ components:
       #- geography
       - dataset_dates
       - storage_status
+      
+      - access_condition
       
       - metadata_info
 
@@ -801,7 +386,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DictionaryEntry'
-          minimum: 1
+          minItems: 1
           # TODO: size ≤ 150
         # !DICO!
 
@@ -811,7 +396,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DictionaryEntry'
-          minimum: 1
+          minItems: 1
           # TODO: size ≤ 500
         # !DICO!
 
@@ -851,6 +436,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Media'
+          minItems: 1
 
         #—•—•—•—•—•—•—•—•—•—•—•—•—•
         # DATASET INFO
@@ -924,13 +510,19 @@ components:
                   maximum: 180
             #......................
             'geographic_distribution':
-              description: Precise geographic distribution of the data 
-              #  type: object  
-              $ref: 'https://app.swaggerhub.com/apis/OlivierMartineau/GeoJSON/#/schemas/GeoJsonObject'
+              allOf:
+              - description: >
+                  Global geographic distribution of the data expressed in 
+                  'EPSG:4326/WGS 84' projection
+                type: object  
+              - $ref: 'https://app.swaggerhub.com/apis/OlivierMartineau/GeoJSON/1.0.0/#/schemas/GeoJsonObject'
             #......................
             'projection':
-              description: Cartographic projection used to describe the data
+              description: 
+                Cartographic projection used in the data. 
+                EPSG codes highly recommended.
               type: string
+              default: 'WGS 84'
               example: 'WGS 84 (EPSG:4326)'
                 # 'RGF93/Lambert-93 (EPSG:2154)'
                 # 'RGF93/CC48 (EPSG:3948)'
@@ -970,6 +562,91 @@ components:
         # !SKOS!
 
         #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # ACCESS CONSTRAINTS
+        #——————————————————————————
+        'access_condition':
+          description: >
+            Access restrictions for the use of data in the form of licence,
+            confidentiality, terms of service, habilitation or required rights,
+            economical model. Default is open licence.
+            #TODO: to be defined. Possible redundencies with other fields!
+          type: object
+          required:
+          - licence
+          properties:
+            #......................
+            'confidentiality':
+              description: Restriction level for the resource
+              type: object
+              properties:
+                'restricted_access': 
+                  description: >
+                    True if the dataset has a restricted access.
+                    False for open data
+                  type: boolean
+                'gdpr_sensitive':
+                  description: >
+                    True if the dataset embeds personal data
+                  type: boolean
+            #......................
+            'licence':
+              $ref: '#/components/schemas/Licence'
+            #......................
+            'usage_constraint':
+              description: >
+                Describes how constrained is the use of the resource
+              type: array
+              items:
+                $ref: '#/components/schemas/DictionaryEntry'
+              example: 
+                [
+                  {
+                    "lang": "fr",
+                    "text": "Usage libre sous réserve des mentions obligatoires sur tout document de diffusion"
+                  }
+                ]
+            #......................
+            'bibliographical_reference':
+              description: >
+                  Information that MUST be cited every time the data is used, 
+                  most likely a BibTeX entry
+              type: array
+              items: 
+                $ref: '#/components/schemas/DictionaryEntry'
+            #......................
+            'mandatory_mention':
+              description: >
+                Mention that must be cited verbatim in every publication that
+                makes use of the data
+              type: array
+              items:
+                $ref: '#/components/schemas/DictionaryEntry'
+              minItems: 1
+              example: 
+                [
+                  {
+                    "lang": "fr-FR",
+                    "text": "Source: Région Bretagne"
+                  }
+                ]
+            #......................
+            'access_constraint':
+              type: array
+              items:
+                $ref: '#/components/schemas/DictionaryEntry'
+            #......................
+            'other_constraints':
+              type: array
+              items:
+                $ref: '#/components/schemas/DictionaryEntry'
+              example: 
+                [  
+                  {
+                    "lang": "fr",
+                    "text": "Pas de restriction d'accès public"
+                  }
+                ]
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
         # METADATA INFO
         #——————————————————————————
         'metadata_info':
@@ -977,7 +654,6 @@ components:
           type: object
           required: 
           - api_version
-          - metadata_dates
           properties:
             #......................
             'api_version':
@@ -1035,6 +711,7 @@ components:
       properties:
         #——————————————————————————
         'contact_id': 
+          description: Unique identifier of the contact in RUDI system
           type: string
           format: uuid
         #——————————————————————————
@@ -1053,15 +730,66 @@ components:
         #——————————————————————————
         'email':
           description: >
-            E-mail address, possibly not nominative to be less dependent
+            Unique E-mail address, possibly not nominative to be less dependent
             on changes in the organization, and comply more easily with 
             RGPD rules
           type: string
           format: email
           #TODO: RGPD compliant!
 
+     
+    #---------------------------------------------------------------------------
+    'Licence':
+      description: Abstract object from which standard and custom licences inherit
+      type: object
+      required:
+      - licence_type
+      properties:
+        #——————————————————————————
+        'licence_type':
+          type: string
+          enum: ['STANDARD', 'CUSTOM']
+ 
+      discriminator:  
+        propertyName: licence_type
+        mapping:
+          'STANDARD': '#/components/schemas/LicenceStandard'
+          'CUSTOM': '#/components/schemas/LicenceCustom'
+                
+    #---------------------------------------------------------------------------
+    'LicenceStandard':
+      allOf:
+      - $ref: "#/components/schemas/Licence"
+      - description: Standard licence (recognized by RUDI system)
+        type: object
+        required:
+        - licence_label
+        properties: 
+          'licence_label':
+            description: Value of the field SkosConcept.concept_code
+            type: string
+            format: skosConceptCode
           
-          
+     #---------------------------------------------------------------------------
+    'LicenceCustom':
+      allOf:
+      - $ref: "#/components/schemas/Licence"
+      - description: Custom licence
+        type: object
+        required: 
+        - custom_licence_label
+        - custom_licence_uri
+        properties: 
+          'custom_licence_label':
+            description: Title of the custom licence 
+            type: array
+            items: 
+              $ref: '#/components/schemas/DictionaryEntry'
+          'custom_licence_uri':
+            description: URL towards the custom licence
+            type: string
+            format: URI
+         
     #---------------------------------------------------------------------------
     'Media':
       description: Abstract object from which File and Series inherit
@@ -1080,6 +808,9 @@ components:
         'media_id':
           type: string
           format: uuid
+        #——————————————————————————
+        'media_name':
+          type: string
         #——————————————————————————
         'connector':
           $ref: '#/components/schemas/Connector'
@@ -1217,7 +948,8 @@ components:
         #——————————————————————————
         'interface_contract':
           description: Link towards the interface contract defined with RUDI Portal
-          type: string
+          type: string # original
+          # maxLength: 10
 
     #---------------------------------------------------------------------------
     'IntegrationError':
@@ -1276,8 +1008,8 @@ components:
         'version' :
           description:
               Version number of the integration contract used for the file
-          type: integer
-          minimum: 0            
+          type: string
+          # pattern: '^[0-9]{1,2}\.[0-9]{1,2}(\.[0-9]{1,2})?[a-z]*$'
         #——————————————————————————
         'integration_status':
           description:
@@ -1299,14 +1031,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IntegrationError'
-
-   #---------------------------------------------------------------------------
-    'UUIDv4':
-      description:
-        Universally unique identifier v4 format
-      type: string
-      pattern: 
-        '^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
 
     #---------------------------------------------------------------------------
     'DOI':
@@ -1406,17 +1130,19 @@ components:
 
     #---------------------------------------------------------------------------
     'Date':
-      description: 'Date in the ISO 8601 format'
+      description: 
+        "Date in the ISO 8601 format (e.g. 2021-07-20T00:00:00.000Z)"
       type: string
       format: date-time
       #TODO: timezone + nanosec?
 
     #---------------------------------------------------------------------------
     'ReferenceDates':
-      description: 'Dates of the actions on the data'
+      description: 'Dates of the ac tions on the data'
       type: object
       required:
       - created
+      - updated
       properties:
         'created':
           $ref: '#/components/schemas/Date'
@@ -1430,25 +1156,237 @@ components:
           $ref: '#/components/schemas/Date'
 
     #---------------------------------------------------------------------------
+    'DictionaryList':
+      type: object
+      required:
+      - lang
+      - text
+      properties:
+        'lang':
+          $ref: '#/components/schemas/Language'
+        'text':
+          type: array
+          items: 
+            type: string
+            #TODO: possibly set limitations (size, characters allowed, HTML-ready or not)
+      example:
+        {
+          lang: 'fr-FR',
+          text: ["abeilles", "Apis"]
+        }
+
+    #---------------------------------------------------------------------------
     'DictionaryEntry':
       type: object
       required:
       - lang
       - text
-      discriminator:
-        propertyName: lang
       properties:
         'lang':
           $ref: '#/components/schemas/Language'
         'text':
-          #TODO: possibly set limitations (size, characters allowed, HTML-ready or not)
           type: string
+          #TODO: possibly set limitations (size, characters allowed, HTML-ready or not)
       example:
         {
           lang: 'fr-FR',
-          text: "Données de capteurs de la qualité de l'air, nov. 2020, Laënnec, Rennes, France"
+          text: "abeilles"
         }
 
+    #---------------------------------------------------------------------------
+    'SkosScheme':
+      description: >
+        Set of SKOS concepts gathered in a transversal and hierarchical 
+        relationships.
+      type: object
+      required:
+      - scheme_id
+      - scheme_label
+      properties:
+        #——————————————————————————
+        'scheme_id':
+          description: 'ID of the SKOS concept scheme'
+          type: string
+          format: uuid
+        #——————————————————————————
+        'scheme_code':
+          description: 
+            'Short abstract code that identifies uniquely the concept scheme'
+          type: string
+          minLength: 2
+          maxLength: 30
+        #——————————————————————————
+        'scheme_label':
+          description: 'Short code for the concept scheme'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryEntry'
+          minItems: 1
+        #——————————————————————————
+        'scheme_role':
+          description: >
+              Underlines a particular use for this Scheme, e.g. "licence"
+          type: string
+        #——————————————————————————
+        'scheme_uri':
+          description: 
+            'Web page that document the SKOS concept scheme'
+          type: string
+          format: uri
+        #——————————————————————————
+        'scheme_icon':
+          description: 
+            'URI towards a graphical resource that describes the concept scheme'
+          type: string
+          format: uri
+        #——————————————————————————
+        'top_concepts':
+          description: 'List of the highest level concepts in the concept scheme'
+          type: array
+          items: 
+            $ref: '#/components/schemas/SkosConcept'
+          
+    #---------------------------------------------------------------------------
+    'SkosConcept':
+      description: >
+        A SKOS concept is an element in a controlled vocabulary such as a 
+        thesaurus. It offers to link concepts in hierarchical (broader/narrower) 
+        or neighbouring relationships.
+        A set of SKOS concepts is gathered in one concept scheme.
+        If a SKOS concept appears in two different concept schemes, it should be
+        duplicated as there are chances the context is slightly different and the
+        meaning will be hard to unify.
+      type: object
+      required:
+      - concept_id
+      - concept_code
+      - skos_scheme_class
+      - pref_label
+      properties:
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # Identification
+        #——————————————————————————
+        'concept_id':
+          description: 'ID of the SKOS concept'
+          type: string
+          format: uuid
+        #——————————————————————————
+        'concept_code':
+          description: 'Short abstract code that identifies uniquely the concept'
+          type: string
+          minLength: 2
+          maxLength: 30
+        #——————————————————————————
+        'concept_uri':
+          description: 'Web page that document the SKOS concept'
+          type: string
+          format: uri
+        #——————————————————————————
+        'concept_icon':
+          description: 
+            'URI towards a graphical resource that describes the concept'
+          type: string
+          format: uri
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # Labels
+        #——————————————————————————
+        'pref_label':
+          description: 'Preferred lexical label for the resource, one for each language'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryEntry'
+          minItems: 1
+        #——————————————————————————
+        'alt_labels':
+          description: 'List of alternative labels (in each language)'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryList'
+        #——————————————————————————
+        'hidden_labels':
+          description: 'List of alternative orthographs for the label (in each language)'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryList'
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # Classification
+        #——————————————————————————
+        'of_scheme':
+          allOf:
+          - description: >
+              Reference to the constrained vocabulary, thesaurus or classification scheme
+            type: object
+          - $ref: '#/components/schemas/SkosScheme'
+        #——————————————————————————
+        'concept_role':
+          description: >
+              Underlines a particular use for this Concept, e.g. a potential
+              value for a property (e.g. "metadata.theme", "metadata.keywords", 
+              "metadata.licence")
+          type: string
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # Relationships
+        #——————————————————————————
+        'broader_concepts':
+          description: >
+            References to the 'parent' SKOS concepts with a broader scope 
+            than the current concept
+          type: array
+          items:
+            $ref: '#/components/schemas/SkosConcept'
+          # beware to avoid graph loops with narrower (children) or 
+          # siblingly (neighbours) concepts !
+        #——————————————————————————
+        'narrower_concepts':
+          description: >
+            References to the 'children' SKOS concepts with a narrower scope 
+            than the current concept
+          type: array
+          items:
+            $ref: '#/components/schemas/SkosConcept'
+          # beware to avoid graph loops with broader (parents) or 
+          # siblingly (neighbours) concepts !
+        #——————————————————————————
+        'siblings_concepts':
+          description: >
+            References to the SKOS concepts that are neighbouring meanings 
+            of the current concept
+          type: array
+          items:
+            $ref: '#/components/schemas/SkosConcept'
+          # beware to avoid graph loops with broader (children) or 
+          # narrower (children) concepts !
+        #——————————————————————————
+        'relative_concepts':
+          description: >
+            References to the SKOS concepts that can be associated in a 
+            non-transitive relationship 
+          type: array
+          items:
+            $ref: '#/components/schemas/SkosConcept'
+        #—•—•—•—•—•—•—•—•—•—•—•—•—•
+        # Documentation
+        #——————————————————————————
+        'scope_note':
+          description: >
+             Contextual information about the intended meaning of the concept, 
+             especially as an indication of how the use of the concept
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryEntry'
+        #——————————————————————————
+        'concept_definition':
+          description: 'Complete explanation of the intended meaning of a concept'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryEntry'
+        #——————————————————————————
+        'concept_example':
+          description: 'Example of the use of a concept'
+          type: array
+          items: 
+            $ref: '#/components/schemas/DictionaryEntry'
+      
     #---------------------------------------------------------------------------
     'Language':
       description: >
@@ -1471,6 +1409,7 @@ components:
 #TODO : thesaurus : tableau de valeurs simples ou couples {label: "Texte à
 #       afficher pour l'utilisateur", "valeur": "ValeurAssociee"}
 
+  #=============================================================================
   responses:
 
     #---------------------------------------------------------------------------
