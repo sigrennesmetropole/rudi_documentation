@@ -48,7 +48,7 @@ curl -X POST -H "Authorization: Basic [base64(login:mot de passe)]" -k -v -H "Co
 </pre>
 
 Le contenu du payload est:
-'''json
+<pre>
  {
   "callbackUrl":"www.google.lk",
   "clientName":"rest_api_admin",
@@ -56,7 +56,7 @@ Le contenu du payload est:
   "grantType":"client_credentials password refresh_token",
   "saasApp":true
 }
-'''
+</pre>
 
 * Récupération d'un token 
 
