@@ -32,7 +32,7 @@ Le fournisseur de données peut valider ce token en réalisant l'appel suivant v
 
 <pre>
 curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
-<pre>
+</pre>
 
 # Authentification des porteurs de projets
 
