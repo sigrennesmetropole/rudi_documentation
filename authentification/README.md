@@ -33,3 +33,35 @@ Le fournisseur de données peut valider ce token en réalisant l'appel suivant v
 <pre>
 curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
 <pre>
+
+# Authentification des porteurs de projets
+
+Lorsqu'un portail de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire 
+* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur est souscrit aux différents jeu de données.
+* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est "anonymous"
+
+La procédure est la même dans les 2 cas :
+* Récupération d'un client_id/client_secret (cette opération n'est à faire qu'une seule fois)
+
+<pre>
+curl -X POST -H "Authorization: Basic [base64(login:mot de passe)]" -k -v -H "Content-Type: application/json" -d @payload.json https://rudi.bzh/wso2/client-registration/v0.17/register > clientkey.json
+</pre>
+
+Le contenu du payload est:
+'''json
+ {
+  "callbackUrl":"www.google.lk",
+  "clientName":"rest_api_admin",
+  "owner":"_mettre ici le login_",
+  "grantType":"client_credentials password refresh_token",
+  "saasApp":true
+}
+'''
+
+* Récupération d'un token 
+
+<pre>
+curl -v -X POST -H "Authorization: Basic Basic [base64(client_id:client_secret)]" -k -d "grant_type=password&username=<login>&password=<password>&scope=apim:api_view" -H "Content-Type:application/x-www-form-urlencoded" https://wso2.open-dev.com:9443/oauth2/token > token-user1.json
+</pre>
+
+
