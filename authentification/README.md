@@ -36,9 +36,9 @@ curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltva
 
 # Authentification des porteurs de projets
 
-Lorsqu'un portail de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire 
-* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur est souscrit aux différents jeu de données.
-* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est "anonymous"
+Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire 
+* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur ait souscrit aux différents jeux de données.
+* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est "anonymous" et son login est "anonymous".
 
 La procédure est la même dans les 2 cas :
 * Récupération d'un client_id/client_secret (cette opération n'est à faire qu'une seule fois)
