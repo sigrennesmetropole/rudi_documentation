@@ -44,7 +44,7 @@ La procédure est la même dans les 2 cas :
 * Récupération d'un client_id/client_secret (cette opération n'est à faire qu'une seule fois)
 
 <pre>
-curl -X POST -H "Authorization: Basic [base64(login:mot de passe)]" -k -v -H "Content-Type: application/json" -d @payload.json https://rudi.bzh/wso2/client-registration/v0.17/register > clientkey.json
+curl -X POST -H "Authorization: Basic [base64(login:mot de passe)]" -k -v -H "Content-Type: application/json" -d @payload.json https://rudi.bzh/client-registration/v0.17/register > clientkey.json
 </pre>
 
 Le contenu du payload est:
@@ -58,10 +58,23 @@ Le contenu du payload est:
 }
 </pre>
 
+Le réponse contient les champs _client_id_ et _client_secret_ utilisable pour les opérations suivantes
+
 * Récupération d'un token 
 
 <pre>
-curl -v -X POST -H "Authorization: Basic Basic [base64(client_id:client_secret)]" -k -d "grant_type=password&username=<login>&password=<password>&scope=apim:api_view" -H "Content-Type:application/x-www-form-urlencoded" https://wso2.open-dev.com:9443/oauth2/token > token-user1.json
+curl -v -X POST "https://rudi.bzh/token" -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic [base64(client_id:client_secret)]"
+</pre>
+
+Le token est de la forme :
+<pre>
+{"access_token":"eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZyIsImtpZCI6Ik16WXhNbUZrT0dZd01XSTBaV05tTkRjeE5HWXdZbU00WlRBM01XSTJOREF6WkdRek5HTTBaR1JsTmpKa09ERmtaRFJpT1RGa01XRmhNelUyWkdWbE5nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJhbm9ueW1vdXMiLCJhdXQiOiJBUFBMSUNBVElPTl9VU0VSIiwiYXVkIjoiSEQwZnVmak1YaDdUYUp1bDM0OEd2TF8zY25jYSIsIm5iZiI6MTYzNjU0MTA0OSwiYXpwIjoiSEQwZnVmak1YaDdUYUp1bDM0OEd2TF8zY25jYSIsImlzcyI6Imh0dHBzOlwvXC9sb2NhbGhvc3Q6OTQ0M1wvb2F1dGgyXC90b2tlbiIsImV4cCI6MTYzNjU0NDY0OSwiaWF0IjoxNjM2NTQxMDQ5LCJqdGkiOiI1YWEyYzRkYy1jMGZhLTQ2ODItYjJiNi1mODAwMmJmODExYjAifQ.p0lNY8SClAVqUCWdH6ImWCUTOp_qnqnGROP1fcpbKgxUK5KSBovqMbiRkKXtZeCs6BLOPgXxEBgy7FqtlROB1jkOs_n-sB6tjTzGvKrdCruJT4nJGVP5toUVqALsTP_rHWFsN6l_llFUymxxaLkGDSR9b_mxjyh5_8R39I7qhH4TM58icJdc9WcIaBVgxky8suJzmZ3QvZT49_toFbcRaawcPxDFwrXbLbxvdGAk1k2-cSj3Sm59a7pYZoCufQFcGPsag8UVswkKGT46qa3oVvf3G2cU9ceJLXefElwpw509pA80lMUwq4c58UpFQX28LRw-cK3DgDF7oX9EUnDn-w","refresh_token":"cd8e4abd-5a14-3bfc-9b93-c225a9535ec3","token_type":"Bearer","expires_in":3600}
+</pre>
+
+* Appel de l'API de téléchargement pour le media souscrit :
+
+<pre>
+curl -v -X GET  "https://rudi.bzh/media/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
 </pre>
 
 
