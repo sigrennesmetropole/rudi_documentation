@@ -63,7 +63,7 @@ Le réponse contient les champs _client_id_ et _client_secret_ utilisable pour l
 * Récupération d'un token 
 
 <pre>
-curl -v -X POST "https://rudi.bzh/token" -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic [base64(client_id:client_secret)]"
+curl -v -X POST "https://rudi.bzh/token" -d "grant_type=password&username=[client_id]&password=[cient_secret]" -H "Authorization: Basic [base64(client_id:client_secret)]"
 </pre>
 
 Le token est de la forme :
