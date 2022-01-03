@@ -171,6 +171,8 @@ Le tableau ci-dessous liste les différents cas d&#39;erreur possibles.
 | ERR-303 | La valeur saisie &quot;_valeur\_saisie_&quot; pour le champ &quot;_nom\_champ_&quot; ne correspond pas à un code de concept SKOS connu |
 | ERR-304 | La valeur saisie &quot;_valeur\_saisie_&quot; pour le champ &quot;_nom\_champ_&quot; est déjà utilisée |
 | ERR-3XX | … Erreur en lien avec les valeurs d&#39;un champ, à définir. |
+| ERR-403 | Le nœud fournisseur authentifié n'est pas le créateur du jeu de données |
+| ERR-500 | Une erreur technique est survenue. Veuillez contacter l'administrateur Rudi pour analyser l'erreur. |
 | ERR-XXX | … Autres types d&#39;erreurs, autres erreurs, à définir. |
 
 ### **3.2.3. Identifiant Rudi**
@@ -386,7 +388,7 @@ Recherche des jeux de données
 **Query :**
 
 - limit : int32
-- ffset : int32
+- offset : int32
 - update\_date\_min : timestamp
 - update\_date\_max : timestamp
 - &lt;à compléter&gt;
