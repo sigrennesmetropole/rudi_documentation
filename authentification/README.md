@@ -63,7 +63,7 @@ Le réponse contient les champs _client_id_ et _client_secret_ utilisable pour l
 * Récupération d'un token 
 
 <pre>
-curl -v -X POST "https://rudi.bzh/token" -d "grant_type=password&username=[client_id]&password=[cient_secret]" -H "Authorization: Basic [base64(client_id:client_secret)]"
+curl -v -X POST "https://rudi.bzh/token" -d "grant_type=password&username=[client_id]&password=[client_secret]" -H "Authorization: Basic [base64(client_id:client_secret)]"
 </pre>
 
 Le token est de la forme :
@@ -74,7 +74,7 @@ Le token est de la forme :
 * Appel de l'API de téléchargement pour le media souscrit :
 
 <pre>
-curl -v -X GET  "https://rudi.bzh/media/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
+curl -v -X GET  "https://rudi.bzh/medias/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
 </pre>
 
 
