@@ -43,6 +43,11 @@ Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le 
 
 ## Dans le cas d'une utilisation en tant qu'utilisateur anonyme, il faut :
 * s'authentifier auprès du portail en tant que "anonymous" et récupérer un token JWT Rudi
+
+<pre>
+curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
+</pre>
+
 * à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
 
 Appel de l'API de téléchargement pour le media souscrit :
