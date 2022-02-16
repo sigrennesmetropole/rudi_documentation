@@ -1,3 +1,8 @@
+---
+title: Contrat portail nœud producteur
+order: 2
+---
+
 **Note Technique de spécification d&#39;interface**
 
 #
@@ -65,23 +70,23 @@ Ce rapport d&#39;intégration à vocation à permettre à un nœud producteur de
 Le contrat d&#39;interface RUDI/Producteur porte sur les grands thèmes suivants :
 
 - Jeux de données
-  - L&#39;interface proposée doit permettre au portail RUDI d&#39;accéder aux données des jeux de données publiés dans le portail RUDI par un nœud producteur.
-  - Chaque jeu de données doit être identifié de manière unique au sein de RUDI.
+    - L&#39;interface proposée doit permettre au portail RUDI d&#39;accéder aux données des jeux de données publiés dans le portail RUDI par un nœud producteur.
+    - Chaque jeu de données doit être identifié de manière unique au sein de RUDI.
 - Métadonnées
-  - L&#39;interface proposée doit permettre au portail RUDI :
-  - La collecte des métadonnées d&#39;un jeu de données proposé par le producteur à partir de l&#39;identifiant unique
-  - La notification de l&#39;intégration des métadonnées d&#39;un jeu de données
-  - L&#39;interface proposée par RUDI doit permettre aux producteurs de notifier la modification des métadonnées d&#39;un jeu de données.
+    - L&#39;interface proposée doit permettre au portail RUDI :
+    - La collecte des métadonnées d&#39;un jeu de données proposé par le producteur à partir de l&#39;identifiant unique
+    - La notification de l&#39;intégration des métadonnées d&#39;un jeu de données
+    - L&#39;interface proposée par RUDI doit permettre aux producteurs de notifier la modification des métadonnées d&#39;un jeu de données.
 
 - Données
-  - L&#39;interface proposée doit permettre au portail RUDI de récupérer les données d&#39;un jeu de données.
-  - Cette récupération doit pouvoir être réalisée en fonction de l&#39;utilisateur humain ou non ayant demandé les données mais aussi si possible en prenant en compte les notions de pagination, de tri et de filtrage par critère temporel, géographique et par mots-clefs.
+    - L&#39;interface proposée doit permettre au portail RUDI de récupérer les données d&#39;un jeu de données.
+    - Cette récupération doit pouvoir être réalisée en fonction de l&#39;utilisateur humain ou non ayant demandé les données mais aussi si possible en prenant en compte les notions de pagination, de tri et de filtrage par critère temporel, géographique et par mots-clefs.
 
 - Consentement
-  - L&#39;interface proposée doit permettre au portail RUDI de transférer au producteur de données, les informations de consentement recueillies par RUDI auprès des utilisateurs. Ce consentement doit être pris en compte lors de la récupération des données.
+    - L&#39;interface proposée doit permettre au portail RUDI de transférer au producteur de données, les informations de consentement recueillies par RUDI auprès des utilisateurs. Ce consentement doit être pris en compte lors de la récupération des données.
 
 - Supervision
-  - L&#39;interface proposée doit permettre au portail RUDI de superviser le nœud du producteur afin de prendre en compte la qualité de service associée.
+    - L&#39;interface proposée doit permettre au portail RUDI de superviser le nœud du producteur afin de prendre en compte la qualité de service associée.
 
 Pour certains producteurs, le contrat d&#39;interface doit aussi couvrir le thème suivant :
 
@@ -96,13 +101,13 @@ L&#39;interface proposée doit permettre au portail RUDI et au producteur de ré
 Les dates sont au format **ISO-8601** et prennent la forme :
 
 - YYYY-MM-DD pour les dates
-  - Exemple : 2020-12-14
+    - Exemple : 2020-12-14
 
 - YYYY-MM-DDTH24:MI:SS.nano pour les « date+heure » - ce format est nommé « Timestamp » dans le reste du document.
-  - Exemple : 2020-12-14T09:56:34.592384024
+    - Exemple : 2020-12-14T09:56:34.592384024
 
 - YYYY-MM-DDTH24:MI:SS.nano&lt;+/- timezone offset ou Z pour UTC&gt; pour les « date+heure avec time-zone » - ce format est nommé « Timestamp avec time-zone » dans le reste du document.
-  - Exemple : 2020-12-14T09:56:34.592384024+0100
+    - Exemple : 2020-12-14T09:56:34.592384024+0100
 
 ### **3.2.2. Rapport d&#39;intégration – #/components/schemas/Report**
 
@@ -208,7 +213,7 @@ Cet objet représente l&#39;ensemble des métadonnées d&#39;un jeu de données 
 Les différentes API sont exposées avec une URL de la forme : &lt;host&gt;/&lt;prefixe&gt;
 
 - &lt;prefixe&gt; prendra la forme api par défaut mais peut prendre d&#39;autres formes si plusieurs typologie d&#39;API sont exposées.
-  - Exemple &lt;host&gt;/api
+    - Exemple &lt;host&gt;/api
 
 L&#39;API dans sa version la plus récente sera exposée en &lt;host&gt;/&lt;prefixe&gt;/*
 
@@ -219,7 +224,7 @@ Les API dans les versions plus anciennes seront exposées en
     <host><prefixe><version>/*
 
 - &lt;version&gt; prendra la forme v&lt;Majeur&gt; ou v&lt;Majeur&gt;.&lt;Mineur&gt;
-  - Exemple : &lt;host&gt;/api/v1 ou &lt;host&gt;/api/v1.1
+    - Exemple : &lt;host&gt;/api/v1 ou &lt;host&gt;/api/v1.1
 
 Cela signifie que les modifications de niveau « Révision » n&#39;ont pas d&#39;impact sur la version de l&#39;API.
 
@@ -252,23 +257,23 @@ Soumission d&#39;une demande de création d&#39;un jeu de données par ses méta
 **Code retour** :
 
 - 200 : prise en compte de la demande
-  - report\_id : UUID V4
+    - report\_id : UUID V4
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 #### **3.4.1.3. Modification des métadonnées d&#39;un jeu de données**
 
@@ -285,25 +290,25 @@ Soumission d&#39;une demande de modification d&#39;un jeu de données par ses m�
 **Code retour** :
 
 - 200 : prise en compte de la demande
-  - report\_id : UUID V4
+    - report\_id : UUID V4
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu dans la métadonnée est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 #### **3.4.1.4. Suppression d&#39;un jeu de données**
 
@@ -316,25 +321,25 @@ Soumission d&#39;une demande de suppression d&#39;un jeu de données
 **Code retour :**
 
 - 200 : prise en compte de la demande
-  - report\_id : UUID V4
+    - report\_id : UUID V4
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu dans la métadonnée est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 #### **3.4.1.5. Obtention d&#39;un Identifiant RUDI**
 
@@ -349,25 +354,25 @@ L'identifiant RUDI généré tiendra compte des informations contenues dans le t
 **Code retour :**
 
 - 200 : prise en compte de la demande
-  - #/components/schémas/RudiId
+    - #/components/schémas/RudiId
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu dans la métadonnée est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 ### **3.4.2. Service Noeud**
 
@@ -396,29 +401,29 @@ Recherche des jeux de données
 **Code retour :**
 
 - 200 : prise en compte de la demande
-  - #/components/schémas/ResourceListInfo
+    - #/components/schémas/ResourceListInfo
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 410 :
-  - $ref: &quot;#/components/responses/Error410Gone&quot;
+    - $ref: &quot;#/components/responses/Error410Gone&quot;
 - 423 :
-  - $ref: &quot;#/components/responses/Error423Locked&quot;
+    - $ref: &quot;#/components/responses/Error423Locked&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 &lt;à compléter&gt;
 
@@ -433,29 +438,29 @@ Obtention des métadonnées d&#39;un jeux de données
 **Code retour :**
 
 - 200 : prise en compte de la demande
-  - #/components/schémas/RudiId
+    - #/components/schémas/RudiId
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 410 :
-  - $ref: &quot;#/components/responses/Error410Gone&quot;
+    - $ref: &quot;#/components/responses/Error410Gone&quot;
 - 423 :
-  - $ref: &quot;#/components/responses/Error423Locked&quot;
+    - $ref: &quot;#/components/responses/Error423Locked&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 #### **3.4.2.4. Réception d&#39;un résultat d&#39;intégration**
 
@@ -471,23 +476,23 @@ Réception de l&#39;intégration d&#39;une demande réalisée par les services [
 
 - 200 : Prise en compte du rapport
 - 400 :
-  - $ref: &quot;#/components/responses/Error400BadRequest&quot;
+    - $ref: &quot;#/components/responses/Error400BadRequest&quot;
 - 401 :
-  - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
+    - $ref: &quot;#/components/responses/Error401Unauthorized&quot;
 - 403 :
-  - $ref: &quot;#/components/responses/Error403Forbidden&quot;
+    - $ref: &quot;#/components/responses/Error403Forbidden&quot;
 - 404 : le global\_id contenu dans la métadonnée est inconnu
-  - $ref: &quot;#/components/responses/Error404NotFound&quot;
+    - $ref: &quot;#/components/responses/Error404NotFound&quot;
 - 406 :
-  - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
+    - $ref: &quot;#/components/responses/Error406NotAcceptable&quot;
 - 408 :
-  - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
+    - $ref: &quot;#/components/responses/Error408RequestTimeout&quot;
 - 429 :
-  - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
+    - $ref: &quot;#/components/responses/Error429TooManyRequests&quot;
 - 500 :
-  - $ref: &quot;#/components/responses/Error500InternalServer&quot;
+    - $ref: &quot;#/components/responses/Error500InternalServer&quot;
 - 503 :
-  - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
+    - $ref: &quot;#/components/responses/Error503ServiceUnavailable&quot;
 
 Les codes suivants impliquent que le portail doit retenter de notifier le nœud producteur du traitement de sa demande :
 
@@ -509,10 +514,10 @@ Par exemple, lors de la création d&#39;un nouveau jeu de données par le produc
 - Si le producteur le souhaite, il peut demander un identifiant unique auprès du portail (GET &lt;&gt;/resources/generation\_id). Cet identifiant unique est appelé « global\_id ».
 - Attribution par le nœud producteur de l&#39;identifiant au nouveau jeu de données
 - Soumission par le nœud d&#39;une demande de création (POST &lt;&gt;/resources) avec la structure de métadonnées attendue
-  - Réponse du portail par un code 200 avec un identifiant unique correspondant à la demande. Cet identifiant est appelé « report\_id ».
+    - Réponse du portail par un code 200 avec un identifiant unique correspondant à la demande. Cet identifiant est appelé « report\_id ».
 - Le portail traite la demande de manière asynchrone (mais dans l&#39;ordre des demandes) et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT &lt;&gt;/resources/report/{global\_id}
-  - Réponse du portail par un code 200
-  - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
+    - Réponse du portail par un code 200
+    - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
 
 #### **3.4.3.2. Moissonnage**
 
@@ -522,14 +527,14 @@ Le séquencement des appels entre Portail et nœud producteur est le suivant :
 
 - Obtention par le portail d&#39;un token JWT
 - Demande auprès du nœud par le portail des différents jeux de données modifiés depuis une date connue du portail (GET &lt;&gt;/resources avec des paramètres et de la pagination)
-  - Réponse du nœud par un code 200 avec une liste d&#39;éléments
+    - Réponse du nœud par un code 200 avec une liste d&#39;éléments
 - Pour chaque élément reçu grâce à l&#39;appel précédent, contrôle de la date de dernière modification par rapport à la date connue du portail pour ce jeu de données
 - Si le jeu de données doit être mis à jour, récupération des métadonnées du jeu (GET &lt;&gt;/resources/{global\_id})
-  - Réponse du nœud par un code 200 avec les métadonnées du jeu de données
+    - Réponse du nœud par un code 200 avec les métadonnées du jeu de données
 - Enregistrement dans la file d&#39;attente d&#39;une activité de mise à jour (création/modification/suppression)
 - Le portail traite la demande et à l&#39;issue de ce traitement le portail appelle le nœud d&#39;origine pour lui transmettre le rapport d&#39;intégration (PUT &lt;&gt;/resources/report/{global\_id}
-  - Réponse du portail par un code 200 ou
-  - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
+    - Réponse du portail par un code 200 ou
+    - Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d&#39;une heure
 
 #
 # **4. Annexes**

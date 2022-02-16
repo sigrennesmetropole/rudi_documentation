@@ -1,0 +1,34 @@
+---
+links:
+  - 
+    label: doc.data.gouv.fr
+    children:
+      -
+        label: data.gouv.fr
+        url: https://www.data.gouv.fr/
+      - 
+        label: Données de référence
+        url: https://www.data.gouv.fr/reference
+      - 
+        label: Condition générales d’utilisation
+        url: https://www.data.gouv.fr/terms
+      - 
+        label: Contact
+        url: https://support.data.gouv.fr/
+
+social:
+  - 
+    icon: mail
+    url: mailto:info@data.gouv.fr
+  - 
+    icon: twitter
+    url: https://www.twitter.com/datagouvfr
+  - 
+    icon: fb
+    url: https://www.facebook.com/etalab
+  - 
+    icon: github
+    url: https://www.github.com/etalab
+  - 
+    icon: rss
+    url: https://www.data.gouv.fr/fr/datasets/recent.atom
