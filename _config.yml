@@ -1,0 +1,47 @@
+title: rudi.bzh - documentation
+description: >
+    La documentation du site rudi.bzh
+
+twitter_username: projetrudi
+github_username:  sigrennesmetropole
+github_repository: sigrennesmetropole/rudi_documentation
+url: https://mathieulavigneopen.github.io/rudi_documentation
+lang: fr
+permalink: pretty
+
+i18n:
+  en:
+    edit: Edit this page
+  fr:
+    edit: Editer cette page
+
+exclude:
+  - .idea/
+  - README.md
+  - CODE_OF_CONDUCT.md
+  - LICENSE.md
+  - docker-compose.yml
+  - circle.yml
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+# Collection configuration
+# Specify a directory to store all our collections in the same place
+collections_dir: articles
+
+# Metadata for our collections
+collections:
+  api:
+    title: API
+    output: true
+    order: 1
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page
+
+sass:
+  style: compressed
