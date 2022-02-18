@@ -1,3 +1,9 @@
 <!-- Scripts -->
 <script src="{{site.url}}/assets/simple-jekyll-search.min.js"></script>
 <script async defer src="{{site.url}}/assets/main.js"></script>
+<script>
+    // Variables Jenkins exposées globalement pour être utilisables dans les scripts JS
+    window.site = {
+        url: "{{site.url}}"
+    }
+</script>
