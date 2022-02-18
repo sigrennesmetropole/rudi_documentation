@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+    <title>Contrat portail nœud producteur</title>
+    <meta name="description" content="Note Technique de spécification d&#39;interface" />
+
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole/rudi_documentation/assets/css/template.css">
+    <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole/rudi_documentation/assets/css/main.css">
+    <link rel="canonical" href="https://sigrennesmetropole/rudi_documentation/api/contrat-portail-noeud-producteur/" />
+</head>
+
+
+  <body>
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+       xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <symbol id="icon-search">
+          <title>search</title>
+          <path d="M15.504 13.616l-3.79-3.223c-0.392-0.353-0.811-0.514-1.149-0.499 0.895-1.048 1.435-2.407 1.435-3.893 0-3.314-2.686-6-6-6s-6 2.686-6 6 2.686 6 6 6c1.486 0 2.845-0.54 3.893-1.435-0.016 0.338 0.146 0.757 0.499 1.149l3.223 3.79c0.552 0.613 1.453 0.665 2.003 0.115s0.498-1.452-0.115-2.003zM6 10c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z"></path>
+        </symbol>
+
+        <symbol id="icon-mail">
+          <title>mail</title>
+          <path d="M29,4l-26,0c-1.65,0 -3,1.35 -3,3l0,20c0,1.65 1.35,3 3,3l26,0c1.65,0 3,-1.35 3,-3l0,-20c0,-1.65 -1.35,-3 -3,-3Zm-16.539,13.199l-8.461,6.59l0,-15.676l8.461,9.086Zm-6.949,-9.199l20.976,0l-10.488,7.875l-10.488,-7.875l0,0Zm7.278,9.553l3.21,3.447l3.21,-3.447l6.58,8.447l-19.579,0l6.58,-8.447l-0.001,0Zm6.749,-0.354l8.461,-9.086l0,15.676l-8.461,-6.59Z"/>
+        </symbol>
+
+        <symbol id="icon-fb">
+          <title>facebook</title>
+          <path d="M29,0l-26,0c-1.65,0 -3,1.35 -3,3l0,26c0,1.65 1.35,3 3,3l13,0l0,-14l-4,0l0,-4l4,0l0,-2c0,-3.306 2.694,-6 6,-6l4,0l0,4l-4,0c-1.1,0 -2,0.9 -2,2l0,2l6,0l-1,4l-5,0l0,14l9,0c1.65,0 3,-1.35 3,-3l0,-26c0,-1.65 -1.35,-3 -3,-3Z"/>
+        </symbol>
+
+        <symbol id="icon-github">
+          <title>github</title>
+          <path d="M16,0.395c-8.836,0 -16,7.163 -16,16c0,7.069 4.585,13.067 10.942,15.182c0.8,0.148 1.094,-0.347 1.094,-0.77c0,-0.381 -0.015,-1.642 -0.022,-2.979c-4.452,0.968 -5.391,-1.888 -5.391,-1.888c-0.728,-1.849 -1.776,-2.341 -1.776,-2.341c-1.452,-0.993 0.11,-0.973 0.11,-0.973c1.606,0.113 2.452,1.649 2.452,1.649c1.427,2.446 3.743,1.739 4.656,1.33c0.143,-1.034 0.558,-1.74 1.016,-2.14c-3.554,-0.404 -7.29,-1.777 -7.29,-7.907c0,-1.747 0.625,-3.174 1.649,-4.295c-0.166,-0.403 -0.714,-2.03 0.155,-4.234c0,0 1.344,-0.43 4.401,1.64c1.276,-0.355 2.645,-0.532 4.005,-0.539c1.359,0.006 2.729,0.184 4.008,0.539c3.054,-2.07 4.395,-1.64 4.395,-1.64c0.871,2.204 0.323,3.831 0.157,4.234c1.026,1.12 1.647,2.548 1.647,4.295c0,6.145 -3.743,7.498 -7.306,7.895c0.574,0.497 1.085,1.47 1.085,2.963c0,2.141 -0.019,3.864 -0.019,4.391c0,0.426 0.288,0.925 1.099,0.768c6.354,-2.118 10.933,-8.113 10.933,-15.18c0,-8.837 -7.164,-16 -16,-16l0,0Z"/>
+        </symbol>
+
+        <symbol id="icon-rss">
+          <title>rss</title>
+          <path d="M29,0l-26,0c-1.65,0 -3,1.35 -3,3l0,26c0,1.65 1.35,3 3,3l26,0c1.65,0 3,-1.35 3,-3l0,-26c0,-1.65 -1.35,-3 -3,-3Zm-20.281,25.975c-1.5,0 -2.719,-1.206 -2.719,-2.706c0,-1.488 1.219,-2.712 2.719,-2.712c1.506,0 2.719,1.225 2.719,2.712c0,1.5 -1.219,2.706 -2.719,2.706Zm6.825,0.025c0,-2.556 -0.994,-4.962 -2.794,-6.762c-1.806,-1.806 -4.2,-2.8 -6.75,-2.8l0,-3.912c7.425,0 13.475,6.044 13.475,13.475l-3.931,0l0,-0.001Zm6.944,0c0,-9.094 -7.394,-16.5 -16.481,-16.5l0,-3.912c11.25,0 20.406,9.162 20.406,20.413l-3.925,0l0,-0.001Z"/>
+        </symbol>
+
+        <symbol id="icon-rss">
+          <title>rss</title>
+          <path id="Checked-Icon" d="M13.23,0.307l-8.118,8.197l-3.345,-3.384c-0.405,-0.408 -1.06,-0.408 -1.464,0c-0.404,0.408 -0.404,1.071 0,1.479l4.055,4.101c0.208,0.21 0.481,0.31 0.754,0.305c0.272,0.005 0.545,-0.095 0.753,-0.305l8.829,-8.915c0.404,-0.408 0.404,-1.07 0,-1.478c-0.404,-0.409 -1.06,-0.409 -1.464,0Z"/>
+        </symbol>
+
+        <symbol id="icon-twitter">
+          <title>twitter</title>
+          <path d="M32,7.075c-1.175,0.525 -2.444,0.875 -3.769,1.031c1.356,-0.813 2.394,-2.1 2.887,-3.631c-1.269,0.75 -2.675,1.3 -4.169,1.594c-1.2,-1.275 -2.906,-2.069 -4.794,-2.069c-3.625,0 -6.563,2.938 -6.563,6.563c0,0.512 0.056,1.012 0.169,1.494c-5.456,-0.275 -10.294,-2.888 -13.531,-6.862c-0.563,0.969 -0.887,2.1 -0.887,3.3c0,2.275 1.156,4.287 2.919,5.463c-1.075,-0.031 -2.087,-0.331 -2.975,-0.819c0,0.025 0,0.056 0,0.081c0,3.181 2.263,5.838 5.269,6.437c-0.55,0.15 -1.131,0.231 -1.731,0.231c-0.425,0 -0.831,-0.044 -1.237,-0.119c0.838,2.606 3.263,4.506 6.131,4.563c-2.25,1.762 -5.075,2.813 -8.156,2.813c-0.531,0 -1.05,-0.031 -1.569,-0.094c2.913,1.869 6.362,2.95 10.069,2.95c12.075,0 18.681,-10.006 18.681,-18.681c0,-0.287 -0.006,-0.569 -0.019,-0.85c1.281,-0.919 2.394,-2.075 3.275,-3.394l0,-0.001Z"/>
+        </symbol>
+
+        <symbol id="icon-googleplus">
+          <title>google +</title>
+          <path d="M29 0H3C1.35 0 0 1.35 0 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3V3c0-1.65-1.35-3-3-3zM12 24c-4.425 0-8-3.575-8-8s3.575-8 8-8c2.162 0 3.969.787 5.363 2.094l-2.175 2.088c-.594-.569-1.631-1.231-3.188-1.231-2.731 0-4.963 2.263-4.963 5.05s2.231 5.05 4.963 5.05c3.169 0 4.356-2.275 4.538-3.45h-4.537v-2.744h7.556c.069.4.125.8.125 1.325 0 4.575-3.063 7.819-7.681 7.819L12 24zm16-8h-2v2h-2v-2h-2v-2h2v-2h2v2h2v2z" fill="#fff" fill-rule="nonzero"/>
+        </symbol>
+
+        <symbol id="icon-cross">
+            <title>cross</title>
+            <path d="M10 0c5.519 0 10 4.481 10 10s-4.481 10-10 10S0 15.519 0 10 4.481 0 10 0zm3.975 7.56a4.673 4.673 0 0 0-1.535-1.535L10 8.465l-2.44-2.44A4.673 4.673 0 0 0 6.025 7.56L8.465 10l-2.44 2.44c.384.625.91 1.151 1.535 1.535l2.44-2.44 2.44 2.44a4.673 4.673 0 0 0 1.535-1.535L11.535 10l2.44-2.44z"/>
+        </symbol>
+
+        <symbol id="icon-link" viewBox="0 0 512 512">
+            <title>link</title>
+            <path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/>
+        </symbol>
+
+        <symbol id="icon-linkedin" viewBox="0 0 512 512">
+          <title>linkedin</title>
+          <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+          <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
+        </symbol>
+
+      </defs>
+    </svg>
+      
+<header class="navbar">
+  <div class="navbar__container">
+    <a class="navbar__home" href="https://sigrennesmetropole/rudi_documentation/">
+      <img class="navbar__logo" src="https://sigrennesmetropole/rudi_documentation/assets/images/logo_rudi.svg"
+        alt="rudi.bzh - documentation" />
+      <span class="navbar__domain">doc.rudi.bzh</span>
+    </a>
+    
+    <nav>
+      <ul class="nav__links">
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+    <div class="hero">
+  <div class="hero__container">
+    <h1 class="hero__title">rudi.bzh - documentation</h1>
+  </div>
+</div>
+
+
+<section class="documentation">
+  <nav class="side-pane" role="navigation">
+  <div class="return-datagouvfr">
+      <a href="https://www.rudi.bzh">Revenir sur rudi.bzh</a>
+  </div>
+  <div class="search-input-wrapper">
+    <input type="text" id="search-input" placeholder="Recherche">
+  </div>
+  <ul class="side-pane__menu">
+    
+    
+        
+        <a></a>
+        
+        <li class="side-pane__dropdown unfolded">
+            <ul class="side-pane__submenu">
+            
+            </ul>
+        </li>
+        
+    
+        
+        <a>API</a>
+        
+        <li class="side-pane__dropdown unfolded">
+            <ul class="side-pane__submenu">
+            
+            <li class="active">
+                <a class="side-pane__link" href="https://sigrennesmetropole/rudi_documentation/api/contrat-portail-noeud-producteur/">Contrat portail nœud producteur</a>
+            </li>
+            
+            <li >
+                <a class="side-pane__link" href="https://sigrennesmetropole/rudi_documentation/api/authentification/">Authentification</a>
+            </li>
+            
+            </ul>
+        </li>
+        
+    
+  </ul>
+</nav>
+
+  <div class="search-results">
+    <h2>Resultats de recherche pour "<span id="search-query"></span>"</h2>
+    <div id="search-results-container"></div>
+  </div>
+  <div class="main-pane">
+    <div class="markdown">
+      <p><strong>Note Technique de spécification d'interface</strong></p>
+
+<p>#</p>
+<h1 id="1-contexte"><strong>1. Contexte</strong></h1>
+
+<p>L'objet du présent document est de définir le contrat d'interface en termes d'API REST entre le portail RUDI et un nœud producteur RUDI.</p>
+
+<p>Le portail RUDI étant décomposé en micro-services, la communication entre un nœud producteur et le portail RUDI se fait au travers du micro-services « µKollect ».</p>
+
+<p>#</p>
+<h1 id="2-collecte-des-métadonnées"><strong>2. Collecte des métadonnées</strong></h1>
+
+<p>La collecte des métadonnées est réalisée par le module « Mise à jour catalogue ».</p>
+
+<p>Le module fonctionne selon 2 modes :</p>
+
+<ul>
+  <li>Mode « notification » (ou push depuis le nœud producteur)</li>
+  <li>Mode « moissonnage » (ou pull depuis le portail)</li>
+</ul>
+
+<h2 id="11-collecte-en-mode--notification-"><strong>1.1. Collecte en mode « Notification »</strong></h2>
+
+<p>En mode « <strong>notification</strong> », le diagramme de séquence d'appel est le suivant :</p>
+
+<p><img src="metacatalogue-push.png" alt="diagramme de séquence des notifications" /></p>
+
+<p><em>Figure 1 - Diagramme de séquence "notification"</em></p>
+
+<p>Comme l'indique le schéma ci-dessus, le nœud producteur peut appeler le module de collecte (µKollect) du portail RUDI afin de déposer une demande de collecte. Cette demande comporte :</p>
+
+<ul>
+  <li>L'identifiant unique du jeu de données</li>
+  <li>La nature de la modification : création, modification des métadonnées ou suppression d'un jeu de données.</li>
+  <li>Les métadonnées du jeu de données</li>
+</ul>
+
+<p>Lors de la réception de ce message, le module de collecte va l'ajouter dans la pile des demandes à traiter persistée en base de données et envoie un accusé de réception au nœud producteur.</p>
+
+<p>Le module de collecte va dépiler de manière asynchrone la liste des messages afin de réaliser les opérations demandées.</p>
+
+<p>A l'issue du traitement, le module de collecte envoie au nœud producteur un rapport d'intégration indiquant le résultat de l'intégration et éventuellement des informations de qualité des métadonnées.</p>
+
+<p><strong>1.2. Collecte en mode « Moissonnage »</strong></p>
+
+<p>En mode « <strong>moissonnage</strong> », le diagramme de séquence d'appel est le suivant :</p>
+
+<p><img src="metacatalogue-pull.png" alt="diagramme de séquence de moissonnage" /></p>
+
+<p><em>Figure 2 - Diagramme de séquence "moisonnage"</em></p>
+
+<p>Comme l'indique le schéma ci-dessus, le module de collecte des données du portail RUDI commence par appeler le nœud producteur afin de collecter par leur identifiant unique tous les jeux de données dont les métadonnées ont été modifiées depuis la dernière date de collecte réussie.</p>
+
+<p>Les modifications peuvent être des créations, des mises à jour ou des suppressions de jeux de données.</p>
+
+<p>Pour chaque jeu de données créé ou modifié qui a été identifié par l'opération précédente, le module de collecte appelle le nœud producteur afin de récupérer les métadonnées.</p>
+
+<p>Le module de collecte traite ensuite de manière asynchrone l'intégration des données et la suppression des jeux de données.</p>
+
+<p>Pour chaque jeu de données traité, le module de collecte envoi au nœud producteur d'origine un rapport d'intégration indiquant le résultat de l'intégration.</p>
+
+<p>Ce rapport d'intégration à vocation à permettre à un nœud producteur de ne fonctionner que par moissonnage et d'être ainsi informé qu'un jeu de données particulier a été intégré dans le portail.</p>
+
+<p>#</p>
+<h1 id="3-contrat-dinterface-portail--nœud-producteur"><strong>3. contrat d'interface Portail / nœud PRODUCTEUR</strong></h1>
+
+<h2 id="31-périmètre"><strong>3.1. Périmètre</strong></h2>
+
+<p>Le contrat d'interface RUDI/Producteur porte sur les grands thèmes suivants :</p>
+
+<ul>
+  <li>Jeux de données
+    <ul>
+      <li>L'interface proposée doit permettre au portail RUDI d'accéder aux données des jeux de données publiés dans le portail RUDI par un nœud producteur.</li>
+      <li>Chaque jeu de données doit être identifié de manière unique au sein de RUDI.</li>
+    </ul>
+  </li>
+  <li>Métadonnées
+    <ul>
+      <li>L'interface proposée doit permettre au portail RUDI :</li>
+      <li>La collecte des métadonnées d'un jeu de données proposé par le producteur à partir de l'identifiant unique</li>
+      <li>La notification de l'intégration des métadonnées d'un jeu de données</li>
+      <li>L'interface proposée par RUDI doit permettre aux producteurs de notifier la modification des métadonnées d'un jeu de données.</li>
+    </ul>
+  </li>
+  <li>Données
+    <ul>
+      <li>L'interface proposée doit permettre au portail RUDI de récupérer les données d'un jeu de données.</li>
+      <li>Cette récupération doit pouvoir être réalisée en fonction de l'utilisateur humain ou non ayant demandé les données mais aussi si possible en prenant en compte les notions de pagination, de tri et de filtrage par critère temporel, géographique et par mots-clefs.</li>
+    </ul>
+  </li>
+  <li>Consentement
+    <ul>
+      <li>L'interface proposée doit permettre au portail RUDI de transférer au producteur de données, les informations de consentement recueillies par RUDI auprès des utilisateurs. Ce consentement doit être pris en compte lors de la récupération des données.</li>
+    </ul>
+  </li>
+  <li>Supervision
+    <ul>
+      <li>L'interface proposée doit permettre au portail RUDI de superviser le nœud du producteur afin de prendre en compte la qualité de service associée.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Pour certains producteurs, le contrat d'interface doit aussi couvrir le thème suivant :</p>
+
+<ul>
+  <li>Appariement</li>
+</ul>
+
+<p>L'interface proposée doit permettre au portail RUDI et au producteur de réaliser l'appariement (mise en correspondance) d'un utilisateur RUDI et d'un utilisateur connu du système du producteur)</p>
+
+<h2 id="32-schéma-de-données"><strong>3.2. Schéma de données</strong></h2>
+
+<h3 id="321-format-des-dates"><strong>3.2.1. Format des dates</strong></h3>
+
+<p>Les dates sont au format <strong>ISO-8601</strong> et prennent la forme :</p>
+
+<ul>
+  <li>YYYY-MM-DD pour les dates
+    <ul>
+      <li>Exemple : 2020-12-14</li>
+    </ul>
+  </li>
+  <li>YYYY-MM-DDTH24:MI:SS.nano pour les « date+heure » - ce format est nommé « Timestamp » dans le reste du document.
+    <ul>
+      <li>Exemple : 2020-12-14T09:56:34.592384024</li>
+    </ul>
+  </li>
+  <li>YYYY-MM-DDTH24:MI:SS.nano&lt;+/- timezone offset ou Z pour UTC&gt; pour les « date+heure avec time-zone » - ce format est nommé « Timestamp avec time-zone » dans le reste du document.
+    <ul>
+      <li>Exemple : 2020-12-14T09:56:34.592384024+0100</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="322-rapport-dintégration--componentsschemasreport"><strong>3.2.2. Rapport d'intégration – #/components/schemas/Report</strong></h3>
+
+<h4 id="3221-généralité"><strong>3.2.2.1. Généralité</strong></h4>
+
+<p>Le rapport d'intégration est de la forme suivante :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  'report\_id': '',
+  'submission\_date': '',
+  'treatment\_date': '',
+  'method' : ('POST'|'PUT'|'DELETE')
+  'version':'',
+  'global\_id': '',
+  'resource\_title': '',
+  'integration\_status': ('OK'|'KO'),
+  'comment': '',
+  'errors': [
+    {
+      'error\_code': '',
+      'error\_message': ''
+      'field\_name': '',
+    }
+  ]
+}
+</code></pre></div></div>
+
+<h4 id="3222-détail-des-données"><strong>3.2.2.2 Détail des données</strong></h4>
+
+<p>Le tableau ci-dessous présente les données présentes dans le rapport d'intégration et leurs caractéristiques.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Nom balise</strong></th>
+      <th><strong>Description</strong></th>
+      <th><strong>Niveau</strong></th>
+      <th><strong>Obligatoire</strong></th>
+      <th><strong>Type</strong></th>
+      <th><strong>Taille</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>report_id</td>
+      <td>Identifiant du rapport d'intégration</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>UUID v4</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>submission_date</td>
+      <td>Date de soumission de la demande d'intégration</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>Timestamp</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>treatment_date</td>
+      <td>Date de traitement de l'intégration du jeu de donnéesdans Rudi</td>
+      <td>2</td>
+      <td>Oui</td>
+      <td>Timestamp</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>version</td>
+      <td>Numéro de la version de l'API utilisée par le nœud producteur pour communiquer avec le portail RUDI</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>Numérique</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>method</td>
+      <td>Méthode de soumission utilisée</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>Enuméré</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>resource_id</td>
+      <td>Identifiant du jeu de donnéesdans le système Rudi</td>
+      <td>2</td>
+      <td>Oui</td>
+      <td>UUID v4</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>Nom du jeu de données</td>
+      <td>2</td>
+      <td>Non</td>
+      <td>Texte</td>
+      <td>Identique à lAPI</td>
+    </tr>
+    <tr>
+      <td>Integration_status</td>
+      <td>État de l'intégration du jeu de donnéesdans Rudi. 2 valeurs possibles :·OK : l'intégration du jeu de données s'est bien déroulée·KO : l'intégration du jeu de données est en erreur</td>
+      <td>2</td>
+      <td>Oui</td>
+      <td>Enuméré</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>comment</td>
+      <td>Commentaire sur l'état de l'intégration. Formaté.·Si etat_integration = OK, commentaire = l'intégration du jeu de données"<em>nom_jeu_de_donnee</em>" s'est bien déroulée le "<em>date_traitement_jdd_Rudi</em>".·Si etat_integration = KO, commentaire = l'intégration du jeu de données"<em>nom_jeu_de_donnee</em>" ne s'est pas déroulée correctement, le "<em>date_traitement_jdd_Rudi. Veuillez consulter les erreurs ci-dessous et après correction des erreurs, renvoyer votre jeu de données. Pour plus d'information, vous pouvez contacter votre administrateur Rudi.</em>".</td>
+      <td>2</td>
+      <td>Oui</td>
+      <td>Texte</td>
+      <td>255</td>
+    </tr>
+    <tr>
+      <td>errors</td>
+      <td>Liste des erreurs rencontrées lors de l'intégration du jeu de données. L'objectif est de lister l'ensemble des erreurs rencontrées sur le jeu de données afin d'éviter de multiple envoi pour un même jeu de données(à chaque envoi, une nouvelle erreur est rencontrée).</td>
+      <td>2</td>
+      <td>Fonction de « status » :·Non si etat_integration = 1·Oui si etat_integration = 0</td>
+      <td>Liste dobjets</td>
+      <td>Infini</td>
+    </tr>
+    <tr>
+      <td>error_code</td>
+      <td>Code technique de l'erreur(Cf. <a href="#_89z81nu8ziwl">3.2.2.3</a>)</td>
+      <td>3</td>
+      <td>Oui</td>
+      <td>Texte</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>field_name</td>
+      <td>Nom du champ concerné par l'erreur (le cas échéant)</td>
+      <td>3</td>
+      <td>Non</td>
+      <td>Texte</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>error_message</td>
+      <td>Descriptif de l'erreur(Cf <a href="#_89z81nu8ziwl">3.2.2.3</a>)</td>
+      <td>3</td>
+      <td>Oui</td>
+      <td>Texte</td>
+      <td>255</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="3223-détail-des-erreurs-possibles"><strong>3.2.2.3. Détail des erreurs possibles</strong></h4>
+
+<p>Le tableau ci-dessous liste les différents cas d'erreur possibles.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>code_erreur</strong></th>
+      <th><strong>commentaire_erreur</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ERR-101</td>
+      <td>Le format du fichier de métadonnées transmis est incorrect.</td>
+    </tr>
+    <tr>
+      <td>ERR-102</td>
+      <td>La balise "<em>nom_balise</em>" est inconnue</td>
+    </tr>
+    <tr>
+      <td>ERR-103</td>
+      <td>Le paramètre "<em>nom_parametre</em>" est manquant</td>
+    </tr>
+    <tr>
+      <td>ERR-104</td>
+      <td>Autres erreurs d'intégration</td>
+    </tr>
+    <tr>
+      <td>ERR-105</td>
+      <td>Erreur inconnue: l'erreur n'a pas été reconnue, veuillez contacter l'administrateur Rudi afin d'analyser l'erreur.</td>
+    </tr>
+    <tr>
+      <td>ERR-106</td>
+      <td>La version de metadonnées "<em>api_version</em>" n’est pas supportée. La version courante est X.X.X</td>
+    </tr>
+    <tr>
+      <td>ERR-1XX</td>
+      <td>…. Erreurs de base, à définir.</td>
+    </tr>
+    <tr>
+      <td>ERR-201</td>
+      <td>Le type du champ "<em>nom_champ</em>" n'est pas le bon (format attendu : "<em>format attendu"</em> / format reçu : <em>"format_reçu"</em> )</td>
+    </tr>
+    <tr>
+      <td>ERR-202</td>
+      <td>Le champ "<em>nom_champ"</em> est manquant alors qu'il est obligatoire.</td>
+    </tr>
+    <tr>
+      <td>ERR-203</td>
+      <td>La longueur du champ dépasse la limite autorisée: la taille attendue est <em>"taille_champ_Rudi"</em> pour "<em>nom_champ</em>" alors que la longueur de la valeur envoyée est <em>" taille_champ_envoye"</em>).</td>
+    </tr>
+    <tr>
+      <td>ERR-2XX</td>
+      <td>…. Erreurs sur le type du champ, à définir.</td>
+    </tr>
+    <tr>
+      <td>ERR-301</td>
+      <td>Des caractères ne sont pas acceptés dans le "<em>nom_champ</em>"</td>
+    </tr>
+    <tr>
+      <td>ERR-302</td>
+      <td>La valeur saisie ne correspond pas au référentiel des valeurs attendues pour le champ "<em>nom_champ</em>" (valeur saisie : "<em>valeur_saisie</em>" / référentiel attendu : "<em>liste des valeurs attendue séparées par des virgules</em>"</td>
+    </tr>
+    <tr>
+      <td>ERR-303</td>
+      <td>La valeur saisie "<em>valeur_saisie</em>" pour le champ "<em>nom_champ</em>" ne correspond pas à un code de concept SKOS connu</td>
+    </tr>
+    <tr>
+      <td>ERR-304</td>
+      <td>La valeur saisie "<em>valeur_saisie</em>" pour le champ "<em>nom_champ</em>" est déjà utilisée</td>
+    </tr>
+    <tr>
+      <td>ERR-3XX</td>
+      <td>… Erreur en lien avec les valeurs d'un champ, à définir.</td>
+    </tr>
+    <tr>
+      <td>ERR-403</td>
+      <td>Le nœud fournisseur authentifié n’est pas le créateur du jeu de données</td>
+    </tr>
+    <tr>
+      <td>ERR-500</td>
+      <td>Une erreur technique est survenue. Veuillez contacter l’administrateur Rudi pour analyser l’erreur.</td>
+    </tr>
+    <tr>
+      <td>ERR-XXX</td>
+      <td>… Autres types d'erreurs, autres erreurs, à définir.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="323-identifiant-rudi"><strong>3.2.3. Identifiant Rudi</strong></h3>
+
+<p>L'identifiant d'un jeu de données RUDI est une chaîne de caractères composée comme suit :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;UUID v4&gt;
+</code></pre></div></div>
+
+<p>L'expression régulière permettant de définir un tel champ est la suivante :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+</code></pre></div></div>
+
+<h3 id="324-métadonnées-dun-jeu-de-données--rudi-componentsschemasmetadata"><strong>3.2.4</strong>** Métadonnées d'un jeu de données – Rudi #/components/schemas/Metadata**</h3>
+
+<p>Cet objet représente l'ensemble des métadonnées d'un jeu de données (Cf. <a href="#_l2u37jhi2oiz">4.1</a>).</p>
+
+<h3 id="325-liste-de-métadonnées--componentschemasmetadatalist"><strong>3.2.5. Liste de métadonnées – #/component/schemas/MetadataList</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  'total': &lt;int64&gt;,
+  'items': [
+    #/components/schemas/Metadata
+  ]
+}
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Nom balise</strong></th>
+      <th><strong>Description</strong></th>
+      <th><strong>Niveau</strong></th>
+      <th><strong>Obligatoire</strong></th>
+      <th><strong>Type</strong></th>
+      <th><strong>Taille</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>total</td>
+      <td>Nombre total d'éléments répondant à la requête</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>Int64</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>items</td>
+      <td>Liste des métadonnées</td>
+      <td>1</td>
+      <td>Oui</td>
+      <td>List d'objet de type Metadata</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="33-url-daccès-et-gestion-du-versionnement"><strong>3.3. URL d'accès et gestion du versionnement</strong></h2>
+
+<p>Les différentes API sont exposées avec une URL de la forme : &lt;host&gt;/&lt;prefixe&gt;</p>
+
+<ul>
+  <li>&lt;prefixe&gt; prendra la forme api par défaut mais peut prendre d'autres formes si plusieurs typologie d'API sont exposées.
+    <ul>
+      <li>Exemple &lt;host&gt;/api</li>
+    </ul>
+  </li>
+</ul>
+
+<p>L'API dans sa version la plus récente sera exposée en &lt;host&gt;/&lt;prefixe&gt;/*</p>
+
+<p>Cela signifie que la version la plus récente de l'API est accessible directement sans changement de code des appelants.</p>
+
+<p>Les API dans les versions plus anciennes seront exposées en</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;host&gt;&lt;prefixe&gt;&lt;version&gt;/*
+</code></pre></div></div>
+
+<ul>
+  <li>&lt;version&gt; prendra la forme v&lt;Majeur&gt; ou v&lt;Majeur&gt;.&lt;Mineur&gt;
+    <ul>
+      <li>Exemple : &lt;host&gt;/api/v1 ou &lt;host&gt;/api/v1.1</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Cela signifie que les modifications de niveau « Révision » n'ont pas d'impact sur la version de l'API.</p>
+
+<p>Dans la mesure du possible, seul le niveau &lt;Majeur&gt; sera utilisé.</p>
+
+<h2 id="34-contrat-dinterface-jeu-de-données--métadonnées"><strong>3.4. Contrat d'interface Jeu de données &amp; Métadonnées</strong></h2>
+
+<h3 id="341-service-portail"><strong>3.4.1. Service Portail</strong></h3>
+
+<h4 id="3411-url--préfixe"><strong>3.4.1.1. URL &amp; préfixe</strong></h4>
+
+<p>Les différents services décrits ci-après seront accessibles avec le préfixe « api ».</p>
+
+<ul>
+  <li>Exemple &lt;host&gt;/api/*</li>
+</ul>
+
+<p>##</p>
+
+<h4 id="3412-création-dun-jeu-de-données"><strong>3.4.1.2. Création d'un jeu de données</strong></h4>
+
+<p><strong>Description</strong> :</p>
+
+<p>Soumission d'une demande de création d'un jeu de données par ses métadonnées</p>
+
+<p><strong>POST &lt;&gt;/resources</strong></p>
+
+<p><strong>Body</strong> :</p>
+
+<ul>
+  <li>#/components/schemas/Metadata</li>
+</ul>
+
+<p><strong>Code retour</strong> :</p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>report_id : UUID V4</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="3413-modification-des-métadonnées-dun-jeu-de-données"><strong>3.4.1.3. Modification des métadonnées d'un jeu de données</strong></h4>
+
+<p><strong>Description</strong> :</p>
+
+<p>Soumission d'une demande de modification d'un jeu de données par ses métadonnées</p>
+
+<p><strong>PUT &lt;&gt;/resources</strong></p>
+
+<p><strong>Body</strong> :</p>
+
+<ul>
+  <li>#/components/schemas/Metadata</li>
+</ul>
+
+<p><strong>Code retour</strong> :</p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>report_id : UUID V4</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu dans la métadonnée est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="3414-suppression-dun-jeu-de-données"><strong>3.4.1.4. Suppression d'un jeu de données</strong></h4>
+
+<p><strong>Description :</strong></p>
+
+<p>Soumission d'une demande de suppression d'un jeu de données</p>
+
+<p><strong>DELETE &lt;&gt;/resources/{global_id}</strong></p>
+
+<p><strong>Code retour :</strong></p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>report_id : UUID V4</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu dans la métadonnée est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="3415-obtention-dun-identifiant-rudi"><strong>3.4.1.5. Obtention d'un Identifiant RUDI</strong></h4>
+
+<p><strong>Description :</strong></p>
+
+<p>Demande de génération d'un identifiant RUDI (UUID v4).</p>
+
+<p>L’identifiant RUDI généré tiendra compte des informations contenues dans le token JWT d'authentification pour déduire le producteur.</p>
+
+<p><strong>GET &lt;&gt;/resources/id_generation</strong></p>
+
+<p><strong>Code retour :</strong></p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>#/components/schémas/RudiId</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu dans la métadonnée est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="342-service-noeud"><strong>3.4.2. Service Noeud</strong></h3>
+
+<h4 id="3421-url--préfixe"><strong>3.4.2.1. URL &amp; préfixe</strong></h4>
+
+<p>Les différents services décrits ci-après seront accessibles avec le préfixe « api ».</p>
+
+<ul>
+  <li>Exemple &lt;host&gt;/api/*</li>
+</ul>
+
+<h4 id="3422-recherche-des-jeux-de-données"><strong>3.4.2.2. Recherche des jeux de données</strong></h4>
+
+<p><strong>Description :</strong></p>
+
+<p>Recherche des jeux de données</p>
+
+<p><strong>GET &lt;&gt;/resources</strong></p>
+
+<p><strong>Query :</strong></p>
+
+<ul>
+  <li>limit : int32</li>
+  <li>offset : int32</li>
+  <li>update_date_min : timestamp</li>
+  <li>update_date_max : timestamp</li>
+  <li>&lt;à compléter&gt;</li>
+</ul>
+
+<p><strong>Code retour :</strong></p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>#/components/schémas/ResourceListInfo</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>410 :
+    <ul>
+      <li>$ref: "#/components/responses/Error410Gone"</li>
+    </ul>
+  </li>
+  <li>423 :
+    <ul>
+      <li>$ref: "#/components/responses/Error423Locked"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<p>&lt;à compléter&gt;</p>
+
+<h4 id="3423-obtention-dun-jeu-de-données"><strong>3.4.2.3. Obtention d'un jeu de données</strong></h4>
+
+<p><strong>Description :</strong></p>
+
+<p>Obtention des métadonnées d'un jeux de données</p>
+
+<p><strong>GET &lt;&gt;/resources/{global_id}</strong></p>
+
+<p><strong>Code retour :</strong></p>
+
+<ul>
+  <li>200 : prise en compte de la demande
+    <ul>
+      <li>#/components/schémas/RudiId</li>
+    </ul>
+  </li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>410 :
+    <ul>
+      <li>$ref: "#/components/responses/Error410Gone"</li>
+    </ul>
+  </li>
+  <li>423 :
+    <ul>
+      <li>$ref: "#/components/responses/Error423Locked"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="3424-réception-dun-résultat-dintégration"><strong>3.4.2.4. Réception d'un résultat d'intégration</strong></h4>
+
+<p><strong>Description :</strong></p>
+
+<p>Réception de l'intégration d'une demande réalisée par les services <a href="#_fy6l6rbd94q2">3.4.1.2</a>, <a href="#_gj0yzmmqjzoi">3.4.1.3</a>, <a href="#_gd2wuvaz8kv1">3.4.1.4.</a>.</p>
+
+<p><strong>PUT &lt;&gt;/resources/{global_id}/report</strong></p>
+
+<p><strong>Body :</strong> #/components/schemas/Report</p>
+
+<p><strong>Code retour :</strong></p>
+
+<ul>
+  <li>200 : Prise en compte du rapport</li>
+  <li>400 :
+    <ul>
+      <li>$ref: "#/components/responses/Error400BadRequest"</li>
+    </ul>
+  </li>
+  <li>401 :
+    <ul>
+      <li>$ref: "#/components/responses/Error401Unauthorized"</li>
+    </ul>
+  </li>
+  <li>403 :
+    <ul>
+      <li>$ref: "#/components/responses/Error403Forbidden"</li>
+    </ul>
+  </li>
+  <li>404 : le global_id contenu dans la métadonnée est inconnu
+    <ul>
+      <li>$ref: "#/components/responses/Error404NotFound"</li>
+    </ul>
+  </li>
+  <li>406 :
+    <ul>
+      <li>$ref: "#/components/responses/Error406NotAcceptable"</li>
+    </ul>
+  </li>
+  <li>408 :
+    <ul>
+      <li>$ref: "#/components/responses/Error408RequestTimeout"</li>
+    </ul>
+  </li>
+  <li>429 :
+    <ul>
+      <li>$ref: "#/components/responses/Error429TooManyRequests"</li>
+    </ul>
+  </li>
+  <li>500 :
+    <ul>
+      <li>$ref: "#/components/responses/Error500InternalServer"</li>
+    </ul>
+  </li>
+  <li>503 :
+    <ul>
+      <li>$ref: "#/components/responses/Error503ServiceUnavailable"</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Les codes suivants impliquent que le portail doit retenter de notifier le nœud producteur du traitement de sa demande :</p>
+
+<p>400, 401, 408, 429, 503</p>
+
+<p>Le portail retentera l'opération 5 fois à 1 heure d'intervalle.</p>
+
+<p>Au-delà de ce délai, une alerte doit être remontée côté portail pour une prise charge humaine.</p>
+
+<h3 id="343-exemple-de-séquencement-des-appels"><strong>3.4.3. Exemple de séquencement des appels</strong></h3>
+
+<h4 id="3431-notification"><strong>3.4.3.1. Notification</strong></h4>
+
+<p>Le mécanisme de notification prend place lorsqu'un nœud producteur souhaite informer le portail de la publication (ou republication) d'un jeu de données.</p>
+
+<p>Par exemple, lors de la création d'un nouveau jeu de données par le producteur, le séquencement des appels entre portail et nœud producteur est le suivant :</p>
+
+<ul>
+  <li>Obtention par le nœud d'un token JWT. Ce Point sera détaillé par ailleurs</li>
+  <li>Si le producteur le souhaite, il peut demander un identifiant unique auprès du portail (GET &lt;&gt;/resources/generation_id). Cet identifiant unique est appelé « global_id ».</li>
+  <li>Attribution par le nœud producteur de l'identifiant au nouveau jeu de données</li>
+  <li>Soumission par le nœud d'une demande de création (POST &lt;&gt;/resources) avec la structure de métadonnées attendue
+    <ul>
+      <li>Réponse du portail par un code 200 avec un identifiant unique correspondant à la demande. Cet identifiant est appelé « report_id ».</li>
+    </ul>
+  </li>
+  <li>Le portail traite la demande de manière asynchrone (mais dans l'ordre des demandes) et à l'issue de ce traitement le portail appelle le nœud d'origine pour lui transmettre le rapport d'intégration (PUT &lt;&gt;/resources/report/{global_id}
+    <ul>
+      <li>Réponse du portail par un code 200</li>
+      <li>Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d'une heure</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="3432-moissonnage"><strong>3.4.3.2. Moissonnage</strong></h4>
+
+<p>Le mécanisme de moissonnage intervient lorsqu'un nœud producteur ne met pas en œuvre le mécanisme de notification. Dans ce cas de figure, le portail, pour réaliser la mise à jour des métadonnées des différentes jeux, vient chercher, sur chaque nœud producteur, les jeux de données dont les métadonnées ont changé.</p>
+
+<p>Le séquencement des appels entre Portail et nœud producteur est le suivant :</p>
+
+<ul>
+  <li>Obtention par le portail d'un token JWT</li>
+  <li>Demande auprès du nœud par le portail des différents jeux de données modifiés depuis une date connue du portail (GET &lt;&gt;/resources avec des paramètres et de la pagination)
+    <ul>
+      <li>Réponse du nœud par un code 200 avec une liste d'éléments</li>
+    </ul>
+  </li>
+  <li>Pour chaque élément reçu grâce à l'appel précédent, contrôle de la date de dernière modification par rapport à la date connue du portail pour ce jeu de données</li>
+  <li>Si le jeu de données doit être mis à jour, récupération des métadonnées du jeu (GET &lt;&gt;/resources/{global_id})
+    <ul>
+      <li>Réponse du nœud par un code 200 avec les métadonnées du jeu de données</li>
+    </ul>
+  </li>
+  <li>Enregistrement dans la file d'attente d'une activité de mise à jour (création/modification/suppression)</li>
+  <li>Le portail traite la demande et à l'issue de ce traitement le portail appelle le nœud d'origine pour lui transmettre le rapport d'intégration (PUT &lt;&gt;/resources/report/{global_id}
+    <ul>
+      <li>Réponse du portail par un code 200 ou</li>
+      <li>Ou pour les codes 400, 401, 408, 429, 503, 5 nouvelles tentatives possibles espacées d'une heure</li>
+    </ul>
+  </li>
+</ul>
+
+<p>#</p>
+<h1 id="4-annexes"><strong>4. Annexes</strong></h1>
+
+<h2 id="41-annexe--structure-des-métadonnées"><strong>4.1. Annexe – Structure des métadonnées</strong></h2>
+
+<p>Version de l'API au moment de l'écriture de ce document:</p>
+
+<p><a href="https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER/1.0.3">https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER/1.0.3</a></p>
+
+<p>Dernière version de l'API:</p>
+
+<p><a href="https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER/">https://app.swaggerhub.com/apis/OlivierMartineau/RUDI-PRODUCER</a></p>
+
+      
+      <p class="edit text-center">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/master/articles/_api/contrat-portail-noeud-producteur.md">
+              ✎ Editer cette page
+          </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__logo">
+      <span>© 2021 RUDI | Tous droits réservés</span>
+      
+      <ul class="footer__social">
+        
+        <li><a href="https://twitter.com/projetrudi?lang=fr"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg></a></li>
+        
+        <li><a href="https://www.linkedin.com/company/projet-rudi/"><svg class="icon icon-linkedin"><use xlink:href="#icon-linkedin"></use></svg></a></li>
+        
+      </ul>
+      
+    </div>
+    
+    <div class="footer__links">
+      
+      <h2>doc.rudi.bzh</h2>
+      
+      <ul>
+        
+          
+            <li><a href="https://rudi.bzh/">rudi.bzh</a></li>
+          
+        
+          
+            <li><a href="https://rudi.datarennes.fr/cgu/">Condition générales d’utilisation</a></li>
+          
+        
+          
+            <li><a href="https://rudi.datarennes.fr/portail-beta-contact/">Contact</a></li>
+          
+        
+      </ul>
+    </div>
+    
+    <div></div>
+  </div>
+</footer>
+
+
+    <!-- Scripts -->
+<script src="https://sigrennesmetropole/rudi_documentation/assets/simple-jekyll-search.min.js"></script>
+<script async defer src="https://sigrennesmetropole/rudi_documentation/assets/main.js"></script>
+
+
+  </body>
+
+</html>
