@@ -6,13 +6,28 @@ Ce dépôt correspond au contenu du site [doc.rudi.bzh](https://doc.rudi.bzh), s
 
 Les contributions sont les bienvenues. Elles peuvent prendre la forme de _pull requests_ effectuées [depuis un fork de ce dépôt](https://help.github.com/articles/fork-a-repo/), ou de discussions dans les [tickets GitHub du dépôt](https://github.com/sigrennesmetropole/rudi_documentation/issues).
 
+Les pages sont rangées dans le dossier [articles](articles).
+Elles sont organisées par catégorie.
+
 ### Ajouter une page
 
-Les nouvelles pages sont créées dans le dossier [articles](articles).
 Le plus simple est de copier une page existante et d'adapter l'en-tête [Front Matter](https://jekyllrb.com/docs/front-matter/) (premières lignes entre `---`).
 
-Si on souhaite ajouter un nouveau sous-dossier (comme [_a-propos](articles/_a-propos)),
-il faut également l'ajouter dans les collections dans la [config Jekyll](_config.yml).
+Exemple de page : [Authentification](articles/_api/authentification.md). Son en-tête se présente comme suit :
+
+```yaml
+order: 2 # La page est affichée en 2e position parmi les autres pages de la même catégorie dans le menu latéral
+title: Authentification # Le titre de la page (dans le menu latéral, mais aussi dans le titre du navigateur)
+```
+
+### Ajouter une catégorie
+
+Pour créer une nouvelle catégorie :
+
+- Créer un nouveau-dossier "_macategorie" dans le dossier [articles](articles) ;
+- Ajouter une nouvelle collection dans la [config Jekyll](_config.yml) sans le préfixe "_".
+
+Exemple avec le dossier contenant des pages : [_api](articles/_api).
 
 ## Démarrage rapide
 
