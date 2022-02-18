@@ -16,15 +16,14 @@ i18n:
     edit: Editer cette page
 
 exclude:
+  - .circle/
   - .idea/
-  - README.md
   - CODE_OF_CONDUCT.md
-  - LICENSE.md
   - docker-compose.yml
-  - circle.yml
+  - LICENSE.md
   - Gemfile
   - Gemfile.lock
-  - vendor
+  - README.md
 
 # Collection configuration
 # Specify a directory to store all our collections in the same place
@@ -33,9 +32,9 @@ collections_dir: articles
 # Metadata for our collections
 collections:
   api:
+    order: 1
     title: API
     output: true
-    order: 1
 
 defaults:
   - scope:

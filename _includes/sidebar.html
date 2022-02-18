@@ -1,0 +1,26 @@
+<nav class="side-pane" role="navigation">
+  <div class="return-datagouvfr">
+      <a href="https://www.rudi.bzh">Revenir sur rudi.bzh</a>
+  </div>
+  <div class="search-input-wrapper">
+    <input type="text" id="search-input" placeholder="Recherche">
+  </div>
+  <ul class="side-pane__menu">
+    {% assign collections = site.collections | sort: 'order' %}
+    {% for collection in collections %}
+        {% if collection.docs %}
+        <a>{{ collection.title }}</a>
+        {% assign docs =  collection.docs | sort: 'order', 'last' %}
+        <li class="side-pane__dropdown unfolded">
+            <ul class="side-pane__submenu">
+            {% for col_page in docs %}
+            <li {% if page.id == col_page.id %}class="active"{% endif %}>
+                <a class="side-pane__link" href="{{site.url}}{{ col_page.url }}">{{ col_page.label| default: col_page.title | escape }}</a>
+            </li>
+            {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+    {% endfor %}
+  </ul>
+</nav>

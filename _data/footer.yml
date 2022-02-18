@@ -1,0 +1,15 @@
+links:
+  - label: doc.rudi.bzh
+    children:
+      - label: rudi.bzh
+        url: https://rudi.bzh/
+      - label: Condition générales d’utilisation
+        url: https://rudi.datarennes.fr/cgu/
+      - label: Contact
+        url: https://rudi.datarennes.fr/portail-beta-contact/
+
+social:
+  - icon: twitter
+    url: https://twitter.com/projetrudi?lang=fr
+  - icon: linkedin
+    url: https://www.linkedin.com/company/projet-rudi/

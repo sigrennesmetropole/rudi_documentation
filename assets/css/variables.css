@@ -1,0 +1,15 @@
+:root{
+    --blue: #004680;
+    --almost-black: #26353f;
+    --red: #d1335b;
+    --dark-red: #a13030;
+    --light-red: #f8e1e7;
+
+    --footer-light-blue: #2854B5;
+    --footer-medium-blue: #264EA6;
+    --footer-dark-blue: #274492;
+
+    --theme-label-text: var(--dark-grey);
+    --theme-dark-text: var(--almost-black);
+    --theme-info-border: var(--blue);
+}
