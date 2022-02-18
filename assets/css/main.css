@@ -3,7 +3,6 @@
 @import 'responsive.css';
 @import 'search.css';
 @import 'variables.css';
-@import 'customvariables.css';
 
 .documentation {
   padding: 0;
@@ -33,4 +32,12 @@ ul {
 
 .edit {
   margin-top: 2em;
+}
+
+span.navbar__domain {
+  font-weight: bold;
+}
+
+.footer {
+  background: var(--theme-primary);
 }

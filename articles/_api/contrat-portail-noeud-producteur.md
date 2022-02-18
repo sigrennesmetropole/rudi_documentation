@@ -1,6 +1,6 @@
 ---
+order: 1
 title: Contrat portail nœud producteur
-order: 2
 ---
 
 **Note Technique de spécification d&#39;interface**

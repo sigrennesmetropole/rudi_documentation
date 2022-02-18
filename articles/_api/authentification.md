@@ -1,6 +1,6 @@
 ---
+order: 2
 title: Authentification
-order: 1
 ---
 
 # Authentification des fournisseurs de données

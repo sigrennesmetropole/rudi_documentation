@@ -1,9 +1,10 @@
   
 <header class="navbar">
   <div class="navbar__container">
-    <a class="navbar__home" href="{{ "/" | relative_url }}">
-      <img class="navbar__logo" src="{{ '/assets/images/logo-marianne.svg' | relative_url }}"
-        alt="{{ site.title }}" /><span class="navbar__domain">{{ site.data.menu.title }}</span><img src="{{ '/assets/images/pointdatagouvfr.svg' }}" class="navbar__gouvfr" alt="gouv.fr" />
+    <a class="navbar__home" href="{{ site.url }}/">
+      <img class="navbar__logo" src="{{ site.url }}/assets/images/logo_rudi.svg"
+        alt="{{ site.title }}" />
+      <span class="navbar__domain">{{ site.data.menu.title }}</span>
     </a>
     
     <nav>

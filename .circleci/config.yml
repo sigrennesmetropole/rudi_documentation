@@ -72,4 +72,3 @@ workflows:
             branches:
               only:
                 - master
-                - RUDI-1527_Créer_documentation_pour_Rudi # Pour tester la RUDI-1527
