@@ -18,7 +18,12 @@ layout: default
           See: https://github.com/netlify/netlify-cms/issues/697
       {% endcomment %}
       <p class="edit text-center">
-          <a class="button" href="https://github.com/{{ site.github_repository }}/edit/master/articles/{{ page.path }}">
+          {% if page.relative_path %}
+            {% assign git_file_path = site.collections_dir | append: "/" | append: page.relative_path %}
+          {% else %}
+            {% assign git_file_path = "/" | append: page.path %}
+          {% endif %}
+          <a class="button" href="https://github.com/{{site.github_repository}}/edit/{{site.master_branch}}/{{git_file_path}}">
               ✎ {{ site.i18n[lang].edit }}
           </a>
       </p>

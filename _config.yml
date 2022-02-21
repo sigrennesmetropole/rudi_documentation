@@ -5,6 +5,7 @@ description: >
 twitter_username: projetrudi
 github_username:  sigrennesmetropole
 github_repository: sigrennesmetropole/rudi_documentation
+master_branch: main
 url: https://sigrennesmetropole.github.io/rudi_documentation
 lang: fr
 permalink: pretty
