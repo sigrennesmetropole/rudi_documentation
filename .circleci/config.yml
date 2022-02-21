@@ -1,0 +1,74 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.1.0
+
+    working_directory: ~/rudi_documentation
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Ruby dependencies
+          command: bundle install
+
+      - run:
+          name: check for deprecations or configuration issues
+          command: bundle exec jekyll doctor
+
+      - run:
+          name: Build website
+          command: bundle exec jekyll build --verbose
+
+      - persist_to_workspace:
+          root: .
+          paths:
+          - _site
+
+  deploy:
+    docker:
+      - image: cimg/python:3.10.1
+
+    working_directory: ~/rudi_documentation
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Expose user pip-installed binaries on path
+          command: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
+      - add_ssh_keys:
+          fingerprints:
+            # https://circleci.com/docs/2.0/gh-bb-integration/
+            # Project Settings > SSH Keys > Additionl SSH Keys > Fingerprint
+            # Clé actuelle : Key Pass RUDI (lecteur U:) > Serveurs > Github > Circleci Key
+            - "6f:33:ea:cb:ec:e1:da:3c:9b:06:d2:85:0f:ce:d1:33"
+      - run:
+          name: Deploy to GitHub Pages
+          command: |
+            pip install --user ghp-import
+            cp -R .circleci _site/
+            git config --global user.name rudi-account-service
+            git config --global user.email projet-rudi@open-groupe.com
+            ghp-import -m "Deploy to GitHub pages" --push _site
+          # TODO une fois le DNS créé, l'utiliser en ajoutant le paramètre cname à ghp-import : --cname=doc.rudi.bzh
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      # Build on any branch except github pages
+      - build:
+          filters:
+            branches:
+              ignore: gh-pages
+      # Deploy only on master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
