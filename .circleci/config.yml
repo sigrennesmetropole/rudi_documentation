@@ -41,10 +41,10 @@ jobs:
           command: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
       - add_ssh_keys:
           fingerprints:
-            # TODO à adapter pour RUDI, actuellement on utilise la clé de mathieu.lavigne@open-groupe.com
             # https://circleci.com/docs/2.0/gh-bb-integration/
             # Project Settings > SSH Keys > Additionl SSH Keys > Fingerprint
-            - "ba:0c:38:57:24:5a:84:1e:d9:4b:c8:8a:7a:c8:24:10"
+            # Clé actuelle : Key Pass RUDI (lecteur U:) > Serveurs > Github > Circleci Key
+            - "6f:33:ea:cb:ec:e1:da:3c:9b:06:d2:85:0f:ce:d1:33"
       - run:
           name: Deploy to GitHub Pages
           command: |
