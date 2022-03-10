@@ -52,8 +52,7 @@ jobs:
             cp -R .circleci _site/
             git config --global user.name rudi-account-service
             git config --global user.email projet-rudi@open-groupe.com
-            ghp-import -m "Deploy to GitHub pages" --push _site
-          # TODO une fois le DNS créé, l'utiliser en ajoutant le paramètre cname à ghp-import : --cname=doc.rudi.bzh
+            ghp-import --cname=doc.rudi.bzh -m "Deploy to GitHub pages" --push _site 
 
 workflows:
   version: 2
