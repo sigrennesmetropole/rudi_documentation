@@ -1,6 +1,6 @@
 ---
 order: 1
-title: Généralités | Documentation RUDI
+title: Généralités
 ---
 
 # Glossaire : généralités
