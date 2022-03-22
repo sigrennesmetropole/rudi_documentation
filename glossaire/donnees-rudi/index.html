@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Authentification</title>
-    <meta name="description" content="Authentification des fournisseurs de données" />
+    <title>Données de Rudi</title>
+    <meta name="description" content="Les données dans Rudi" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/api/authentification/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/donnees-rudi/" />
 </head>
 
 
@@ -131,7 +131,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/contrat-portail-noeud-producteur/">Contrat portail nœud producteur</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/authentification/">Authentification</a>
             </li>
             
@@ -157,7 +157,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/utilisateurs-comptes/">Utilisateurs et comptes</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/donnees-rudi/">Données de Rudi</a>
             </li>
             
@@ -174,101 +174,24 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="authentification-des-fournisseurs-de-données">Authentification des fournisseurs de données</h1>
+      <h1 id="les-données-dans-rudi">Les données dans Rudi</h1>
 
-<p>Les fournisseurs de données pour publier des métadonnées doivent s’authentifier en OAuth2.</p>
+<h2 id="donnée-ouverte-ou-jeu-de-données-ouvert">Donnée ouverte (ou Jeu de données ouvert)</h2>
+<p>Une <strong>Donnée ouverte</strong> sur Rudi est une donnée accessible librement à tout <strong>Utilisateur</strong>. Elle dispose néanmoins de conditions d’utilisation, qui sont définies par la licence qui lui a été attribuée.</p>
 
-<p>Pour cela, il faut :</p>
-<ul>
-  <li>Déclarer le fournisseur dans RUDI Portail (µPoviders)</li>
-  <li>Déclarer chaque noeud du fournisseur dans RUDI Portail (µPoviders)</li>
-  <li>
-    <p>A chaque noeud est associé un utilisateur de type <em>ROBOT</em>  (µACL). L’utilisateur possède :</p>
+<h2 id="donnée-restreinte-ou-jeu-de-données-restreint">Donnée restreinte (ou Jeu de données restreint)</h2>
+<p>Une <strong>Donnée restreinte</strong> désigne toute donnée non ouverte sur le catalogue. Il s’agit de données dont le <strong>Producteur</strong> a indiqué ne donner l’accès qu’à certaines conditions. Les Jeux de données restreints apparaissent dans le catalogue, mais leur accès doit faire l’objet d’une <strong>Demande</strong> via un <strong>Projet</strong>. Les conditions d’accès sont définies par le producteur de données, en accord avec la réglementation en vigueur sur l’accès aux données.</p>
 
-    <ul>
-      <li>un client_id sous la forme d’un UUID V4</li>
-      <li>un client_secret</li>
-    </ul>
-  </li>
-</ul>
+<h2 id="donnée-personnelle-ou-donnée-à-caractère-personnel">Donnée personnelle (ou Donnée à caractère personnel)</h2>
+<p>Toute donnée permettant d’identifier directement ou indirectement une personne. Les <strong>Producteurs de données</strong> peuvent détenir des <strong>Données personnelles</strong> collectées dans le cadre de leur activité. Ces données peuvent éventuellement être transmises à des <strong>Porteurs de projet</strong>, et ce uniquement avec le <strong>Consentement</strong> explicite des personnes concernés. Les données personnelles peuvent également être anonymisées par leur producteur (voir <strong>Donnée anonymisée</strong>).</p>
 
-<p>Le noeud fournisseur peut alors s’authentifier comme suit :</p>
-
-<pre>
-curl -v --request POST http://&lt;server&gt;:&lt;port&gt;/oauth/token --data "grant_type=password" --data "username=&lt;username&gt;" --data "password=&lt;client_password&gt;" --data "scope=&lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&lt;client_id&gt;" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
-
-
-</pre>
-
-<h1 id="contrôle-de-lauthentification-appel-du-portail-rudi-vers-un-fournisseur-de-données">Contrôle de l’authentification appel du Portail RUDI vers un fournisseur de données</h1>
-
-<p>Lorsque le portail vient moissonner des données d’un fournisseur de données ou lorsque le portail vient soumettre un rapport d’intégration, l’appel comporte une entête d’authorization de type “Bearer”.</p>
-
-<p>Exemple :</p>
-<pre>
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
-</pre>
-
-<p>Le fournisseur de données peut valider ce token en réalisant l’appel suivant vers le portail :</p>
-
-<pre>
-curl -v --request GET http://&lt;server&gt;:&lt;port&gt;/oauth/check_token?token=&amp;ltvaleur du token&gt;
-</pre>
-
-<h1 id="authentification-des-porteurs-de-projets">Authentification des porteurs de projets</h1>
-
-<p>Lorsqu’un porteur de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire</p>
-<ul>
-  <li>soit en son nom. C’est le cas de tous les jeux de données à accès restreint et c’est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d’authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur ait souscrit aux différents jeux de données.</li>
-  <li>soit en tant qu’utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est “anonymous” et son login est “anonymous”.</li>
-</ul>
-
-<h2 id="dans-le-cas-dune-utilisation-en-tant-quutilisateur-anonyme-il-faut-">Dans le cas d’une utilisation en tant qu’utilisateur anonyme, il faut :</h2>
-<ul>
-  <li>s’authentifier auprès du portail en tant que “anonymous” et récupérer un token JWT Rudi</li>
-</ul>
-
-<pre>
-curl -v -X POST https://rudi.bzh/token -d "grant_type=password&amp;username=anonymous&amp;password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
-</pre>
-
-<ul>
-  <li>à partir du token il est alors possible d’accéder aux APIs de téléchargement comme suit :</li>
-</ul>
-
-<p>Appel de l’API de téléchargement pour le media souscrit :</p>
-<pre>
-curl -v -X GET  "https://rudi.bzh/medias/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
-</pre>
-
-<h2 id="pour-une-accès-en-son-nom-propre-éléments-en-cours-de-définition-coté-portail-et-non-disponible-actuellement-sur-rudibzh-il-faut-">Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :</h2>
-<ul>
-  <li>Se connecter sur le portail avec son compte utilisateur</li>
-  <li>Accéder au détail du compte</li>
-  <li>Activer l’utilisation des APIs</li>
-  <li>Récupérer le couple “customer_key”/customer_secret”</li>
-  <li>Utiliser ce couple pour s’authentifier :</li>
-</ul>
-
-<pre>
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" https://rudi.bzh/apim/oauth2/token
-</pre>
-
-<p>Cet appel permet de récupérer un token.</p>
-
-<ul>
-  <li>à partir du token il est alors possible d’accéder aux APIs de téléchargement comme suit :</li>
-</ul>
-
-<pre>
-curl -kv -X POST -H "Authorization: Bearer <token>" https://rudi.bzh/apim/datasets/02777fcb-c0bd-4d89-830a-8070cfb89261/dwnl/1.0.0
-&lt;/pre&gt;
-</token></pre>
+<h2 id="jeu-de-données-anonymisé-ou-donnée-anonymisée">Jeu de données anonymisé (ou Donnée anonymisée)</h2>
+<p>Un <strong>Jeu de données anonymisé</strong> est un jeu de données portant sur des données à caractère personnel qui a fait l’objet d’un traitement visant à empêcher la ré-identification des personnes concernées. Une donnée anonymisée peut être partagée sans le <strong>Consentement</strong> des personnes concernées. Le traitement d’anonymisation est effectué sous la responsabilité du <strong>Producteur de données</strong> avant sa publication. La liste des méthodes d’anonymisation autorisées est publiée et maintenue à jour par la Gouvernance.</p>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_api/authentification.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_glossaire/donnees-rudi.md">
               ✎ Editer cette page
           </a>
       </p>
