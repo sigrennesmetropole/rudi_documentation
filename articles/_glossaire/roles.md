@@ -3,78 +3,20 @@ order: 2
 title: Rôles
 ---
 
-# Les différents rôles sur la plateformes Rudi
+# Les différents rôles sur la plateforme Rudi
 
-Les fournisseurs de données pour publier des métadonnées doivent s'authentifier en OAuth2.
+# Producteur de données
+Un Producteur de données est une personne morale qui a adhéré à la Fédération Rudi et qui publie au moins 1 jeu de données accessible via Rudi. Cette publication se fait au moyen d'un Nœud producteur.
 
-Pour cela, il faut :
-* Déclarer le fournisseur dans RUDI Portail (µPoviders)
-* Déclarer chaque noeud du fournisseur dans RUDI Portail (µPoviders)
-* A chaque noeud est associé un utilisateur de type _ROBOT_  (µACL). L'utilisateur possède :
+# Porteur de projet 
+Un Porteur de projet est une personne physique ou morale ayant déclaré sur la plateforme Rudi un Projet de réutilisation de données du catalogue. À la différence d'un simple Réutilisateur, déclarer son projet lui permet d'accéder à certaines fonctionnalités, comme la demande d'accès aux Données restreintes ou la mise en réseau avec d'autres utilisateurs.
 
-  * un client_id sous la forme d'un UUID V4
-  * un client_secret
+# Réutilisateur
+Un Réutilisateur est une personne physique ou morale utilisant des données du catalogue de Rudi. Ses Réutilisations peuvent être déclarées sur la plateforme afin de mettre en avant l'utilisation qui est faite des données. Cette déclaration n'est pas obligatoire et requiert l'inscription sur la plateforme. À la différence du Porteur de projet, le Réutilisateur est autonome dans sa réutilisation des données, et ne peut accéder qu'aux données ouvertes.
 
-Le noeud fournisseur peut alors s'authentifier comme suit :
+# Animateur Rudi
+Un Animateur est une personne physique agissant pour le compte de la Gouvernance de Rudi sur la Plateforme. L'animateur dispose de droits et d'obligations spécifiques : validation d'un Projet, réponse à des demandes de support, consultation de statistiques…
 
-<pre>
-curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_type=password" --data "username=&lt;username>" --data "password=&lt;client_password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
+# Organisation
+Une Organisation est un groupe d'Utilisateurs inscrits qui agissent au nom d'une même personne morale (salariés d'une même structure ou membres d'une association par exemple). Les membres d'une Organisation ont délégation pour créer et gérer des Réutilisations et des Projets au nom de cette organisation. L'organisation est déclarée par un Utilisateur inscrit dans son espace personnel, et peut être rejointe par d'autres utilisateurs inscrits.
 
-
-</pre>
-
-
-# Contrôle de l'authentification appel du Portail RUDI vers un fournisseur de données
-
-Lorsque le portail vient moissonner des données d'un fournisseur de données ou lorsque le portail vient soumettre un rapport d'intégration, l'appel comporte une entête d'authorization de type "Bearer".
-
-Exemple :
-<pre>
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
-</pre>
-
-Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
-
-<pre>
-curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
-</pre>
-
-# Authentification des porteurs de projets
-
-Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire
-* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur ait souscrit aux différents jeux de données.
-* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est "anonymous" et son login est "anonymous".
-
-
-## Dans le cas d'une utilisation en tant qu'utilisateur anonyme, il faut :
-* s'authentifier auprès du portail en tant que "anonymous" et récupérer un token JWT Rudi
-
-<pre>
-curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
-</pre>
-
-* à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
-
-Appel de l'API de téléchargement pour le media souscrit :
-<pre>
-curl -v -X GET  "https://rudi.bzh/medias/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
-</pre>
-
-## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
-* Se connecter sur le portail avec son compte utilisateur
-* Accéder au détail du compte
-* Activer l'utilisation des APIs
-* Récupérer le couple "customer_key"/customer_secret"
-* Utiliser ce couple pour s'authentifier :
-
-<pre>
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" https://rudi.bzh/apim/oauth2/token
-</pre>
-
-Cet appel permet de récupérer un token.
-
-* à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
-
-<pre>
-curl -kv -X POST -H "Authorization: Bearer <token>" https://rudi.bzh/apim/datasets/02777fcb-c0bd-4d89-830a-8070cfb89261/dwnl/1.0.0
-</pre>
