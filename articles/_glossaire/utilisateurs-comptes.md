@@ -1,6 +1,6 @@
 ---
 order: 3
-title: Utilisateurs et comptes | Documentation Rudi
+title: Utilisateurs et comptes
 ---
 
 # Les différents types d'utilisateurs et de comptes sur la plateforme Rudi
