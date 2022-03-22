@@ -36,6 +36,11 @@ collections:
     order: 1
     title: API
     output: true
+    
+  glossaire:
+    order: 1
+    title: Glossaire
+    output: true
 
 defaults:
   - scope:
