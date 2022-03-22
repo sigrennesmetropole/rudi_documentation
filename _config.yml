@@ -32,14 +32,15 @@ collections_dir: articles
 
 # Metadata for our collections
 collections:
-  api:
-    order: 1
-    title: API
-    output: true
-    
+      
   glossaire:
     order: 1
     title: Glossaire
+    output: true
+    
+  api:
+    order: 2
+    title: API
     output: true
 
 defaults:
