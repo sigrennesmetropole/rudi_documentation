@@ -3,14 +3,11 @@ order: 3
 title: API exposées
 ---
 
-Cette page liste les swaggers des microservice exposées par Rudi.
+Cette page liste les swaggers des microservices exposées par Rudi.
 
-# **1. Liste des microservice **
+# **1. Liste des microservices **
 
-Les micro-services exposés par le portail Rudi sont listés ci-dessous :
+Les microservices exposés par le portail Rudi sont listés ci-dessous :
+
 - acl
 - konsult
-- projekt
-- kos
-- kalim
-- providers
