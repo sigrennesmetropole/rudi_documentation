@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Rudi - documentation</title>
-    <meta name="description" content="La documentation de la plateforme Rudi" />
+    <title>API exposées</title>
+    <meta name="description" content="Cette page liste les swaggers des microservice exposées par Rudi." />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/api/API_exposees/" />
 </head>
 
 
@@ -165,7 +165,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/authentification/">Authentification</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/API_exposees/">API exposées</a>
             </li>
             
@@ -182,16 +182,23 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="objet">Objet</h1>
+      Cette page liste les swaggers des microservice exposées par Rudi.
 
-<p>Cet espace a pour but de rassembler l’ensemble des ressources utiles à l’utilisation du portail Rudi. Vous y trouverez notamment un glossaire et de la documentation technique. Il sera enrichi à mesure des avancées du projet.</p>
+# **1. Liste des microservice **
 
-<p>Cliquez sur une page dans le menu à gauche pour commencer.</p>
+Les micro-services exposés par le portail Rudi sont listés ci-dessous :
+- [acl](https://rudi.bzh/acl/swagger-ui/index.html?configUrl=/acl/v3/api-docs/swagger-config) : micro-service permettant d'administrer les utilisateurs
+- [konsult](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult) : micro-service permettant d'administrer les jeux de données du catalogue Rudi
+- [projekt](https://rudi.bzh/projekt/swagger-ui/index.html?configUrl=%2Fprojekt%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=projekt) : micro-service permettant d'administrer les projets dans Rudi
+- [kos](https://rudi.bzh/kos/swagger-ui/index.html?configUrl=%2Fkos%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kos) : micro-service permettant de publier/modifier/supprimer un jeu de données dans le portail
+- [kalim](https://rudi.bzh/kalim/swagger-ui/index.html?configUrl=%2Fkalim%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kalim) : micro-service permettant d'administrer les mots-clés et thèmes au format SKOS
+- [providers](https://rudi.bzh/providers/swagger-ui/index.html?configUrl=%2Fproviders%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=providers) : micro-service permettant d'administrer les producteurs de données
+
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main//index.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_api/API_exposees">
               ✎ Editer cette page
           </a>
       </p>
