@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Généralités</title>
-    <meta name="description" content="Glossaire : généralités" />
+    <title>API exposées</title>
+    <meta name="description" content="# Authentification des fournisseurs de données" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/general/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/api/api_exposees/" />
 </head>
 
 
@@ -127,7 +127,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/general/">Généralités</a>
             </li>
             
@@ -165,7 +165,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/authentification/">Authentification</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/api/api_exposees/">API exposées</a>
             </li>
             
@@ -182,29 +182,84 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="glossaire--généralités">Glossaire : généralités</h1>
+      # Authentification des fournisseurs de données
 
-<h2 id="plateforme-rudi">Plateforme Rudi</h2>
-<p>Application composée du <strong>portail Rudi</strong> (cœur de la Plateforme) et de l’ensemble des <strong>Nœuds producteur Rudi</strong>. Elle est développée par le consortium Rudi. Son code est publié sous la licence publique de l’Union européenne (EUPL), version 1.2.</p>
+Les fournisseurs de données pour publier des métadonnées doivent s'authentifier en OAuth2.
 
-<h2 id="portail-ou-portail-rudi">Portail (ou Portail Rudi)</h2>
-<p>Application web open-source constituant le cœur de la <strong>Plateforme Rudi</strong>, permettant à ses <strong>Utilisateurs</strong> de parcourir le catalogue des jeux de données publiées par l’ensemble des <strong>Nœuds producteurs</strong> et d’interroger ce catalogue pour accéder aux données. Les <strong>Utilisateurs inscrits</strong> disposent également d’un espace personnel permettant de déclarer et gérer des <strong>Réutilisations</strong>, des <strong>Projets</strong>, de formuler des <strong>Demandes d’accès</strong> spécifiques ou d’y répondre, ou d’agir sur leurs <strong>Données personnelles</strong>.</p>
+Pour cela, il faut :
+* Déclarer le fournisseur dans RUDI Portail (µPoviders)
+* Déclarer chaque noeud du fournisseur dans RUDI Portail (µPoviders)
+* A chaque noeud est associé un utilisateur de type _ROBOT_  (µACL). L'utilisateur possède :
 
-<h2 id="nœud-producteur">Nœud producteur</h2>
-<p>Application open-source faisant partie intégrante de la <strong>Plateforme Rudi</strong>, regroupant toutes les fonctionnalités liées à la publication de données dans Rudi : chargement des jeux de données, déclaration des métadonnées, etc. Un Nœud producteur est généralement hébergé sous la responsabilité du <strong>Producteur de données</strong> qui en est gestionnaire, dans son système d’information ou dans le cloud, mais peut aussi être partagé entre plusieurs Producteurs et mis à disposition par la <strong>Gouvernance</strong> (cas d’un “nœud mutualisé”)</p>
+  * un client_id sous la forme d'un UUID V4
+  * un client_secret
 
-<h2 id="gouvernance">Gouvernance</h2>
-<p><strong>Organisation</strong> responsable de la <strong>Plateforme Rudi</strong>. La Gouvernance met en œuvre la plateforme et fixe les droits et les obligations des utilisateurs. Elle définit les orientations de la plateforme, ses développements éventuels, ses interconnexions avec d’autres systèmes de partage de données, elle décide des investissements et assure le financement de la plateforme. Sur la Plateforme, elle intervient notamment à travers un ou plusieurs <strong>Animateur(s)</strong>.
-Pendant la phase de construction du projet, la gouvernance de Rudi est exercée par les partenaires de Rudi, unis par un accord de consortium et réunis en comité de pilotage présidé par Rennes Métropole.</p>
+Le noeud fournisseur peut alors s'authentifier comme suit :
 
-<h2 id="fédération">Fédération</h2>
-<p>Ensemble des <strong>Producteurs de données</strong> ayant choisi de contribuer à Rudi en y publiant des données, ouvertes ou non. La Fédération est régie par un règlement qui fixe les droits et obligations des Producteurs de données vis-à-vis de la <strong>Gouvernance</strong> et des différents <strong>Utilisateurs</strong> de la <strong>Plateforme</strong>.</p>
+<pre>
+curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_type=password" --data "username=&lt;username>" --data "password=&lt;client_password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
 
+
+</pre>
+
+
+# Contrôle de l'authentification appel du Portail RUDI vers un fournisseur de données
+
+Lorsque le portail vient moissonner des données d'un fournisseur de données ou lorsque le portail vient soumettre un rapport d'intégration, l'appel comporte une entête d'authorization de type "Bearer".
+
+Exemple :
+<pre>
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
+</pre>
+
+Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
+
+<pre>
+curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
+</pre>
+
+# Authentification des porteurs de projets
+
+Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire
+* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un utilisateur de réaliser des essais rapidement
+* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il est nécessaire de soumettre un projet dans Rudi puis de souscrire aux différents jeux de données (pas encore disponible)
+
+
+## Dans le cas d'une utilisation en tant qu'utilisateur anonyme, il faut :
+
+* Les APIs de téléchargement sont accessibles comme suit :
+
+Appel de l'API de téléchargement pour le media souscrit :
+<pre>
+curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
+</pre>
+
+L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media. 
+Une évolution est en cours dans le portail pour rendre cette url plus facilement accessible.
+
+## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
+* Se connecter sur le portail avec son compte utilisateur
+* Accéder au détail du compte
+* Activer l'utilisation des APIs
+* Récupérer le couple "customer_key"/customer_secret"
+* Utiliser ce couple pour s'authentifier :
+
+<pre>
+curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" https://rudi.bzh/apim/oauth2/token
+</pre>
+
+Cet appel permet de récupérer un token.
+
+* à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
+
+<pre>
+curl -kv -X POST -H "Authorization: Bearer <token>" https://rudi.bzh/apim/datasets/02777fcb-c0bd-4d89-830a-8070cfb89261/dwnl/1.0.0
+</pre>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_glossaire/general.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_api/api_exposees">
               ✎ Editer cette page
           </a>
       </p>
