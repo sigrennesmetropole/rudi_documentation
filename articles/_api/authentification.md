@@ -42,23 +42,21 @@ curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltva
 # Authentification des porteurs de projets
 
 Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le portail, il peut le faire
-* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il faut un utilisateur Rudi (création de compte depuis le portail) et que cet utilisateur ait souscrit aux différents jeux de données.
-* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un porteur de réaliser des essais rapidement. Le mot de passe de cet utilisateur est "anonymous" et son login est "anonymous".
+* soit en tant qu'utilisateur anonyme. Cette possibilité est proposée afin de permettre à un utilisateur de réaliser des essais rapidement
+* soit en son nom. C'est le cas de tous les jeux de données à accès restreint et c'est aussi le cas si le porteur de projet souhaite une qualité de service particulière. Il est important de noter que pour effectuer ce mode d'authentification, il est nécessaire de soumettre un projet dans Rudi puis de souscrire aux différents jeux de données (pas encore disponible)
 
 
 ## Dans le cas d'une utilisation en tant qu'utilisateur anonyme, il faut :
-* s'authentifier auprès du portail en tant que "anonymous" et récupérer un token JWT Rudi
 
-<pre>
-curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
-</pre>
-
-* à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
+* Les APIs de téléchargement sont accessibles comme suit :
 
 Appel de l'API de téléchargement pour le media souscrit :
 <pre>
-curl -v -X GET  "https://rudi.bzh/medias/eef6832f-6a06-4f65-8f95-a533ac8926a7/dwnl/1.0.0" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
+curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
 </pre>
+
+L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media 
+Une évolution est en cours dans le portail pour rendre cette url plus facilement accessible.
 
 ## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
 * Se connecter sur le portail avec son compte utilisateur
