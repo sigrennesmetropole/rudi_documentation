@@ -55,7 +55,7 @@ Appel de l'API de téléchargement pour le media souscrit :
 curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
 </pre>
 
-L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media 
+L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media. 
 Une évolution est en cours dans le portail pour rendre cette url plus facilement accessible.
 
 ## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
