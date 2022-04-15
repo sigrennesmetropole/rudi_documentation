@@ -15,3 +15,16 @@ Les microservices exposés sont listés ci-dessous. Leur documentation est acces
 * [kos](https://rudi.bzh/kos/swagger-ui/index.html?configUrl=%2Fkos%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kos) : microservice permettant de publier/modifier/supprimer un jeu de données dans le portail
 * [kalim](https://rudi.bzh/kalim/swagger-ui/index.html?configUrl=%2Fkalim%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kalim) : microservice permettant d'administrer les mots-clés et thèmes au format SKOS
 * [providers](https://rudi.bzh/providers/swagger-ui/index.html?configUrl=%2Fproviders%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=providers) : microservice permettant d'administrer les producteurs de données
+
+# API de catalogage
+Le micoservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
+
+Pour l'utiliser, il est nécessaire de s'authentifier au près du portail en tant qu'anonymous (login = anonymous et mdp = anonymous) ou avec votre compte utilisateur et de récupérer un token JWT Rudi :
+<pre>
+curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
+</pre>
+
+A partir du token il est alors possible de requêter l'API de catalogage comme suit :
+<pre>
+curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
+</pre>
