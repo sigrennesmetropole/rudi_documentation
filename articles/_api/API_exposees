@@ -10,4 +10,10 @@ Cette page liste les swaggers des microservices exposées par Rudi.
 ## Liste des microservices
 
 Les microservices exposés par le portail Rudi sont listés ci-dessous :
+* acl
+* konsult
+* projekt
+* kos
+* kalim
+* providers
 
