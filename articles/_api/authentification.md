@@ -19,8 +19,6 @@ Le noeud fournisseur peut alors s'authentifier comme suit :
 
 <pre>
 curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_type=password" --data "username=&lt;username>" --data "password=&lt;client_password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
-
-
 </pre>
 
 
