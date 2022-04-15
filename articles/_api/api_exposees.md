@@ -1,0 +1,17 @@
+---
+order: 3
+title: API exposées
+---
+
+Le portail Rudi expose des microservices pour sa propre utilisation mais ils peuvent également être utilisés par tous en s'authentifiant ou non.
+
+# Microservices exposés par le portail Rudi
+
+Les microservices exposés sont listés ci-dessous. Leur documentation est accessible via les hyperliens.
+
+* [https://rudi.bzh/acl/swagger-ui/index.html?configUrl=/acl/v3/api-docs/swagger-config](https://rudi.bzh/acl/swagger-ui/index.html?configUrl=/acl/v3/api-docs/swagger-config /"acl") : micro-service permettant d'administrer les utilisateurs
+* [konsult](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult) : micro-service permettant d'administrer les jeux de données du catalogue Rudi
+* [projekt](https://rudi.bzh/projekt/swagger-ui/index.html?configUrl=%2Fprojekt%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=projekt) : micro-service permettant d'administrer les projets dans Rudi
+* [kos](https://rudi.bzh/kos/swagger-ui/index.html?configUrl=%2Fkos%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kos) : micro-service permettant de publier/modifier/supprimer un jeu de données dans le portail
+* [kalim](https://rudi.bzh/kalim/swagger-ui/index.html?configUrl=%2Fkalim%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kalim) : micro-service permettant d'administrer les mots-clés et thèmes au format SKOS
+* [providers](https://rudi.bzh/providers/swagger-ui/index.html?configUrl=%2Fproviders%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=providers) : micro-service permettant d'administrer les producteurs de données![image](https://user-images.githubusercontent.com/78209595/163550383-c9b69b00-6516-4ab5-9a81-31928993e121.png)
