@@ -289,8 +289,10 @@ curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]
   <li>à partir du token il est alors possible d’accéder aux APIs de téléchargement comme suit :</li>
 </ul>
 
-<p>curl -kv -X GET -H “Authorization: Bearer <token>" https://rudi.bzh/apim/datasets/02777fcb-c0bd-4d89-830a-8070cfb89261/dwnl/1.0.0</token></p>
-
+<pre>
+curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
+&lt;/pre&gt;
+</token></pre>
 
       
       <p class="edit text-center">
