@@ -72,6 +72,6 @@ Cet appel permet de récupérer un token.
 
 * à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
 
-<pre>
+
 curl -kv -X GET -H "Authorization: Bearer <token>" https://rudi.bzh/apim/datasets/02777fcb-c0bd-4d89-830a-8070cfb89261/dwnl/1.0.0
-</pre>
+
