@@ -46,16 +46,14 @@ Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le 
 
 ## Dans le cas d'une utilisation en tant qu'utilisateur anonyme, il faut :
 
-* Les APIs de téléchargement sont accessibles comme suit :
+* Les APIs de téléchargement sont requêtables comme suit :
 
 Appel de l'API de téléchargement pour le media souscrit :
 ```
 curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
 ```
 
-L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media.
-
-Une évolution est en cours dans le portail pour rendre cette url plus facilement accessible.
+L'url de téléchargement d'un média d'un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données. 
 
 ## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
 * Se connecter sur le portail avec son compte utilisateur
@@ -70,8 +68,8 @@ curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]
 
 Cet appel permet de récupérer un token.
 
-* à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
+* à partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
 
 ```
-curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
+curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/apm/medias/uuid_du_média/dwnl/1.0.0"
 ```
