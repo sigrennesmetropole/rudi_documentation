@@ -20,7 +20,8 @@ Les microservices exposés sont listés ci-dessous. Leur documentation est acces
 Le micoservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
 
 Pour l'utiliser, il est nécessaire de s'authentifier au près du portail en tant qu'anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :
-modifié
+
+modifié 2
 
 ```
 curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
@@ -28,6 +29,8 @@ curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymou
 
 A partir du token il est alors possible de requêter l'API de catalogage comme suit :
 
-```curl
-curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
-```
+  curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]"
+  
+  nouveau
+    curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]"
+
