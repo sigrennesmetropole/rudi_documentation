@@ -17,9 +17,9 @@ Pour cela, il faut :
 
 Le noeud fournisseur peut alors s'authentifier comme suit :
 
-<pre>
+```
 curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_type=password" --data "username=&lt;username>" --data "password=&lt;client_password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
-</pre>
+```
 
 
 # Contrôle de l'authentification appel du Portail RUDI vers un fournisseur de données
@@ -27,15 +27,15 @@ curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_ty
 Lorsque le portail vient moissonner des données d'un fournisseur de données ou lorsque le portail vient soumettre un rapport d'intégration, l'appel comporte une entête d'authorization de type "Bearer".
 
 Exemple :
-<pre>
+```
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
-</pre>
+```
 
 Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
 
-<pre>
+```
 curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
-</pre>
+```
 
 # Authentification des porteurs de projets
 
@@ -49,9 +49,9 @@ Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le 
 * Les APIs de téléchargement sont accessibles comme suit :
 
 Appel de l'API de téléchargement pour le media souscrit :
-<pre>
+```
 curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
-</pre>
+```
 
 L'uuid du média est accessible en regardant l'url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media.
 
@@ -64,14 +64,14 @@ Une évolution est en cours dans le portail pour rendre cette url plus facilemen
 * Récupérer le couple "customer_key"/customer_secret"
 * Utiliser ce couple pour s'authentifier :
 
-<pre>
+```
 curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/token"
-</pre>
+```
 
 Cet appel permet de récupérer un token.
 
 * à partir du token il est alors possible d'accéder aux APIs de téléchargement comme suit :
 
-<pre>
+```
 curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
-</pre>
+```
