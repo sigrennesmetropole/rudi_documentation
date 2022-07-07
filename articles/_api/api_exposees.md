@@ -21,13 +21,17 @@ Le micoservice konsult expose une API de catalogage des jeux de données Rudi : 
 
 Pour l'utiliser, il est nécessaire de s'authentifier au près du portail en tant qu'anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :
 
-```json
+shell
+
+```shell
 curl -v -X POST https://rudi.bzh/token -d "grant_type=password&username=anonymous&password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
 ```
 
 A partir du token il est alors possible de requêter l'API de catalogage comme suit :
 
-```
+bash
+
+```bash
 curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]"
 ```  
 
