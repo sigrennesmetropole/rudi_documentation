@@ -228,24 +228,21 @@
 
 <p>Le noeud fournisseur peut alors s’authentifier comme suit :</p>
 
-<pre>
-curl -v --request POST http://&lt;server&gt;:&lt;port&gt;/oauth/token --data "grant_type=password" --data "username=&lt;username&gt;" --data "password=&lt;client_password&gt;" --data "scope=&lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&lt;client_id&gt;" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://&amp;lt;server&gt;:&amp;lt;port&gt;/oauth/token --data "grant_type=password" --data "username=&amp;lt;username&gt;" --data "password=&amp;lt;client_password&gt;" --data "scope=&amp;lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&amp;lt;client_id&gt;" -H "Authorization:Basic &amp;lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
+</code></pre></div></div>
 
 <h1 id="contrôle-de-lauthentification-appel-du-portail-rudi-vers-un-fournisseur-de-données">Contrôle de l’authentification appel du Portail RUDI vers un fournisseur de données</h1>
 
 <p>Lorsque le portail vient moissonner des données d’un fournisseur de données ou lorsque le portail vient soumettre un rapport d’intégration, l’appel comporte une entête d’authorization de type “Bearer”.</p>
 
 <p>Exemple :</p>
-<pre>
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
+</code></pre></div></div>
 
 <p>Le fournisseur de données peut valider ce token en réalisant l’appel suivant vers le portail :</p>
 
-<pre>
-curl -v --request GET http://&lt;server&gt;:&lt;port&gt;/oauth/check_token?token=&amp;ltvaleur du token&gt;
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request GET http://&amp;lt;server&gt;:&amp;lt;port&gt;/oauth/check_token?token=&amp;ltvaleur du token&gt;
+</code></pre></div></div>
 
 <h1 id="authentification-des-porteurs-de-projets">Authentification des porteurs de projets</h1>
 
@@ -262,9 +259,8 @@ curl -v --request GET http://&lt;server&gt;:&lt;port&gt;/oauth/check_token?token
 </ul>
 
 <p>Appel de l’API de téléchargement pour le media souscrit :</p>
-<pre>
-curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
+</code></pre></div></div>
 
 <p>L’uuid du média est accessible en regardant l’url envoyée au clic sur le bouton Télécharger dans le portail : uuid après /media.</p>
 
@@ -279,9 +275,8 @@ curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
   <li>Utiliser ce couple pour s’authentifier :</li>
 </ul>
 
-<pre>
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/token"
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/token"
+</code></pre></div></div>
 
 <p>Cet appel permet de récupérer un token.</p>
 
@@ -289,10 +284,8 @@ curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]
   <li>à partir du token il est alors possible d’accéder aux APIs de téléchargement comme suit :</li>
 </ul>
 
-<pre>
-curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
-&lt;/pre&gt;
-</token></pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer &lt;token&gt;" "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
+</code></pre></div></div>
 
       
       <p class="edit text-center">
