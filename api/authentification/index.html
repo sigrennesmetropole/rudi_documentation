@@ -228,7 +228,7 @@
 
 <p>Le noeud fournisseur peut alors s’authentifier comme suit :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://&amp;lt;server&gt;:&amp;lt;port&gt;/oauth/token --data "grant_type=password" --data "username=&amp;lt;username&gt;" --data "password=&amp;lt;client_password&gt;" --data "scope=&amp;lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&amp;lt;client_id&gt;" -H "Authorization:Basic &amp;lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username&gt;" --data "password=password&gt;" --data "scope=&amp;lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&amp;lt;client_id&gt;" -H "Authorization:Basic &amp;lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
 </code></pre></div></div>
 
 <h1 id="contrôle-de-lauthentification-appel-du-portail-rudi-vers-un-fournisseur-de-données">Contrôle de l’authentification appel du Portail RUDI vers un fournisseur de données</h1>
@@ -241,7 +241,7 @@
 
 <p>Le fournisseur de données peut valider ce token en réalisant l’appel suivant vers le portail :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request GET http://&amp;lt;server&gt;:&amp;lt;port&gt;/oauth/check_token?token=&amp;ltvaleur du token&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request GET http://rudi.bzh/oauth/check_token?token=valeur du token&gt;
 </code></pre></div></div>
 
 <h1 id="authentification-des-porteurs-de-projets">Authentification des porteurs de projets</h1>
