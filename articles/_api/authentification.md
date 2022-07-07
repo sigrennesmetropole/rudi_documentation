@@ -18,7 +18,7 @@ Pour cela, il faut :
 Le noeud fournisseur peut alors s'authentifier comme suit :
 
 ```
-curl -v --request POST http://&lt;server>:&lt;port>/oauth/token --data "grant_type=password" --data "username=&lt;username>" --data "password=&lt;client_password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
+curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username>" --data "password=password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
 ```
 
 
@@ -34,7 +34,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlc
 Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
 
 ```
-curl -v --request GET http://&lt;server>:&lt;port>/oauth/check_token?token=&ltvaleur du token>
+curl -v --request GET http://rudi.bzh/oauth/check_token?token=valeur du token>
 ```
 
 # Authentification des porteurs de projets
