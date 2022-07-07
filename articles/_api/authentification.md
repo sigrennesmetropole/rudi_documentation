@@ -18,7 +18,7 @@ Pour cela, il faut :
 Le noeud fournisseur peut alors s'authentifier comme suit :
 
 ```
-curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username>" --data "password=password>" --data "scope=&lt;liste des scopes séparés par des virgules>" --data "client_id=&lt;client_id>" -H "Authorization:Basic &lt;encodage en base 64 de la chaine &lt:client_id:client_password>"
+curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username>" --data "password=password>" --data "scope=liste des scopes séparés par des virgules>" --data "client_id=client_id>" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password>"
 ```
 
 
