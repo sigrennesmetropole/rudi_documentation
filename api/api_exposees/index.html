@@ -228,17 +228,13 @@
 
 <p>Pour l’utiliser, il est nécessaire de s’authentifier au près du portail en tant qu’anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :</p>
 
-<p>modifié 2</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X POST https://rudi.bzh/token -d "grant_type=password&amp;username=anonymous&amp;password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
-</code></pre></div></div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">curl</span><span class="w"> </span><span class="err">-v</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">https://rudi.bzh/token</span><span class="w"> </span><span class="err">-d</span><span class="w"> </span><span class="s2">"grant_type=password&amp;username=anonymous&amp;password=anonymous"</span><span class="w"> </span><span class="err">-H</span><span class="w"> </span><span class="s2">"Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"</span><span class="w">
+</span></code></pre></div></div>
 
 <p>A partir du token il est alors possible de requêter l’API de catalogage comme suit :</p>
 
-<p>curl -v -X GET  “https://rudi.bzh/konsult/v1/datasets/metadatas” -H “Authorization: Bearer [l’access token retourné par l’appel précédent]”</p>
-
-<p>nouveau
-    curl -v -X GET  “https://rudi.bzh/konsult/v1/datasets/metadatas” -H “Authorization: Bearer [l’access token retourné par l’appel précédent]”</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]"
+</code></pre></div></div>
 
 
       
