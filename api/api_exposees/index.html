@@ -228,15 +228,13 @@
 
 <p>Pour l’utiliser, il est nécessaire de s’authentifier au près du portail en tant qu’anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :</p>
 
-<pre>
-curl -v -X POST https://rudi.bzh/token -d "grant_type=password&amp;username=anonymous&amp;password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
-</pre>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X POST https://rudi.bzh/token -d "grant_type=password&amp;username=anonymous&amp;password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
+</code></pre></div></div>
 
 <p>A partir du token il est alors possible de requêter l’API de catalogage comme suit :</p>
 
-<pre>
-curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
-</pre>
+<pre><code class="language-curl">curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
+</code></pre>
 
       
       <p class="edit text-center">
