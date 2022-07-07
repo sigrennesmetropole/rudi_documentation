@@ -228,7 +228,7 @@
 
 <p>Le noeud fournisseur peut alors s’authentifier comme suit :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username&gt;" --data "password=password&gt;" --data "scope=&amp;lt;liste des scopes séparés par des virgules&gt;" --data "client_id=&amp;lt;client_id&gt;" -H "Authorization:Basic &amp;lt;encodage en base 64 de la chaine &amp;lt:client_id:client_password&gt;"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username&gt;" --data "password=password&gt;" --data "scope=liste des scopes séparés par des virgules&gt;" --data "client_id=client_id&gt;" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password&gt;"
 </code></pre></div></div>
 
 <h1 id="contrôle-de-lauthentification-appel-du-portail-rudi-vers-un-fournisseur-de-données">Contrôle de l’authentification appel du Portail RUDI vers un fournisseur de données</h1>
