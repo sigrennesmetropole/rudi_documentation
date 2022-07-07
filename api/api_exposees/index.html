@@ -226,16 +226,20 @@
 <h1 id="api-de-catalogage">API de catalogage</h1>
 <p>Le micoservice konsult expose une API de catalogage des jeux de données Rudi : <a href="https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&amp;urls.primaryName=konsult#/datasets/searchMetadatas">API catalogage</a>.</p>
 
-<p>Pour l’utiliser, il est nécessaire de s’authentifier au près du portail en tant qu’anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :
-modifié</p>
+<p>Pour l’utiliser, il est nécessaire de s’authentifier au près du portail en tant qu’anonymous ou avec votre compte utilisateur et de récupérer un token JWT Rudi :</p>
+
+<p>modifié 2</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X POST https://rudi.bzh/token -d "grant_type=password&amp;username=anonymous&amp;password=anonymous" -H "Authorization: Basic TEgxT1o1T3JMZmRFcXlRdkozcEFvUzhieFFNYTpYYWdmOENRdEpzak1UV09pdnBueGxjbTczb0lh"
 </code></pre></div></div>
 
 <p>A partir du token il est alors possible de requêter l’API de catalogage comme suit :</p>
 
-<pre><code class="language-curl">curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]" 
-</code></pre>
+<p>curl -v -X GET  “https://rudi.bzh/konsult/v1/datasets/metadatas” -H “Authorization: Bearer [l’access token retourné par l’appel précédent]”</p>
+
+<p>nouveau
+    curl -v -X GET  “https://rudi.bzh/konsult/v1/datasets/metadatas” -H “Authorization: Bearer [l’access token retourné par l’appel précédent]”</p>
+
 
       
       <p class="edit text-center">
