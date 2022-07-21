@@ -37,15 +37,20 @@ collections:
     order: 1
     title: Glossaire
     output: true
-    
-  api:
-    order: 3
-    title: API
-    output: true
-  
+     
   acces_donnees_restreintes:
     order: 2
     title: Accéder à des données restreintes
+    output: true
+
+   organisation:
+    order: 3
+    title: Organisations
+    output: true
+  
+  api:
+    order: 4
+    title: API
     output: true
 
 defaults:
