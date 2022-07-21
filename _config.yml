@@ -47,6 +47,11 @@ collections:
     order: 3
     title: API
     output: true
+    
+  organisation:
+    order: 4
+    title: Organisation
+    output: true
 
 defaults:
   - scope:
