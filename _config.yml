@@ -44,12 +44,12 @@ collections:
     output: true
   
   api:
-    order: 3
+    order: 4
     title: API
     output: true
     
   organisation:
-    order: 4
+    order: 3
     title: Organisation
     output: true
 
