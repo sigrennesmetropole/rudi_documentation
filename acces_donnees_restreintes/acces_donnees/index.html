@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
     <title>Accéder aux données</title>
-    <meta name="description" content="" />
+    <meta name="description" content="Une fois la demande d’accès acceptée par le producteur, vous pouvez requêter le jeu de données en effectuant les requêtes suivantes." />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
@@ -222,7 +222,23 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      
+      <p>Une fois la demande d’accès acceptée par le producteur, vous pouvez requêter le jeu de données en effectuant les requêtes suivantes.</p>
+
+<h2 id="récupération-dun-token">Récupération d’un token</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
+</code></pre></div></div>
+<p>Cet appel permet de récupérer un token.</p>
+
+<h2 id="téléchargement-de-la-donnée">Téléchargement de la donnée</h2>
+<p>A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer &lt;token&gt;" "https://rudi.bzh/apm/medias/uuid_du_média/dwnl/1.0.0"
+</code></pre></div></div>
+
+<p>L’uuid du média est récupérable depuis le détail du jeu de données, en consultant l’url mentionnée.</p>
+
+<p>Pour l’instant, les jeux de données restreints ne sont pas téléchargeables directement depuis le catalogue. Il est nécessaire d’effectuer les 2 requêtes ci-dessus.</p>
 
       
       <p class="edit text-center">
