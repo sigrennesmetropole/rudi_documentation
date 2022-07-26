@@ -15,7 +15,7 @@ Cet appel permet de récupérer un token.
 A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
 
 ```
-curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/apm/medias/uuid_du_média/dwnl/1.0.0"
+curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 ```
 
 L'uuid du média est récupérable depuis le détail du jeu de données, en consultant l'url mentionnée.
