@@ -18,6 +18,6 @@ A partir du token il est alors possible de requêter les APIs de téléchargemen
 curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 ```
 
-L'uuid du média est récupérable depuis le détail du jeu de données, en consultant l'url mentionnée.
+L'uuid du média est récupérable depuis le détail du jeu de données, en consultant l'url mentionnée dans les sources de données.
 
-Pour l'instant, les jeux de données restreints ne sont pas téléchargeables directement depuis le catalogue. Il est nécessaire d'effectuer les 2 requêtes ci-dessus.
+Vous pouvez également télécharger le jeu de données depuis son détail : pour cela vous devez vous connecter, accéder au détail du jeu de donnée et cliquer sur le bouton Télécharger.
