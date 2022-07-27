@@ -63,7 +63,7 @@ L'url de téléchargement d'un média d'un jeu de données est consultable depui
 * Utiliser ce couple pour s'authentifier :
 
 ```
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/token"
+curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
 ```
 
 Cet appel permet de récupérer un token.
@@ -71,5 +71,5 @@ Cet appel permet de récupérer un token.
 * à partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
 
 ```
-curl -kv -X GET -H "Authorization: Bearer <token>" "https://rudi.bzh/apm/medias/uuid_du_média/dwnl/1.0.0"
+curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 ```
