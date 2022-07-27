@@ -291,7 +291,7 @@
   <li>Utiliser ce couple pour s’authentifier :</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/token"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
 </code></pre></div></div>
 
 <p>Cet appel permet de récupérer un token.</p>
@@ -300,7 +300,7 @@
   <li>à partir du token il est alors possible de requêter les APIs de téléchargement comme suit :</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer &lt;token&gt;" "https://rudi.bzh/apm/medias/uuid_du_média/dwnl/1.0.0"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 </code></pre></div></div>
 
       
