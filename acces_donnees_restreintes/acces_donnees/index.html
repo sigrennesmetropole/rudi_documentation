@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
     <title>Accéder aux données</title>
-    <meta name="description" content="Une fois la demande d’accès acceptée par le producteur, vous pouvez requêter le jeu de données en effectuant les requêtes suivantes." />
+    <meta name="description" content="Une fois la demande d’accès acceptée par le producteur et la souscription réaliser, vous pouvez accéder au jeu de données de 2 manières : soit via API, soit ..." />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
@@ -226,22 +226,29 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <p>Une fois la demande d’accès acceptée par le producteur, vous pouvez requêter le jeu de données en effectuant les requêtes suivantes.</p>
+      <p>Une fois la demande d’accès acceptée par le producteur et la souscription réaliser, vous pouvez accéder au jeu de données de 2 manières :</p>
+<ul>
+  <li>soit via API,</li>
+  <li>soit directement dans le portail.</li>
+</ul>
 
-<h2 id="récupération-dun-token">Récupération d’un token</h2>
+<h2 id="téléchargement-de-la-donnée-via-api">Téléchargement de la donnée via API</h2>
+<p><strong>S’authentifier afin de récupérer un token</strong></p>
 
+<p>La première étape pour télécharger un jeu de données via API est de s’authentifier en exécutant la commande suivante :</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
 </code></pre></div></div>
 <p>Cet appel permet de récupérer un token.</p>
 
-<h2 id="téléchargement-de-la-donnée">Téléchargement de la donnée</h2>
-<p>A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :</p>
+<p><strong>Télécharger le jeu de données</strong>
+A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 </code></pre></div></div>
 
 <p>L’uuid du média est récupérable depuis le détail du jeu de données, en consultant l’url mentionnée dans les sources de données.</p>
 
+<h2 id="téléchargement-de-la-donnée-à-partir-du-portail">Téléchargement de la donnée à partir du portail</h2>
 <p>Vous pouvez également télécharger le jeu de données depuis son détail : pour cela vous devez vous connecter, accéder au détail du jeu de donnée et cliquer sur le bouton Télécharger.</p>
 
       
