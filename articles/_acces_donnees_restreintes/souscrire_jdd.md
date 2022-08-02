@@ -17,6 +17,6 @@ Pour cela :
 Une fois cette étape réalisée, vous pouvez fermer cette fenêtre et accéder aux jeux de données.
 L'accès aux jeux de données restreint n'est actuellement possible qu'en les requêtant (des évolutions sont en cours afin que le téléchargement soit possible directement depuis le portail).
 
-# Consultation ses informations d'authentification
+# Consultation des informations d'authentification
 
 Dans l'onglet API, vous pouvez consulter votre Consumer Key et Consumer Secret, identifiants à utiliser pour vous authentifier et requêter les jeux de données en votre nom.
