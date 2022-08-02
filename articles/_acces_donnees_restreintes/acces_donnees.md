@@ -16,6 +16,7 @@ curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]
 Cet appel permet de récupérer un token.
 
 **Télécharger le jeu de données**
+
 A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
 
 ```
