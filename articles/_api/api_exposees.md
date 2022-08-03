@@ -14,7 +14,7 @@ Les microservices exposés sont listés ci-dessous. Leur documentation est acces
 * [projekt](https://rudi.bzh/projekt/swagger-ui/index.html?configUrl=%2Fprojekt%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=projekt) : microservice permettant d'administrer les projets dans Rudi
 * [kos](https://rudi.bzh/kos/swagger-ui/index.html?configUrl=%2Fkos%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kos) : microservice permettant d'administrer les mots-clés et thèmes au format SKOS
 * [kalim](https://rudi.bzh/kalim/swagger-ui/index.html?configUrl=%2Fkalim%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kalim) : microservice permettant de publier/modifier/supprimer un jeu de données dans le portail
-* [providers](https://rudi.bzh/providers/swagger-ui/index.html?configUrl=%2Fproviders%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=providers) : microservice permettant d'administrer les producteurs de données
+* [strukture](https://rudi.bzh/strukture/swagger-ui/index.html?configUrl=%2Fstrukture%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=strukture) : microservice permettant d'administrer les producteurs de données
 
 # API de catalogage
 Le micoservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
