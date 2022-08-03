@@ -16,7 +16,7 @@ Les microservices exposés sont listés ci-dessous. Leur documentation est acces
 * [kalim](https://rudi.bzh/kalim/swagger-ui/index.html?configUrl=%2Fkalim%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=kalim) : microservice permettant de publier/modifier/supprimer un jeu de données dans le portail
 * [strukture](https://rudi.bzh/strukture/swagger-ui/index.html?configUrl=%2Fstrukture%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=strukture) : microservice permettant d'administrer les producteurs de données
 
-# API de catalogage
+# API de catalogage des jeux de données
 Le micoservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
 
 Pour l'utiliser, il est nécessaire de s'authentifier au près du portail en tant qu'anonymous ou avec votre compte utilisateur et de récupérer un access token  Rudi :
@@ -31,3 +31,10 @@ A partir du token il est alors possible de requêter l'API de catalogage comme s
 curl -v -X GET  "https://rudi.bzh/konsult/v1/datasets/metadatas" -H "Authorization: Bearer [l'access token retourné par l'appel précédent]"
 ```  
 
+# API pour récupérer la clé publique de chiffrement
+Le micoservice konsult expose une API permettant de récupérer la clé publique pour chiffrer les données : [API clé publique](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/encryption-key/getEncryptionKey).
+
+La clé publique est récupérable de la manière suivante :
+```
+curl -X GET "https://rudi.bzh/konsult/v1/encryption-key" -H  "accept: application/octet-stream"
+```  
