@@ -49,8 +49,13 @@ collections:
     output: true
     
   organisation:
-    order: 3
+    order: 5
     title: Organisation
+    output: true
+    
+  autres:
+    order: 6
+    title: Autres
     output: true
 
 defaults:
