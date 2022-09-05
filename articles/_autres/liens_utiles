@@ -3,9 +3,15 @@ order: 1
 title: Liens utiles
 ---
 
-* Portail Rudi [Portail Rudi](http://rudi.datarennes.fr/portail-beta)
-* Blog du projet [http://rudi.datarennes.fr](http://rudi.datarennes.fr)
-* Documentation [https://doc.rudi.bzh](https://doc.rudi.bzh)
-* Feuille de route publique [https://roadmap.rudi.bzh/rudi](https://roadmap.rudi.bzh/rudi)
-* Wiki [http://rudi.datarennes.fr/yeswiki/?PagePrincipale](http://rudi.datarennes.fr/yeswiki/?PagePrincipale)
-* Code source du projet [https://github.com/orgs/sigrennesmetropole/repositories?q=rudi&type=all&language=&sort=](https://github.com/orgs/sigrennesmetropole/repositories?q=rudi&type=all&language=&sort=)
+Le portail Rudi expose des microservices pour sa propre utilisation mais ils peuvent également être utilisés par tous en s'authentifiant ou non.
+
+# Microservices exposés par le portail Rudi
+
+Les microservices exposés sont listés ci-dessous. Leur documentation est accessible via les hyperliens.
+
+* [http://rudi.datarennes.fr/portail-beta](http://rudi.datarennes.fr/portail-beta) : portail Rudi
+* [http://rudi.datarennes.fr](http://rudi.datarennes.fr) : Blog du projet
+* [https://doc.rudi.bzh](https://doc.rudi.bzh) : Documentation
+* [https://roadmap.rudi.bzh/rudi](https://roadmap.rudi.bzh/rudi) : Feuille de route publique
+* [http://rudi.datarennes.fr/yeswiki/?PagePrincipale](http://rudi.datarennes.fr/yeswiki/?PagePrincipale) : Wiki
+* [https://github.com/sigrennesmetropole/rudi_portal](https://github.com/sigrennesmetropole/rudi_portal) : Code source du projet
