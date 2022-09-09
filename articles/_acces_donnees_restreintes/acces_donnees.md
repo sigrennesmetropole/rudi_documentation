@@ -11,7 +11,7 @@ Une fois la demande d'accès acceptée par le producteur et la souscription réa
 
 La première étape pour télécharger un jeu de données via API est de s'authentifier en exécutant la commande suivante :
 ```
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
+curl -kv -X POST -H "Authorization: Basic [base64(consumer_key:consumer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
 ```
 Cet appel permet de récupérer un token.
 
