@@ -55,10 +55,11 @@ curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0"
 
 L'url de téléchargement d'un média d'un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données. 
 
-## Pour une accès en son nom propre (éléments en cours de définition coté portail et non disponible actuellement sur rudi.bzh), il faut :
+## Pour une accès en son nom propre, il faut :
 * Se connecter sur le portail avec son compte utilisateur
-* Accéder au détail du compte
-* Activer l'utilisation des APIs
+* Créer un projet en y ajoutant les jdd auxquels on souhaite accéder
+* Accéder au détail du projet depuis son espace personnel
+* Souscrire aux jeux de données
 * Récupérer le couple "customer_key"/customer_secret"
 * Utiliser ce couple pour s'authentifier :
 
