@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
     <title>Déchiffrement des données</title>
-    <meta name="description" content="Les données restreintes sont stockées chiffrées sur le noeud producteur." />
+    <meta name="description" content="Les données restreintes sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
@@ -240,7 +240,41 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <p>Les données restreintes sont stockées chiffrées sur le noeud producteur.</p>
+      <p>Les données restreintes sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">encrypted</code> qui doit toujours être à <code class="language-plaintext highlighter-rouge">true</code> ;</li>
+  <li><code class="language-plaintext highlighter-rouge">public_key_url</code> : l’URL de la clé publique utilisée ;</li>
+  <li><code class="language-plaintext highlighter-rouge">pub_key_cut</code> : les premièrs caractères du contenu de la clé publique utilisée pour chiffrer (si le paramètre précédent n’est pas renseigné) ;</li>
+  <li><code class="language-plaintext highlighter-rouge">original_mime_type</code> : le MIME type avant chiffrement du média ;</li>
+  <li><code class="language-plaintext highlighter-rouge">encrypted_mime_type</code> : le MIME type après chiffrement du média.</li>
+</ul>
+
+<p>Exemple de média :</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="nl">"connector_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+		</span><span class="p">{</span><span class="w">
+			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BOOLEAN"</span><span class="w">
+		</span><span class="p">},</span><span class="w">
+		</span><span class="p">{</span><span class="w">
+			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pub_key_cut"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvS3nTZOj01kq1V6wKpMe"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
+		</span><span class="p">},</span><span class="w">
+		</span><span class="p">{</span><span class="w">
+			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"original_mime_type"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
+		</span><span class="p">},</span><span class="w">
+		</span><span class="p">{</span><span class="w">
+			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted_mime_type"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg+crypt"</span><span class="p">,</span><span class="w">
+			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
+		</span><span class="p">}</span><span class="w">
+	</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
 
 <h2 id="chiffrement-à-partir-de-la-clé-publique-du-portail">Chiffrement à partir de la clé publique du portail</h2>
 <p>Elles peuvent être chiffrées à partir d’une clé publique exposée par le portail.
