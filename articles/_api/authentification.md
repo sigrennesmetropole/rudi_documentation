@@ -53,9 +53,12 @@ Appel de l'API de téléchargement pour le media souscrit :
 curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
 ```
 
-L'url de téléchargement d'un média d'un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données. 
+L'url de téléchargement d'un média d'un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données.
 
-## Pour une accès en son nom propre, il faut :
+Si l'URL commence par `/apm/medias/` au lieu de `/medias/`, il est nécessaire de s'authentifier, en ajoutant un token à la requête (cf. paragraphes suivants).
+
+## Pour un accès en son nom propre, il faut :
+
 * Se connecter sur le portail avec son compte utilisateur
 * Créer un projet en y ajoutant les jdd auxquels on souhaite accéder
 * Accéder au détail du projet depuis son espace personnel
@@ -74,3 +77,11 @@ Cet appel permet de récupérer un token.
 ```
 curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 ```
+
+## Pour un accès en mode anonyme, il faut :
+
+Utiliser les mêmes requêtes que dans le paragraphe précédent "Pour un accès en son nom propre", via le compte anonyme avec les informations suivantes :
+
+- login : `anonymous`
+- customer_key : `4fl6YM9uUHTRqsTLcYJ3wqEO5B4a`
+- customer_secret : `j7KmWhObMAjFpHYDJ7LALzpd22ca`
