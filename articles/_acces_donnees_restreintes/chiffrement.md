@@ -3,7 +3,40 @@ order: 5
 title: Déchiffrement des données
 ---
 
-Les données restreintes sont stockées chiffrées sur le noeud producteur.
+Les données restreintes sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :
+
+- `encrypted` qui doit toujours être à `true` ;
+- `public_key_url` : l'URL de la clé publique utilisée ;
+- `pub_key_cut` : les premièrs caractères du contenu de la clé publique utilisée pour chiffrer (si le paramètre précédent n'est pas renseigné) ;
+- `original_mime_type` : le MIME type avant chiffrement du média ;
+- `encrypted_mime_type` : le MIME type après chiffrement du média.
+
+Exemple de média :
+
+```json
+	"connector_parameters": [
+		{
+			"key": "encrypted",
+			"value": "true",
+			"type": "BOOLEAN"
+		},
+		{
+			"key": "pub_key_cut",
+			"value": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvS3nTZOj01kq1V6wKpMe",
+			"type": "STRING"
+		},
+		{
+			"key": "original_mime_type",
+			"value": "image/jpeg",
+			"type": "STRING"
+		},
+		{
+			"key": "encrypted_mime_type",
+			"value": "image/jpeg+crypt",
+			"type": "STRING"
+		}
+	]
+```
 
 ## Chiffrement à partir de la clé publique du portail
 Elles peuvent être chiffrées à partir d'une clé publique exposée par le portail.
