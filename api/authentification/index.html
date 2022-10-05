@@ -296,7 +296,10 @@
 
 <p>L’url de téléchargement d’un média d’un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données.</p>
 
-<h2 id="pour-une-accès-en-son-nom-propre-il-faut-">Pour une accès en son nom propre, il faut :</h2>
+<p>Si l’URL commence par <code class="language-plaintext highlighter-rouge">/apm/medias/</code> au lieu de <code class="language-plaintext highlighter-rouge">/medias/</code>, il est nécessaire de s’authentifier, en ajoutant un token à la requête (cf. paragraphes suivants).</p>
+
+<h2 id="pour-un-accès-en-son-nom-propre-il-faut-">Pour un accès en son nom propre, il faut :</h2>
+
 <ul>
   <li>Se connecter sur le portail avec son compte utilisateur</li>
   <li>Créer un projet en y ajoutant les jdd auxquels on souhaite accéder</li>
@@ -317,6 +320,16 @@
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 </code></pre></div></div>
+
+<h2 id="pour-un-accès-en-mode-anonyme-il-faut-">Pour un accès en mode anonyme, il faut :</h2>
+
+<p>Utiliser les mêmes requêtes que dans le paragraphe précédent “Pour un accès en son nom propre”, via le compte anonyme avec les informations suivantes :</p>
+
+<ul>
+  <li>login : <code class="language-plaintext highlighter-rouge">anonymous</code></li>
+  <li>customer_key : <code class="language-plaintext highlighter-rouge">4fl6YM9uUHTRqsTLcYJ3wqEO5B4a</code></li>
+  <li>customer_secret : <code class="language-plaintext highlighter-rouge">j7KmWhObMAjFpHYDJ7LALzpd22ca</code></li>
+</ul>
 
       
       <p class="edit text-center">
