@@ -15,15 +15,25 @@ curl -kv -X POST -H "Authorization: Basic [base64(consumer_key:consumer_secret)]
 ```
 Cet appel permet de récupérer un token.
 
+Si vous souhaitez télécharger un jeu de données ouverts par le biais d'anonymous, vous pouvez récupérer le token en exécutant la commande suivante : 
+```
+curl -v -X POST "https://rudi.bzh/authenticate" --header "Content-Type: application/x-www-form-urlencoded" --data-urlencode "login=anonymous" --data-urlencode "password=anonymous"
+```
+
 **Télécharger le jeu de données**
 
-A partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
+A partir du "jwtToken "il est alors possible de requêter les APIs de téléchargement. Les 3 dernières informations de l'url sont :  https://rudi.bzh/konsult/v1/medias/ Identifiant du fichier / Le type de fichier/ la version 
+
+Exemple de requête sur le média de type csv du jeu de données : https://rudi.bzh/catalogue/detail/6c3b795c-0b60-4bf8-911c-c6f0625b7123 : 
 
 ```
-curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
+curl -v -X GET " https://rudi.bzh/konsult/v1/medias/1cd92470-77b6-46c6-ae7b-14d10fac49d7/csv/1.0.0" -H "Authorization: Bearer [jwtToken]"
 ```
 
-L'uuid du média est récupérable depuis le détail du jeu de données, en consultant l'url mentionnée dans les sources de données.
+Les différentes informations du médias sont récupérables dans la page de détail du jeu de données au sein de la partie 'Informations complémentaires' puis 'Source de données'.
+
+![image](https://user-images.githubusercontent.com/109140019/202900288-f8872540-c382-4308-8537-afb5503f7ed2.png)
+
 
 ## Téléchargement de la donnée à partir du portail
 Vous pouvez également télécharger le jeu de données depuis son détail : pour cela vous devez vous connecter, accéder au détail du jeu de donnée et cliquer sur le bouton Télécharger.
