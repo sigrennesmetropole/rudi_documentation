@@ -15,14 +15,14 @@ curl -kv -X POST -H "Authorization: Basic [base64(consumer_key:consumer_secret)]
 ```
 Cet appel permet de récupérer un token.
 
-Si vous souhaitez télécharger un jeu de données ouverts par le biais d'anonymous, vous pouvez récupérer le token en exécutant la commande suivante : 
+Si vous souhaitez télécharger un jeu de données ouvert par le biais d'anonymous, vous pouvez récupérer le token en exécutant la commande suivante : 
 ```
 curl -v -X POST "https://rudi.bzh/authenticate" --header "Content-Type: application/x-www-form-urlencoded" --data-urlencode "login=anonymous" --data-urlencode "password=anonymous"
 ```
 
 **Télécharger le jeu de données**
 
-A partir du "jwtToken "il est alors possible de requêter les APIs de téléchargement. Les 3 dernières informations de l'url sont :  https://rudi.bzh/konsult/v1/medias/ Identifiant du fichier / Le type de fichier/ la version 
+A partir du "jwtToken "il est alors possible de requêter les APIs de téléchargement par le biais d'une requête "Get". Nous l'effectuons sur une url dont les 3 dernières informations sont :  https://rudi.bzh/konsult/v1/medias/ Identifiant du fichier / Le type de fichier/ la version 
 
 Exemple de requête sur le média de type csv du jeu de données : https://rudi.bzh/catalogue/detail/6c3b795c-0b60-4bf8-911c-c6f0625b7123 : 
 
