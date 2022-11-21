@@ -1,6 +1,6 @@
 ---
 order: 5
-title: Concepts de Rudui
+title: Concepts de Rudi
 ---
 
 # Glossaire : notions-clés utilisées sur la plateforme Rudi
