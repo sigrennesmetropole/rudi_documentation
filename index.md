@@ -15,7 +15,7 @@ buttons:
   default: faq/integrateur
 ---
 
-# Objet
+# Documentation de Rudi
 
 Cet espace a pour but de rassembler l'ensemble des ressources utiles à l'utilisation du portail Rudi. Vous y trouverez notamment un glossaire et de la documentation technique. Il sera enrichi à mesure des avancées du projet.
 
