@@ -44,7 +44,7 @@ collections:
     output: true
   
     donnees_personnelles:
-    order: 2
+    order: 3
     title: Accéder à vos données personnelles
     output: true
     
