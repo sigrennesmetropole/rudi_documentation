@@ -43,6 +43,11 @@ collections:
     title: Accéder à des données restreintes
     output: true
   
+    donnees_personnelles:
+    order: 2
+    title: Accéder à vos données personnelles
+    output: true
+    
   api:
     order: 4
     title: API
