@@ -43,7 +43,7 @@ collections:
     title: Accéder à des données restreintes
     output: true
     
-   donnees_personnelles:
+  donnees_personnelles:
     order: 3
     title: Accéder à vos données personnelles
     output: true
