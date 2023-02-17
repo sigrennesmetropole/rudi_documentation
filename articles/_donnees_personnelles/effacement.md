@@ -1,3 +1,8 @@
+---
+order: 4
+title: Effacement
+---
+
 # La demande d'effacement
 Cette fonctionnalité n’est pas encore disponible dans le portail Rudi.
 Conformément aux directives européennes, vous avez la possibilité de demander l’effacement de vos données personnelles auprès des producteurs en disposant si au moins une de ces situations correspond à votre cas :
