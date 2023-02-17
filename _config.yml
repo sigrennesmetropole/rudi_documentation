@@ -45,7 +45,7 @@ collections:
     
    donnees_personnelles:
     order: 3
-    title: Accéder à des vos données personnelles
+    title: Accéder à vos données personnelles
     output: true
     
   api:
