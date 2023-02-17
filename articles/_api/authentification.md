@@ -1,9 +1,9 @@
 ---
 order: 2
-title: Test Authentification
+title: Authentification
 ---
 
-# Test Authentification des fournisseurs de données
+# Authentification des fournisseurs de données
 
 Les fournisseurs de données pour publier des métadonnées doivent s'authentifier en OAuth2.
 
