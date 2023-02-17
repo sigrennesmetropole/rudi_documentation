@@ -57,9 +57,14 @@ collections:
     order: 5
     title: Organisation
     output: true
-    
-  autres:
+ 
+  publication:
     order: 6
+    title: Publier des données
+    output: true
+ 
+  autres:
+    order: 7
     title: Autres
     output: true
 
