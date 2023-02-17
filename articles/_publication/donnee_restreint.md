@@ -1,4 +1,4 @@
 ---
-order: 1
-title: Jeu de données restreint
+order: 2
+title: Données à accès restreint
 ---
