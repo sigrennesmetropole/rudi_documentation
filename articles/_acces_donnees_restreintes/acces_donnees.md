@@ -1,9 +1,9 @@
 ---
 order: 4
-title: Accéder aux données
+title: Accéder aux données en accès restreint
 ---
 
-# Accéder aux données restreintes
+# Accéder aux données en accès restreint
 
 Une fois la demande d'accès acceptée par le producteur et la souscription réalisée, vous pouvez accéder au jeu de données de 2 manières :
 * soit via API,
