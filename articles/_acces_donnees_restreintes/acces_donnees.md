@@ -37,6 +37,8 @@ Les différentes informations du médias sont récupérables dans la page de dé
 
 ![image](https://user-images.githubusercontent.com/109140019/202900288-f8872540-c382-4308-8537-afb5503f7ed2.png)
 
+_affichage des sources sur la page de détails d'un jeu de données_
+
 
 ## Téléchargement de la donnée à partir du portail
 Vous pouvez également télécharger le jeu de données depuis son détail : pour cela vous devez vous connecter, accéder au détail du jeu de donnée et cliquer sur le bouton Télécharger.
