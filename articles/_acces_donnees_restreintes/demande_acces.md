@@ -3,9 +3,9 @@ order: 2
 title: Demander l'accès
 ---
 
-# Demander l'accès à des données restreintes
+# Demander l'accès à des données en accès restreint
 
-Pour télécharger des données restreintes, vous devez y demander l'accès.
+Pour télécharger des données en accès restreint, vous devez d'abord y demander l'accès.
 
 Les demandes d'accès se font uniquement dans le cadre d'un projet. Si vous avez déjà [créé votre projet](https://doc.rudi.bzh/acces_donnees_restreintes/creer_un_projet/) dans Rudi, vous pouvez demander l'accès à un jeu de données directement depuis le détail du jeu de données, dans le catalogue. Au clic sur "Demander l'accès", vous devez sélectionner le projet pour lequel vous demander l'accès au jeu de données.
 
