@@ -1,6 +1,6 @@
 ---
 order: 2
-title: Publication de onnées en accès restreint
+title: Publication de données en accès restreint
 ---
 
 # Publication de données en accès restreint
