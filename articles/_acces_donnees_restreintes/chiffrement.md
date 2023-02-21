@@ -3,6 +3,8 @@ order: 5
 title: Déchiffrement des données
 ---
 
+# Déchiffrement des données restreintes
+
 Les données restreintes sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :
 
 - `encrypted` qui doit toujours être à `true` ;
