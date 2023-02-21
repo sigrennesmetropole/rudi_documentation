@@ -2,6 +2,9 @@
 order: 4
 title: Accéder aux données
 ---
+
+# Accéder aux données restreintes
+
 Une fois la demande d'accès acceptée par le producteur et la souscription réalisée, vous pouvez accéder au jeu de données de 2 manières :
 * soit via API,
 * soit directement dans le portail.
