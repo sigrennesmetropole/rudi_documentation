@@ -40,7 +40,7 @@ collections:
      
   acces_donnees_restreintes:
     order: 2
-    title: Accéder à des données restreintes
+    title: Accéder à des données en accès restreint
     output: true
     
   donnees_personnelles:
