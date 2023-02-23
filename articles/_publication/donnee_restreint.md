@@ -1,6 +1,6 @@
 ---
 order: 2
-title: Publication de données en accès restreint
+title: Données à accès restreint
 ---
 
 # Publication de données en accès restreint
