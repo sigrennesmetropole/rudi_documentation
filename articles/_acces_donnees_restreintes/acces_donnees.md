@@ -30,7 +30,7 @@ A partir du "jwtToken "il est alors possible de requêter les APIs de téléchar
 Exemple de requête sur le média de type csv du jeu de données : https://rudi.bzh/catalogue/detail/6c3b795c-0b60-4bf8-911c-c6f0625b7123 : 
 
 ```
-curl -v -X GET " https://rudi.bzh/konsult/v1/medias/1cd92470-77b6-46c6-ae7b-14d10fac49d7/csv/1.0.0" -H "Authorization: Bearer [jwtToken]"
+curl -v -X GET " https://rudi.bzh/apm/medias/1cd92470-77b6-46c6-ae7b-14d10fac49d7/dwnl/1.0.0" -H "Authorization: Bearer [jwtToken]"
 ```
 
 Les différentes informations du médias sont récupérables dans la page de détail du jeu de données au sein de la partie 'Informations complémentaires' puis 'Source de données'.
