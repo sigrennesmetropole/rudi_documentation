@@ -1,6 +1,6 @@
 ---
 order: 2
-title: Requêter un jeu de données ouvert
+title: Requêter
 ---
 
 # Requêter un jeu de donnée ouvert
