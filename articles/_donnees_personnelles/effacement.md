@@ -20,4 +20,5 @@ Cependant ce droit à l’effacement n’est pas possible si l’effacement de v
 * De l’utilisation de vos données si elles concernent un intérêt public dans le domaine de la santé ;
 * De leur utilisation à des fins archivistiques dans l’intérêt public, à des fins de recherche scientifique ou historique ou à des fins statistiques ;
 * De la constatation, de l’exercice ou de la défense de droits en justice.
+<br>
 Rudi vous simplifie cette démarche en vous mettant en relation avec les producteurs concernés. 
