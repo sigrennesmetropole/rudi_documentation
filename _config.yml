@@ -38,33 +38,38 @@ collections:
     title: Glossaire
     output: true
      
-  acces_donnees_restreintes:
+  acces_donnee_ouverte:
     order: 2
+    title: Accéder à des données ouvertes
+    output: true
+  
+  acces_donnees_restreintes:
+    order: 3
     title: Accéder à des données en accès restreint
     output: true
     
   donnees_personnelles:
-    order: 3
+    order: 4
     title: Accéder à vos données personnelles
     output: true
     
   api:
-    order: 4
+    order: 5
     title: API
     output: true
     
   organisation:
-    order: 5
+    order: 6
     title: Organisation
     output: true
  
   publication:
-    order: 6
-    title: Publier des données
-    output: true
- 
-  autres:
     order: 7
+    title: Noeud producteur
+    output: true
+  
+  autres:
+    order: 8
     title: Autres
     output: true
 
