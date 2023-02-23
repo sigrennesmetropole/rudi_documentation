@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Créer un projet</title>
-    <meta name="description" content="Créer un projet" />
+    <title>Requêter un jeu de données ouvert</title>
+    <meta name="description" content="Requêter un jeu de donnée ouvert" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnees_restreintes/creer_un_projet/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnee_ouverte/requeter/" />
 </head>
 
 
@@ -161,7 +161,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnee_ouverte/telecharger/">Télécharger</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnee_ouverte/requeter/">Requêter un jeu de données ouvert</a>
             </li>
             
@@ -175,7 +175,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnees_restreintes/creer_un_projet/">Créer un projet</a>
             </li>
             
@@ -306,27 +306,19 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="créer-un-projet">Créer un projet</h1>
+      <h1 id="requêter-un-jeu-de-donnée-ouvert">Requêter un jeu de donnée ouvert</h1>
 
-<p>La création d’un projet se fait depuis le <a href="https://rudi.bzh/projets">catalogue des réutilisations</a>, en cliquant sur le bouton “<strong>Soumettre un projet</strong>”.</p>
+<p>Il est possible de requêter un jeu de données ouvert sans être authentifié.
+Il suffit de faire un GET sur l’url du jeu de données. Vous trouverez ci-dessous un exemple de requête :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X GET "https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0"
+</code></pre></div></div>
 
-<p>Pour créer un projet, vous devez renseigner différentes informations :</p>
-<ul>
-  <li>Informations décrivant le projet</li>
-  <li>Informations sur votre identité : vous pouvez soumettre un projet en votre nom ou au nom d’une organisation</li>
-  <li>Sélection des jeux de données que vous souhaitez utiliser dans le cadre de votre projet</li>
-</ul>
-
-<p>La description de votre projet vous permet de choisir si votre projet sera visible depuis le catalogue par tous ou s’il est confidentiel (visible uniquement par vous, l’animateur Rudi et les producteurs de données concernés). *fonctionnalité en cours d’implémentation**</p>
-
-<p>Lorsque votre projet est créé, celui-ci est référencé dans le catalogue des réutilisations et est consultable par tous. Vous pouvez également le consulter depuis votre compte / Mes réutilisations.</p>
-
-<p>La modification d’un projet n’est pas encore possible dans Rudi.</p>
+<p>L’url d’un média est consultable depuis le portail, dans le détail d’un jeu de données / Informations complémentaires / Sources de données (un bouton vous permet de copier directement l’url)</p>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_acces_donnees_restreintes/creer_un_projet.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_acces_donnee_ouverte/requeter.md">
               ✎ Editer cette page
           </a>
       </p>
