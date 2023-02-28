@@ -59,6 +59,9 @@ curl -X GET "https://rudi.bzh/konsult/v1/encryption-key" -H  "accept: applicatio
 
 Dans ce cas là, le déchiffrement des données se fait automatiquement par le portail lors d'un téléchargement. Cette étape est totalement transparente pour vous.
 
+![prod](https://user-images.githubusercontent.com/109140019/221823775-41613dab-097a-4f87-9508-cf665019a532.PNG)
+
+
 ## Chiffrement à partir d'une clé inconnue pour le portail
 Les données en accès restreint peuvent être chiffrées à partir d'une autre clé, qui n'est pas connue par le portail.
 Dans ce cas, le portail Rudi ne peut pas déchiffrer la donnée. Les données que vous récupérez au moment du téléchargement seront alors chiffrées.
