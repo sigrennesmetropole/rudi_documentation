@@ -5,6 +5,9 @@ title: Rôles
 
 # Les différents rôles sur la plateforme Rudi
 
+![gloss](https://user-images.githubusercontent.com/109140019/221825035-47ad122e-f8a6-4347-a0bc-65886c52b47e.PNG)
+
+
 ## Producteur de données
 Un **Producteur de données** est une personne morale qui a adhéré à la **Fédération Rudi** et qui publie au moins 1 jeu de données accessible via Rudi. Cette publication se fait au moyen d'un **Nœud producteur**.
 
