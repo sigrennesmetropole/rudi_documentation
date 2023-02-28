@@ -13,3 +13,5 @@ Cliquez sur une rubrique ci-dessous pour obtenir plus d'informations.
 - [Accéder à vos données personnelles](https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/access/)
 - [Demander la rectification de données vous concernant](https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/rectification/)
 - [Demander l'effacement de données vous concernant](https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/effacement/)
+
+![pero](https://user-images.githubusercontent.com/109140019/221822839-40b95133-7c7a-4bb9-af25-442df49dec4d.PNG)
