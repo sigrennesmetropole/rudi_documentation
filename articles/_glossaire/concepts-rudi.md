@@ -5,6 +5,9 @@ title: Concepts de Rudi
 
 # Glossaire : notions-clés utilisées sur la plateforme Rudi
 
+![bandeau](https://user-images.githubusercontent.com/109140019/221818721-fed74eff-1616-41bb-8f20-388443dbd416.PNG)
+
+
 ## Réutilisation
 Une **Réutilisation** est la description par un **Utilisateur** de l'usage d'un ou plusieurs jeux de données du catalogue. Tout **Utilisateur inscrit** peut déclarer une Réutilisation en décrivant le résultat produit (article, application, etc) et en indiquant le ou les jeux de données utilisés.
 
