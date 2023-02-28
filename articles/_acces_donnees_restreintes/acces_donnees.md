@@ -37,3 +37,6 @@ _affichage des sources sur la page de détails d'un jeu de données_
 
 ## Téléchargement de la donnée à partir du portail
 Vous pouvez également télécharger le jeu de données depuis son détail : pour cela vous devez vous connecter, accéder au détail du jeu de donnée et cliquer sur le bouton Télécharger.
+![restprod](https://user-images.githubusercontent.com/109140019/221825731-2b310847-767f-47f6-a624-8e9a2c99ebae.PNG)
+
+
