@@ -17,3 +17,5 @@ Une fois validée, la demande est transmise au producteur de données concerné.
 Le producteur de données peut, depuis son espace personnel, consulter votre demande et la traiter.
 
 Vous recevrez un mail vous indiquant la décision du producteur de données.
+
+![accés](https://user-images.githubusercontent.com/109140019/221821773-95ad0a2e-cbea-43bd-aac0-baecc1e995a3.PNG)
