@@ -17,3 +17,6 @@ La description de votre projet vous permet de choisir si votre projet sera visib
 Lorsque votre projet est créé, celui-ci est référencé dans le catalogue des réutilisations et est consultable par tous. Vous pouvez également le consulter depuis votre compte / Mes réutilisations.
 
 La modification d'un projet n'est pas encore possible dans Rudi.
+
+![projet](https://user-images.githubusercontent.com/109140019/221820875-d31dcaf6-633c-4b05-a8e9-a1380ef9b2b7.PNG)
+
