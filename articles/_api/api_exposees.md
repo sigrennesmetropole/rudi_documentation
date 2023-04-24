@@ -17,7 +17,7 @@ Les microservices exposés sont listés ci-dessous. Leur documentation est acces
 * [strukture](https://rudi.bzh/strukture/swagger-ui/index.html?configUrl=%2Fstrukture%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=strukture) : microservice permettant d'administrer les producteurs de données
 
 # API de catalogage des jeux de données
-Le micoservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
+Le microservice konsult expose une API de catalogage des jeux de données Rudi : [API catalogage](https://rudi.bzh/konsult/swagger-ui/index.html?configUrl=%2Fkonsult%2Fv3%2Fapi-docs%2Fswagger-config&urls.primaryName=konsult#/datasets/searchMetadatas).
 
 Pour l'utiliser, il est nécessaire de s'authentifier au près du portail en tant qu'anonymous ou avec votre compte utilisateur et de récupérer un access token  Rudi :
 
