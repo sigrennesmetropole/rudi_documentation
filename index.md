@@ -15,6 +15,5 @@ buttons:
   default: faq/integrateur
 ---
 
-
-![image](https://user-images.githubusercontent.com/109140019/235706340-156cd113-4bfd-4195-aa81-36a5cf63126a.png)
-![bandeau](https://user-images.githubusercontent.com/109140019/221818721-fed74eff-1616-41bb-8f20-388443dbd416.PNG)
+![entête](https://user-images.githubusercontent.com/109140019/235708420-dada30e5-f111-41d4-8b1b-739b567f0603.PNG)
+![bandeau](https://user-images.githubusercontent.com/109140019/235708199-9a82ffde-f623-4e90-967a-80d3865e4edb.PNG)
