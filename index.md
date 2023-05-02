@@ -15,6 +15,5 @@ buttons:
   default: faq/integrateur
 ---
 
-# Documentation de Rudi
 
 ![image](https://user-images.githubusercontent.com/109140019/235706340-156cd113-4bfd-4195-aa81-36a5cf63126a.png)
