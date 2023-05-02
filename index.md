@@ -17,6 +17,4 @@ buttons:
 
 # Documentation de Rudi
 
-Cet espace a pour but de rassembler l'ensemble des ressources utiles à l'utilisation du portail Rudi. Vous y trouverez notamment un glossaire et de la documentation technique. Il sera enrichi à mesure des avancées du projet.
-
-Cliquez sur une page dans le menu à gauche pour commencer.
+![image](https://user-images.githubusercontent.com/109140019/235706340-156cd113-4bfd-4195-aa81-36a5cf63126a.png)
