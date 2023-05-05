@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Données à accès restreint</title>
-    <meta name="description" content="Publication de données en accès restreint" />
+    <title>Démonstrations vidéos</title>
+    <meta name="description" content="Grâce à ces tutoriels, laissez vous guider pas à pas dans le portail de données territoriales Rudi" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/publication/donnee_restreint/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/" />
 </head>
 
 
@@ -275,7 +275,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/publication/donnee_ouverte/">Données ouvertes</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/publication/donnee_restreint/">Données à accès restreint</a>
             </li>
             
@@ -301,7 +301,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/code_source/">Code source</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/">Démonstrations vidéos</a>
             </li>
             
@@ -318,72 +318,17 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="publication-de-données-en-accès-restreint">Publication de données en accès restreint</h1>
+      Grâce à ces tutoriels, laissez vous guider pas à pas dans le portail de données territoriales Rudi
 
-<p>De la même manière que pour les jeux de données ouverts, la publication sur Rudi de données en accès restreint se fait via l’utilisation d’un noeud producteur.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLFkzWY--e3EooMs5gqNjOYYEEXM7d77Ip" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-<p>Lors de la saisie des métadonnées concernant votre jeu de données, vous pourrez indiquer que vous souhaitez restreindre l’accès à ce jeu de données. Vous devrez alors indiquer quelles sont les conditions d’accès pour pouvoir accéder à ce jeu de données. Les données restreintes sont stockées chiffrées dans le noeud producteur. De plus amples informations sur le chiffrement des données sont définies dans les chapitres ci-dessous.</p>
 
-<p>Si vous n’avez pas encore accès à un noeud producteur, vous pouvez prendre contact avec l’animateur Rudi via le formulaire en ligne : <a href="https://blog.rudi.bzh/portail-beta-contact/">formulaire</a>.</p>
 
-<p>L’animateur vous recontactera le plus rapidement possible.</p>
-
-<h1 id="chiffrement-des-données-en-accès-restreint">Chiffrement des données en accès restreint</h1>
-
-<p>Les données en accès restreint sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">encrypted</code> qui doit toujours être à <code class="language-plaintext highlighter-rouge">true</code> ;</li>
-  <li><code class="language-plaintext highlighter-rouge">public_key_url</code> : l’URL de la clé publique utilisée ;</li>
-  <li><code class="language-plaintext highlighter-rouge">pub_key_cut</code> : les premièrs caractères du contenu de la clé publique utilisée pour chiffrer (si le paramètre précédent n’est pas renseigné) ;</li>
-  <li><code class="language-plaintext highlighter-rouge">original_mime_type</code> : le MIME type avant chiffrement du média ;</li>
-  <li><code class="language-plaintext highlighter-rouge">encrypted_mime_type</code> : le MIME type après chiffrement du média.</li>
-</ul>
-
-<p>Exemple de média :</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="nl">"connector_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BOOLEAN"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pub_key_cut"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvS3nTZOj01kq1V6wKpMe"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"original_mime_type"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted_mime_type"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg+crypt"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">}</span><span class="w">
-	</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<h2 id="chiffrement-à-partir-de-la-clé-publique-du-portail">Chiffrement à partir de la clé publique du portail</h2>
-<p>Elles peuvent être chiffrées à partir d’une clé publique exposée par le portail.
-Cette clé est accessible via la requête :</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X GET "https://rudi.bzh/konsult/v1/encryption-key" -H  "accept: application/octet-stream"
-</code></pre></div></div>
-
-<p>Dans ce cas là, le déchiffrement des données se fait automatiquement par le portail lors d’un téléchargement. Cette étape est totalement transparente pour vous.</p>
-
-<p><img src="https://user-images.githubusercontent.com/109140019/221823775-41613dab-097a-4f87-9508-cf665019a532.PNG" alt="prod" /></p>
-
-<h2 id="chiffrement-à-partir-dune-clé-inconnue-pour-le-portail">Chiffrement à partir d’une clé inconnue pour le portail</h2>
-<p>Les données en accès restreint peuvent être chiffrées à partir d’une autre clé, qui n’est pas connue par le portail.
-Dans ce cas, le portail Rudi ne peut pas déchiffrer la donnée. Les données que vous récupérez au moment du téléchargement seront alors chiffrées.</p>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_publication/donnee_restreint.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_autres/tutoriels">
               ✎ Editer cette page
           </a>
       </p>
