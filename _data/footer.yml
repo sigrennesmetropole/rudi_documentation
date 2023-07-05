@@ -1,7 +1,7 @@
 links:
-  - label: doc.rudi.bzh
+  - label: Liens utiles
     children:
-      - label: rudi.bzh
+      - label: Rudi
         url: https://rudi.bzh/
       - label: Condition générales d’utilisation
         url: https://rudi.datarennes.fr/cgu/
