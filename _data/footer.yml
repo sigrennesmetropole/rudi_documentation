@@ -3,7 +3,7 @@ links:
     children:
       - label: Rudi
         url: https://rudi.bzh/
-      - label: Condition générales d’utilisation
+      - label: Conditions générales d’utilisation
         url: https://rudi.datarennes.fr/cgu/
       - label: Contact
         url: https://rudi.datarennes.fr/portail-beta-contact/
