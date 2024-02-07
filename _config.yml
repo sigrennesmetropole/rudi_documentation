@@ -37,39 +37,44 @@ collections:
     order: 1
     title: Glossaire
     output: true
+    
+  espace_personnel_explication:
+    order: 2
+    title: Comprendre les espaces personnels
+    output: true
      
   acces_donnee_ouverte:
-    order: 2
+    order: 3
     title: Accéder à des données ouvertes
     output: true
   
   acces_donnees_restreintes:
-    order: 3
+    order: 4
     title: Accéder à des données en accès restreint
     output: true
     
   donnees_personnelles:
-    order: 4
+    order: 5
     title: Accéder à vos données personnelles
     output: true
     
   api:
-    order: 5
+    order: 6
     title: API
     output: true
     
   organisation:
-    order: 6
+    order: 7
     title: Organisation
     output: true
  
   publication:
-    order: 7
+    order: 8
     title: Noeud producteur
     output: true
   
   autres:
-    order: 8
+    order: 9
     title: Autres
     output: true
 
