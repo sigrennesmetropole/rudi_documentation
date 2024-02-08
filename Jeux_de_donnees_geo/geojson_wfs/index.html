@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Démos et tutos</title>
-    <meta name="description" content="Grâce à ces vidéos, laissez vous guider pas à pas dans le portail de données territoriales Rudi :" />
+    <title>Média WFS type GeoJson</title>
+    <meta name="description" content="Publier un jeu de données ayant un média WFS type GeoJson" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/geojson_wfs/" />
 </head>
 
 
@@ -307,7 +307,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/geojson_wfs/">Média WFS type GeoJson</a>
             </li>
             
@@ -329,7 +329,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/code_source/">Code source</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/">Démos et tutos</a>
             </li>
             
@@ -346,19 +346,85 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      Grâce à ces vidéos, laissez vous guider pas à pas dans le portail de données territoriales Rudi :
+      <h1 id="publier-un-jeu-de-données-ayant-un-média-wfs-type-geojson">Publier un jeu de données ayant un média WFS type GeoJson</h1>
 
+<p>Vous trouverez ci-dessous la section available format à ajouter à votre json de publication.</p>
 
+<p>Point Infos : Pour récupérer un json d’un jeu de données présent sur rudi.bzh vous pouvez le requêter en effectuant un GET sur l’url d’un média présent dans la page de détail du jeu de données (section : “Source de données”).</p>
+<ul>
+  <li>La requête : curl -v -X GET “https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0”.</li>
+</ul>
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/videoseries?list=PLFkzWY--e3EooMs5gqNjOYYEEXM7d77Ip" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>La section de code à ajouter au JSON :</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    "available_formats": [
+        {
+            "media_type": "FILE", //Correspond au type de media, ici il s'agit d'un fichier (ne pas changer)
+            "media_id": "", //Correspond à l'uuid du media
+            "file_type": "application/geo+json", //Correspond au type de média (ne pas changer)
+            "file_size": 4096, //Correspond à la taille du média
+            "file_encoding": "UTF-8", //Correspond à l'encodage du média
+            "checksum": {
+                "algo": "MD5",
+                "hash": "bc4711a0-6c95-4f0f-b84d-534186ae8a89" //Correspond à l'algorithme de hachage
+            },
+            "connector": {
+                "interface_contract": "dwnl", //Correspond à l'interface contract (ne pas changer)
+                "url": "https://public.sig.rennesmetropole.fr/geoserver/ptou_lois/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=ptou_lois%3Acircuit_pedestre&amp;maxFeatures=200&amp;outputFormat=application%2Fjson", //Correspond à l'url du média (elle doit être structurée de la même façon)
+                "connector_parameters": [
+                    {
+                        "key": "layer", //Correspond à la clé "layer" (ne pas changer)
+                        "value": "ptou_lois:circuit_pedestre",  //Correspond à la couche que vous souhaitez importer
+                        "type": "STRING", //Correspond au type (ne pas changer)
+                        "usage": "Nom du layer à récupérer", //Correspond à l'usage de la clé layer
+                        "accepted_values": [
+                            {
+                                "cle": "layer" //Correspond à la clé "Layer"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "versions", //Correspond à la clé "Versions"
+                        "value": "1.0.0", //Correspond à la version présente dans l'url que vous avez renseigné
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "versions" //Correspond à la clé "Versions" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "default_crs", //Correspond à la clé "default_crs" (ne pas changer)
+                        "value": "EPSG:3948", //Correspond à la projection 
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "default_crs" //Correspond à la clé "default_crs" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "formats", //Correspond à la clé "formats" (ne pas changer)
+                        "value": "application/json", //Correspond au format (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "formats" //Correspond à la clé "formats" (ne pas changer)
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
 
+</code></pre></div></div>
 
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_autres/tutoriels">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_Jeux_de_donnees_geo/geojson_wfs.md">
               ✎ Editer cette page
           </a>
       </p>
