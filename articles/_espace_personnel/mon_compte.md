@@ -3,7 +3,7 @@ order: 1
 title: Mon compte
 ---
 
-# Comprendre mon espace mon compte
+# Comprendre mon espace mon compte 
 
 Cet espace est composé de deux onglets. 
 Le premier onglet nommé "Mon profil" vous présente les informations que vous avez renseigné lors de votre inscription : Nom, Prénom et Adresse e-mail. 
