@@ -75,7 +75,7 @@ collections:
 
   Jeux_de_donnees_geo:
     order: 9
-    title: Publier des jeux de donnees géographiques
+    title: Publier des jeux de données géographiques
     output: true
   
   autres:
