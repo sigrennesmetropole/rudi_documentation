@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Déchiffrement des données</title>
-    <meta name="description" content="Déchiffrement des données en accès restreint" />
+    <title>Mes données personnelles</title>
+    <meta name="description" content="Comprendre son espace - Mes données personnelles" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnees_restreintes/chiffrement/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/espace_personnel_explication/mes_donnees_personelles/" />
 </head>
 
 
@@ -157,7 +157,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/espace_personnel_explication/mes_donnees_personelles/">Mes données personnelles</a>
             </li>
             
@@ -209,7 +209,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnees_restreintes/acces_donnees/">Accéder aux données en accès restreint</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/acces_donnees_restreintes/chiffrement/">Déchiffrement des données</a>
             </li>
             
@@ -362,60 +362,23 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="déchiffrement-des-données-en-accès-restreint">Déchiffrement des données en accès restreint</h1>
+      <h1 id="comprendre-son-espace---mes-données-personnelles">Comprendre son espace - Mes données personnelles</h1>
 
-<p>Les données en accès restreint sont stockées chiffrées sur le noeud producteur. Pour chaque média chiffré les connector_parameters suivants doivent être renseignés :</p>
+<p>Cet espace est composé de deux onglets.</p>
+
+<p>Il regroupe l’ensemble de vos actions en lien avec vos données personnelles sur RUDI.</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">encrypted</code> qui doit toujours être à <code class="language-plaintext highlighter-rouge">true</code> ;</li>
-  <li><code class="language-plaintext highlighter-rouge">public_key_url</code> : l’URL de la clé publique utilisée ;</li>
-  <li><code class="language-plaintext highlighter-rouge">pub_key_cut</code> : les premièrs caractères du contenu de la clé publique utilisée pour chiffrer (si le paramètre précédent n’est pas renseigné) ;</li>
-  <li><code class="language-plaintext highlighter-rouge">original_mime_type</code> : le MIME type avant chiffrement du média ;</li>
-  <li><code class="language-plaintext highlighter-rouge">encrypted_mime_type</code> : le MIME type après chiffrement du média.</li>
+  <li>Le premier onglet est nommé “Données personnelles”, il regroupe l’ensemble des jeux de données pour lesquels vous pouvez effectuer une demande d’accès, d’information, de rectification (Cf : <a href="https://doc.rudi.bzh/donnees_personnelles/intro/">Accéder à vos données (rudi.bzh)</a> ).</li>
+  <li>Le deuxième onglet est nommé “Mes consentements”, il regroupera l’ensemble de vos consentements établis sur RUDI pas encore développé).</li>
 </ul>
 
-<p>Exemple de média :</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="nl">"connector_parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BOOLEAN"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pub_key_cut"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvS3nTZOj01kq1V6wKpMe"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"original_mime_type"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">},</span><span class="w">
-		</span><span class="p">{</span><span class="w">
-			</span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"encrypted_mime_type"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg+crypt"</span><span class="p">,</span><span class="w">
-			</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w">
-		</span><span class="p">}</span><span class="w">
-	</span><span class="p">]</span><span class="w">
-</span></code></pre></div></div>
-
-<h2 id="chiffrement-à-partir-de-la-clé-publique-du-portail">Chiffrement à partir de la clé publique du portail</h2>
-<p>Elles peuvent être chiffrées à partir d’une clé publique exposée par le portail.
-Cette clé est accessible via la requête :</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X GET "https://rudi.bzh/konsult/v1/encryption-key" -H  "accept: application/octet-stream"
-</code></pre></div></div>
-
-<p>Dans ce cas là, le déchiffrement des données se fait automatiquement par le portail lors d’un téléchargement. Cette étape est totalement transparente pour vous.</p>
-
-<h2 id="chiffrement-à-partir-dune-clé-inconnue-pour-le-portail">Chiffrement à partir d’une clé inconnue pour le portail</h2>
-<p>Les données en accès restreint peuvent être chiffrées à partir d’une autre clé, qui n’est pas connue par le portail.
-Dans ce cas, le portail Rudi ne peut pas déchiffrer la donnée. Les données que vous récupérez au moment du téléchargement seront alors chiffrées.</p>
+<p><img src="https://github.com/sigrennesmetropole/rudi_documentation/assets/109140019/d56b66c5-4e29-4444-adfa-e85d62a50916" alt="image" /></p>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_acces_donnees_restreintes/chiffrement.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_espace_personnel_explication/mes_donnees_personelles.md">
               ✎ Editer cette page
           </a>
       </p>
