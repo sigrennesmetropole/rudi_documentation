@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Démos et tutos</title>
-    <meta name="description" content="Grâce à ces vidéos, laissez vous guider pas à pas dans le portail de données territoriales Rudi :" />
+    <title>Média WFS</title>
+    <meta name="description" content="Publier un jeu de données ayant un média de type WFS" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wfs/" />
 </head>
 
 
@@ -311,7 +311,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/geojson_wfs/">Média WFS type GeoJson</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wfs/">Média WFS</a>
             </li>
             
@@ -333,7 +333,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/code_source/">Code source</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/autres/tutoriels/">Démos et tutos</a>
             </li>
             
@@ -350,19 +350,77 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      Grâce à ces vidéos, laissez vous guider pas à pas dans le portail de données territoriales Rudi :
+      <h1 id="publier-un-jeu-de-données-ayant-un-média-de-type-wfs">Publier un jeu de données ayant un média de type WFS</h1>
 
+<p>Vous trouverez ci-dessous la section available format à ajouter à votre json de publication.</p>
 
+<p>Point Infos : Pour récupérer un json d’un jeu de données présent sur rudi.bzh vous pouvez le requêter en effectuant un GET sur l’url d’un média présent dans la page de détail du jeu de données (section : “Source de données”).</p>
+<ul>
+  <li>La requête : curl -v -X GET “https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0”.</li>
+</ul>
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/videoseries?list=PLFkzWY--e3EooMs5gqNjOYYEEXM7d77Ip" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>La section de code à ajouter au JSON :</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"available_formats": [
+        {
+            "media_type": "SERVICE", //Correspond au type de media, ici il s'agit d'un service (ne pas changer)
+            "media_id": "", //Correspond à l'uuid du media
+            "connector": {
+                "interface_contract": "wfs", //Correspond au type de service (ne pas changer)
+                "url": "https://public.sig.rennesmetropole.fr/geoserver/eq_cultspo/ows", // Correspond au début d'une url récupérée sur un geoserver, ici nous nous arrêterons à "ows"
+                "connector_parameters": [
+                    {
+                        "key": "layer", //Correspond à la clé utilisée (ne pas changer)
+                        "value": "eq_cultspo:v_sport_proximite", // Correspond à la layer à afficher
+                        "type": "STRING", //Correspond au format (ne pas changer) 
+                        "usage": "Nom du layer à récupérer", //Correspond à l'usage de la clé (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "layer" //Correspond à la clé utilisée (ne pas changer)
+                            }
+                        ]
+                    },
+                                        {
+                        "key": "versions",//Correspond à la clé "Versions" (ne pas changer)
+                        "value": "1.0.0", //Correspond à la version (cette information est à récupérer au sein de l'url affichée dans votre onglet geoserver)
+                        "type": "STRING",
+                        "accepted_values": [
+                            {
+                                "cle": "versions" //Correspond à la clé "Versions" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "default_crs",//Correspond à la clé "default_crs" (ne pas changer)
+                        "value": "EPSG:3857",//Correspond au système de projection
+                        "type": "STRING",
+                        "accepted_values": [
+                            {
+                                "cle": "default_crs"//Correspond à la clé utilisée (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "formats", //Correspond à la clé "formats" (ne pas changer)
+                        "value": "application/json", //Correspond au format (ne pas changer)
+                        "type": "STRING", //Correspond au format  (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "formats"//Correspond à la clé "formats"  (ne pas changer)
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
 
-
+</code></pre></div></div>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_autres/tutoriels">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_Jeux_de_donnees_geo/wfs.md">
               ✎ Editer cette page
           </a>
       </p>
