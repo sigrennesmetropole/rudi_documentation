@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Accès</title>
-    <meta name="description" content="La demande d’accès Conformément aux directives européennes, vous avez la possibilité de demander l’accès à vos données personnelles détenues par les producte..." />
+    <title>Média WMTS</title>
+    <meta name="description" content="Publier un jeu de données ayant un média de type WMTS" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/access/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wmts/" />
 </head>
 
 
@@ -223,7 +223,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/intro/">Accéder à vos données</a>
             </li>
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/donnees_personnelles/access/">Accès</a>
             </li>
             
@@ -311,7 +311,7 @@
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wms/">Média WMS</a>
             </li>
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wmts/">Média WMTS</a>
             </li>
             
@@ -358,32 +358,101 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="la-demande-daccès">La demande d’accès</h1>
-<p>Conformément aux directives européennes, vous avez la possibilité de demander l’accès à vos données personnelles détenues par les producteurs de données. La plateforme Rudi vous donne la possibilité de réaliser ce type de demande, sur certains jeux de données en particulier, de manière expérimentale.</p>
+      <h1 id="publier-un-jeu-de-données-ayant-un-média-de-type-wmts">Publier un jeu de données ayant un média de type WMTS</h1>
 
-<p>La liste des jeux de données concernés par ce genre de demande est visible depuis votre espace personnel, dans la partie Données personnelles.
-Depuis cette liste, vous pouvez consulter le détail de chaque jeu de données contenant des données personnelles.</p>
+<p>Vous trouverez ci-dessous la section available format à ajouter à votre json de publication.</p>
 
-<p>Depuis le détail d’un jeu de données, en cliquant sur « accéder à mes données », vous arriverez sur un formulaire dans lesquels vous êtes invités à renseigner vos informations d’identification.
-Ces informations correspondent aux informations strictement nécessaires pour vous identifier de manière unique et fiable. Les informations saisies ne sont utilisées que dans le cadre de cette demande et seront supprimées une fois la demande traitée.</p>
-
-<p>Une fois votre demande envoyée, elle est transmise à l’administrateur du portail Rudi. Celui-ci vérifie leur exactitude. Dès que vos informations sont validées par l’administrateur de Rudi, votre demande est transmise au producteur concerné. Le producteur vous indique ensuite s’il dispose ou non des données vous concernant. Si la réponse est positive, il vous y donne ensuite accès.</p>
-
-<p>Deux modes d’accès sont possibles :</p>
+<p>Point Infos : Pour récupérer un json d’un jeu de données présent sur rudi.bzh vous pouvez le requêter en effectuant un GET sur l’url d’un média présent dans la page de détail du jeu de données (section : “Source de données”).</p>
 <ul>
-  <li>Directement via le portail Rudi (API) : dans ce cas, vos données sont consultables depuis votre espace personnel / dans le détail du jeu de données / onglet Données</li>
-  <li>Par mail (OUT) : vous recevez un mail de la part du producteur contenant vos données personnelles.
-À tout moment, vous pouvez consulter l’état de votre demande depuis votre espace personnel, partie « Données personnelles ».</li>
+  <li>La requête : curl -v -X GET “https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0”.</li>
 </ul>
 
-<p>Le traitement de votre demande peut prendre jusqu’à XX mois (valeur à déterminer à l’issue de la phase d’expérimentation).</p>
+<p>La section de code à ajouter au JSON (particularité : Seule la projection 3857 permet une visualisation au sein du portail.):</p>
 
-<p><img src="https://user-images.githubusercontent.com/109140019/221822314-2b8cb90f-7634-43dc-b332-6967f753a0a4.PNG" alt="perso" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    "available_formats": [
+        {
+            "media_type": "SERVICE", //Correspond au type de media, ici il s'agit d'un service (ne pas changer) 
+            "media_id": "", //Correspond à l'uuid du media
+            "connector": {
+                "interface_contract": "wmts", //Correspond au type de service (ne pas changer)
+                "url": "https://public.sig.rennesmetropole.fr/geowebcache/service/wmts", // Correspond au début d'une url récupérée sur un geoserver, ici nous nous arrêterons à "wmts"
+                "connector_parameters": [
+                    {
+                        "key": "layer", //Correspond à la clé "layer" (ne pas changer)
+                        "value": "ref_fonds:top25", // Correspond à la layer à afficher
+                        "type": "STRING", // Correspond au format (ne pas changer)
+                        "usage": "Nom du layer à récupérer", //Correspond à l'usage de la clé "layer" (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "layer" //Correspond à la clé "Layer" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "default_crs", //Correspond à la clé "Default_crs" (ne pas changer)
+                        "value": "EPSG:3857", //Correspond à la projection (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "default_crs" //Correspond à la clé "Default_crs" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "versions",//Correspond à la clé "Versions" (ne pas changer)
+                        "value": "1.3.0", //Correspond à la version (cette information est à récupérer au sein de l'url affichée dans votre onglet geoserver)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "versions"  //Correspond à la clé "Versions" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "matrix_set", //Correspond à la clé "Matrix_set" (ne pas changer)
+                        "value": "EPSG:3857", //Correspond à la projection (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "usage": "Nom du matrix set conjoint à la projection",//Correspond à l'usage de la clé "matrix_set" (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "matrix_set"//Correspond à la clé utilisée (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "matrix_id_prefix", //Correspond à la clé "Matrix_id_prefixe" (ne pas changer)
+                        "value": "EPSG:3857", //Correspond à la projection (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "usage": "Nom du préfixe au matrix set conjoint au matrix set", //Correspond à l'usage de la clé "matrix_id_prefix" (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "matrix_id_prefix" //Correspond à la clé "matrix_id_prefix" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "formats", //Correspond à la clé "Formats" (ne pas changer)
+                        "value": "image/png", //Correspond au format (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "usage": "Format des images pour l'affichage", //Correspond à l'usage de la clé "format" (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "format" //Correspond à la clé "Format"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+
+</code></pre></div></div>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_donnees_personnelles/access.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_Jeux_de_donnees_geo/wmts.md">
               ✎ Editer cette page
           </a>
       </p>
