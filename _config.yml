@@ -73,7 +73,7 @@ collections:
     title: Noeud producteur
     output: true
 
-  Jeux_de_donnees_geo:
+  Jeux_de_données_geo:
     order: 9
     title: Publier des jeux de données géographiques
     output: true  
