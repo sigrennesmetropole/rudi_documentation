@@ -1,6 +1,6 @@
 ---
 order: 4
-title: Média WFS type GeoJson
+title: TEST - Média WFS type GeoJson
 ---
 
 # Publier un jeu de données ayant un média WFS type GeoJson
