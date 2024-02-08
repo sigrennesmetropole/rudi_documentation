@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 
-    <title>Généralités</title>
-    <meta name="description" content="Glossaire : généralités" />
+    <title>Média WMS</title>
+    <meta name="description" content="Publier un jeu de données ayant un média de type WMS" />
 
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/template.css">
     <link rel="stylesheet" type="text/css" media="screen,projection" href="https://sigrennesmetropole.github.io/rudi_documentation/assets/css/main.css">
-    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/general/" />
+    <link rel="canonical" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wms/" />
 </head>
 
 
@@ -127,7 +127,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li class="active">
+            <li >
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/glossaire/general/">Généralités</a>
             </li>
             
@@ -307,7 +307,7 @@
         <li class="side-pane__dropdown unfolded">
             <ul class="side-pane__submenu">
             
-            <li >
+            <li class="active">
                 <a class="side-pane__link" href="https://sigrennesmetropole.github.io/rudi_documentation/Jeux_de_donnees_geo/wms/">Média WMS</a>
             </li>
             
@@ -354,29 +354,75 @@
   </div>
   <div class="main-pane">
     <div class="markdown">
-      <h1 id="glossaire--généralités">Glossaire : généralités</h1>
+      <h1 id="publier-un-jeu-de-données-ayant-un-média-de-type-wms">Publier un jeu de données ayant un média de type WMS</h1>
 
-<h2 id="plateforme-rudi">Plateforme Rudi</h2>
-<p>Application composée du <strong>portail Rudi</strong> (cœur de la Plateforme) et de l’ensemble des <strong>Nœuds producteur Rudi</strong>. Elle est développée par le consortium Rudi. Son code est publié sous la licence publique de l’Union européenne (EUPL), version 1.2.</p>
+<p>Vous trouverez ci-dessous la section available format à ajouter à votre json de publication.</p>
 
-<h2 id="portail-ou-portail-rudi">Portail (ou Portail Rudi)</h2>
-<p>Application web open-source constituant le cœur de la <strong>Plateforme Rudi</strong>, permettant à ses <strong>Utilisateurs</strong> de parcourir le catalogue des jeux de données publiées par l’ensemble des <strong>Nœuds producteurs</strong> et d’interroger ce catalogue pour accéder aux données. Les <strong>Utilisateurs inscrits</strong> disposent également d’un espace personnel permettant de déclarer et gérer des <strong>Réutilisations</strong>, des <strong>Projets</strong>, de formuler des <strong>Demandes d’accès</strong> spécifiques ou d’y répondre, ou d’agir sur leurs <strong>Données personnelles</strong>.</p>
+<p>Point Infos : Pour récupérer un json d’un jeu de données présent sur rudi.bzh vous pouvez le requêter en effectuant un GET sur l’url d’un média présent dans la page de détail du jeu de données (section : “Source de données”).</p>
+<ul>
+  <li>La requête : curl -v -X GET “https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0”.</li>
+</ul>
 
-<h2 id="nœud-producteur">Nœud producteur</h2>
-<p>Application open-source faisant partie intégrante de la <strong>Plateforme Rudi</strong>, regroupant toutes les fonctionnalités liées à la publication de données dans Rudi : chargement des jeux de données, déclaration des métadonnées, etc. Un Nœud producteur est généralement hébergé sous la responsabilité du <strong>Producteur de données</strong> qui en est gestionnaire, dans son système d’information ou dans le cloud, mais peut aussi être partagé entre plusieurs Producteurs et mis à disposition par la <strong>Gouvernance</strong> (cas d’un “nœud mutualisé”)</p>
+<p>La section de code à ajouter au JSON :</p>
 
-<h2 id="gouvernance">Gouvernance</h2>
-<p><strong>Organisation</strong> responsable de la <strong>Plateforme Rudi</strong>. La Gouvernance met en œuvre la plateforme et fixe les droits et les obligations des utilisateurs. Elle définit les orientations de la plateforme, ses développements éventuels, ses interconnexions avec d’autres systèmes de partage de données, elle décide des investissements et assure le financement de la plateforme. Sur la Plateforme, elle intervient notamment à travers un ou plusieurs <strong>Animateur(s)</strong>.
-Pendant la phase de construction du projet, la gouvernance de Rudi est exercée par les partenaires de Rudi, unis par un accord de consortium et réunis en comité de pilotage présidé par Rennes Métropole.</p>
-
-<h2 id="fédération">Fédération</h2>
-<p>Ensemble des <strong>Producteurs de données</strong> ayant choisi de contribuer à Rudi en y publiant des données, ouvertes ou non. La Fédération est régie par un règlement qui fixe les droits et obligations des Producteurs de données vis-à-vis de la <strong>Gouvernance</strong> et des différents <strong>Utilisateurs</strong> de la <strong>Plateforme</strong>.</p>
-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"available_formats": [
+        {
+            "media_type": "SERVICE", //Correspond au type de media, ici il s'agit d'un service (ne pas changer)
+            "media_id": "",//Correspond à l'uuid du media
+            "connector": {
+                "interface_contract": "wms", //Correspond au type de service (ne pas changer)
+                "url": "https://public.sig.rennesmetropole.fr/geoserver/pnat_hab/wms",// Corresopnd au début d'une url récupérée sur un geoserver, ici nous nous arrêterons à "wms"
+                "connector_parameters": [
+                    {
+                        "key": "layer", //Correspond à la clé "layer" (ne pas changer)
+                        "value": "pnat_hab:delaisse_urbain", // Correspond à la layer à afficher et renseignée dans url
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "usage": "Nom du layer à récupérer",//Correspond à l'usage de la clé "layer"  (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "layer" //Correspond à la clé "layer" (ne pas changer)
+                            }
+                        ]
+                    },                    {
+                        "key": "versions", //Correspond à la clé "Versions" (ne pas changer)
+                        "value": "1.1.0",//Correspond à la version (cette information est à récupérer au sein de l'url affichée dans votre onglet geoserver)
+                        "type": "STRING", //Correspond au format  (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "versions"  //Correspond à la clé "Versions" (ne pas la changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "default_crs", //Correspond à la clé "Default_crs" (ne pas changer)
+                        "value": "EPSG:2154", //Correspond au système de projection
+                        "type": "STRING", // Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "default_crs" //Correspond à la clé utilisée "Default_crs" (ne pas changer)
+                            }
+                        ]
+                    },
+                    {
+                        "key": "formats", //Correspond à la clé "Formats" (ne pas changer)
+                        "value": "image/png", //Correspond au format du média (ne pas changer)
+                        "type": "STRING", //Correspond au format (ne pas changer)
+                        "accepted_values": [
+                            {
+                                "cle": "formats" //Correspond à la clé "format" (ne pas changer) 
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+</code></pre></div></div>
 
       
       <p class="edit text-center">
           
-          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_glossaire/general.md">
+          <a class="button" href="https://github.com/sigrennesmetropole/rudi_documentation/edit/main/articles/_Jeux_de_donnees_geo/wms.md">
               ✎ Editer cette page
           </a>
       </p>
