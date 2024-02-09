@@ -37,6 +37,12 @@ collections:
     order: 1
     title: Glossaire
     output: true
+    -Généralités: https://github.com/sigrennesmetropole/rudi_documentation/blob/main/articles/_glossaire/general.md
+    -Rôles: https://github.com/sigrennesmetropole/rudi_documentation/blob/main/articles/_glossaire/roles.md
+    -Utilisateurs et comptes: https://github.com/sigrennesmetropole/rudi_documentation/blob/main/articles/_glossaire/utilisateurs-comptes.md
+    -Données de Rudi: https://github.com/sigrennesmetropole/rudi_documentation/blob/main/articles/_glossaire/donnees-rudi.md
+    -Concepts de Rudi: https://github.com/sigrennesmetropole/rudi_documentation/blob/main/articles/_glossaire/concepts-rudi.md
+
     
   espace_personnel_explication:
     order: 2
