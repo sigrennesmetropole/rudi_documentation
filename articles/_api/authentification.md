@@ -18,7 +18,7 @@ Pour cela, il faut :
 Le noeud fournisseur peut alors s'authentifier comme suit :
 
 ```
-curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username>" --data "password=password>" --data "scope=liste des scopes séparés par des virgules>" --data "client_id=client_id>" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password>"
+curl -v --request POST https://rudi.rennesmetropole.fr/oauth/token --data "grant_type=password" --data "username=username>" --data "password=password>" --data "scope=liste des scopes séparés par des virgules>" --data "client_id=client_id>" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password>"
 ```
 
 
@@ -28,13 +28,13 @@ Lorsque le portail vient moissonner des données d'un fournisseur de données ou
 
 Exemple :
 ```
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAamb
 ```
 
 Le fournisseur de données peut valider ce token en réalisant l'appel suivant vers le portail :
 
 ```
-curl -v --request GET http://rudi.bzh/oauth/check_token?token=valeur du token>
+curl -v --request GET https://rudi.rennesmetropole.fr/oauth/check_token?token=valeur du token>
 ```
 
 # Authentification des porteurs de projets
@@ -50,7 +50,7 @@ Lorsqu'un porteur de projet souhaite utiliser un jeu de données exposé par le 
 
 Appel de l'API de téléchargement pour le media souscrit :
 ```
-curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
+curl -v -X GET  "https://rudi.rennesmetropole.fr/medias/uuid_du_média/dwnl/1.0.0" 
 ```
 
 L'url de téléchargement d'un média d'un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données.
@@ -67,7 +67,7 @@ Si l'URL commence par `/apm/medias/` au lieu de `/medias/`, il est nécessaire d
 * Utiliser ce couple pour s'authentifier :
 
 ```
-curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
+curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&username=[login du user sur le portail associé au customer_key]&scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.rennesmetropole.fr/apm/token"
 ```
 
 Cet appel permet de récupérer un token.
@@ -75,7 +75,7 @@ Cet appel permet de récupérer un token.
 * à partir du token il est alors possible de requêter les APIs de téléchargement comme suit :
 
 ```
-curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
+curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.rennesmetropole.fr/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 ```
 
 ## Pour un accès en mode anonyme, il faut :
