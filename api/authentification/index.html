@@ -394,7 +394,7 @@
 
 <p>Le noeud fournisseur peut alors s’authentifier comme suit :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST http://rudi.bzh/oauth/token --data "grant_type=password" --data "username=username&gt;" --data "password=password&gt;" --data "scope=liste des scopes séparés par des virgules&gt;" --data "client_id=client_id&gt;" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password&gt;"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request POST https://rudi.rennesmetropole.fr/oauth/token --data "grant_type=password" --data "username=username&gt;" --data "password=password&gt;" --data "scope=liste des scopes séparés par des virgules&gt;" --data "client_id=client_id&gt;" -H "Authorization:Basic encodage en base 64 de la chaine client_id:client_password&gt;"
 </code></pre></div></div>
 
 <h1 id="contrôle-de-lauthentification-appel-du-portail-rudi-vers-un-fournisseur-de-données">Contrôle de l’authentification appel du Portail RUDI vers un fournisseur de données</h1>
@@ -402,12 +402,12 @@
 <p>Lorsque le portail vient moissonner des données d’un fournisseur de données ou lorsque le portail vient soumettre un rapport d’intégration, l’appel comporte une entête d’authorization de type “Bearer”.</p>
 
 <p>Exemple :</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAambdGqtnl--Zw0DidCf0_JCghXlpznMIteUPdHnQ
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydWRpIiwiY29ubmVjdGVkVXNlciI6eyJsb2dpbiI6InJ1ZGkiLCJ0eXBlIjoiUEVSU09OIiwiZmlyc3RuYW1lIjoicnVkaSIsImxhc3RuYW1lIjoicnVkaSIsImVtYWlsIjpudWxsLCJvcmdhbml6YXRpb24iOiJydWRpIiwicm9sZXMiOlsiQURNSU5JU1RSQVRPUiJdfSwiZXhwIjoxNjE0NjE5Nzc2LCJpYXQiOjE2MTQ2MTYxNzZ9.Em7yclposciDOll-Dgv9O6jGDE-GsVEHp9dYKyfYNCyPTAamb
 </code></pre></div></div>
 
 <p>Le fournisseur de données peut valider ce token en réalisant l’appel suivant vers le portail :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request GET http://rudi.bzh/oauth/check_token?token=valeur du token&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v --request GET https://rudi.rennesmetropole.fr/oauth/check_token?token=valeur du token&gt;
 </code></pre></div></div>
 
 <h1 id="authentification-des-porteurs-de-projets">Authentification des porteurs de projets</h1>
@@ -425,7 +425,7 @@
 </ul>
 
 <p>Appel de l’API de téléchargement pour le media souscrit :</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X GET  "https://rudi.bzh/medias/uuid_du_média/dwnl/1.0.0" 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -v -X GET  "https://rudi.rennesmetropole.fr/medias/uuid_du_média/dwnl/1.0.0" 
 </code></pre></div></div>
 
 <p>L’url de téléchargement d’un média d’un jeu de données est consultable depuis le détail du jeu de données, dans la partie Informations complémentaires / Sources de données.</p>
@@ -443,7 +443,7 @@
   <li>Utiliser ce couple pour s’authentifier :</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.bzh/apm/token"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X POST -H "Authorization: Basic [base64(customer_key:customer_secret)]" -d "grant_type=client_credentials&amp;username=[login du user sur le portail associé au customer_key]&amp;scope=apim:subscribe apim:app_manage" -H "Content-Type:application/x-www-form-urlencoded" "https://rudi.rennesmetropole.fr/apm/token"
 </code></pre></div></div>
 
 <p>Cet appel permet de récupérer un token.</p>
@@ -452,7 +452,7 @@
   <li>à partir du token il est alors possible de requêter les APIs de téléchargement comme suit :</li>
 </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.bzh/apm/medias/[uuid_du_média]/dwnl/1.0.0"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -kv -X GET -H "Authorization: Bearer [token]" "https://rudi.rennesmetropole.fr/apm/medias/[uuid_du_média]/dwnl/1.0.0"
 </code></pre></div></div>
 
 <h2 id="pour-un-accès-en-mode-anonyme-il-faut-">Pour un accès en mode anonyme, il faut :</h2>
