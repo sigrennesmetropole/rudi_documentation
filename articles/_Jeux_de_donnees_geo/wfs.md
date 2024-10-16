@@ -8,7 +8,7 @@ title: Média WFS
 Vous trouverez ci-dessous la section available format à ajouter à votre json de publication. 
 
 Point Infos : Pour récupérer un json d'un jeu de données présent sur rudi.bzh vous pouvez le requêter en effectuant un GET sur l'url d'un média présent dans la page de détail du jeu de données (section : "Source de données"). 
-* La requête : curl -v -X GET "https://rudi.bzh/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0".
+* La requête : curl -v -X GET "https://rudi.rennesmetropole.fr/medias/fd6be827-a10f-46d0-9c58-e143d26f7e55/dwnl/1.0.0".
 
 La section de code à ajouter au JSON : 
 
